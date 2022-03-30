@@ -16,6 +16,7 @@ import {
 } from "@coreui/icons";
 
 import { Link } from "react-router-dom";
+import PopupDelete from "./PopupDelete";
 
 function Bookings() {
   return (
@@ -55,9 +56,7 @@ function Bookings() {
               </Link>{" "}
               <Link to="#">
                 {" "}
-                <button className="btn btn-danger">
-                  <CIcon icon={cilDelete} size="lg" />
-                </button>
+                <PopupDelete />
               </Link>{" "}
             </CTableDataCell>
           </CTableRow>
@@ -80,9 +79,7 @@ function Bookings() {
               </Link>{" "}
               <Link to="#">
                 {" "}
-                <button className="btn btn-danger">
-                  <CIcon icon={cilDelete} size="lg" />
-                </button>
+                <PopupDelete />
               </Link>{" "}
             </CTableDataCell>
           </CTableRow>
