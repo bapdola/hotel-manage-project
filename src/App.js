@@ -20,16 +20,22 @@ const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
 const Home = React.lazy(() => import("./views/pages/home/Home"));
 
-const Rooms = React.lazy(() => import("./components/userPage/Title"));
+const SingleRoom = React.lazy(() =>
+  import("./views/pages/singleRoom/SingleRoom")
+);
 
 const App = () => {
-  const isLogged = false;
+  const isLogged = true;
   return (
     <BrowserRouter>
       <Suspense fallback={loading}>
         <Routes>
           <Route path="/" name="Home Page" element={<Home />} />
-          <Route path="/rooms" name="Page" element={<Rooms />} />
+          <Route
+            path="/rooms/single-room"
+            name="Page"
+            element={<SingleRoom isLogged={isLogged} />}
+          />
 
           <Route
             element={
