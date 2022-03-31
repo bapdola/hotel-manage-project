@@ -17,6 +17,7 @@ import {
 
 import { Link } from "react-router-dom";
 import PopupDelete from "./PopupDelete";
+import PopupUpdate from "./PopupUpdate";
 
 function Bookings() {
   return (
@@ -48,16 +49,7 @@ function Bookings() {
             <CTableDataCell>10000</CTableDataCell>
             <CTableDataCell>Rejected</CTableDataCell>
             <CTableDataCell>
-              <Link to="/bookings/edit">
-                {" "}
-                <button className="btn btn-success">
-                  <CIcon icon={cilCloudUpload} size="lg" />
-                </button>
-              </Link>{" "}
-              <Link to="#">
-                {" "}
-                <PopupDelete />
-              </Link>{" "}
+              <PopupUpdate /> <PopupDelete />
             </CTableDataCell>
           </CTableRow>
           <CTableRow>
@@ -71,16 +63,8 @@ function Bookings() {
             <CTableDataCell>20000</CTableDataCell>
             <CTableDataCell>Rejected</CTableDataCell>
             <CTableDataCell>
-              <Link to="/bookings/edit">
-                {" "}
-                <button className="btn btn-success">
-                  <CIcon icon={cilCloudUpload} size="lg" />
-                </button>
-              </Link>{" "}
-              <Link to="#">
-                {" "}
-                <PopupDelete />
-              </Link>{" "}
+              {" "}
+              <PopupUpdate /> <PopupDelete />
             </CTableDataCell>
           </CTableRow>
         </CTableBody>
