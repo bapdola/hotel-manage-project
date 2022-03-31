@@ -1,7 +1,8 @@
 import React from "react";
+import Rooms from "./rooms/rooms";
 
 function Dashboard() {
-  return <div>{`DashBoard`}</div>;
+  return <>Hello</>;
 }
 
 export default Dashboard;
