@@ -5,6 +5,8 @@ import Banner from "src/components/userPage/Banner";
 import Services from "src/components/userPage/Services";
 import FeaturedRooms from "src/components/userPage/FeaturedRooms";
 
+import { HashRouter, Route, Routes } from "react-router-dom";
+
 const Home = () => {
   return (
     <>

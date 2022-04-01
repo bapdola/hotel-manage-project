@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FaAlignRight } from "react-icons/fa";
 import logo from "../../images/logo.svg";
-
+import Room from '../../views/pages/rooms/Rooms'
 export default class Navbar extends Component {
   state = {
-    isOpen: false,
+    isOpen: false
   };
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -34,9 +34,6 @@ export default class Navbar extends Component {
             </li>
             <li>
               <Link to="/rooms">Rooms</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
             </li>
           </ul>
         </div>

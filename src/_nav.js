@@ -1,33 +1,30 @@
-import React from 'react'
-import CIcon from '@coreui/icons-react'
-import {
-  cilDrop,
-  cilSpeedometer,
-} from '@coreui/icons'
-import { CNavItem } from '@coreui/react'
+import React from "react";
+import CIcon from "@coreui/icons-react";
+import { cilUser, cilRoom,cibStorybook } from "@coreui/icons";
+import { CNavItem } from "@coreui/react";
 
 const _nav = [
   {
     component: CNavItem,
-    name: 'Rooms',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    name: "Rooms",
+    to: "/admin/rooms",
+    icon: <CIcon icon={cilRoom} customClassName="nav-icon" />,
     badge: {
-      color: 'info',
+      color: "info",
     },
   },
   {
     component: CNavItem,
-    name: 'User',
-    to: '/user',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    name: "User",
+    to: "/admin/user",
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Bookings',
-    to: '/bookings',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    name: "Bookings",
+    to: "/admin/bookings",
+    icon: <CIcon icon={cibStorybook} customClassName="nav-icon" />,
   },
-]
+];
 
-export default _nav
+export default _nav;
