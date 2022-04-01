@@ -48,7 +48,6 @@ const App = () => {
               element={<Register />}
             />
           </Route>
-          <Route path="admin/login" name="Login Page" element={<Login />} />
 
           <Route
             element={

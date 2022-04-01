@@ -3,10 +3,12 @@ import img1 from "../../../images/room-8.jpeg";
 import { Link } from "react-router-dom";
 import BtnBookings from "src/components/userPage/btnBooking";
 import { PropTypes } from "prop-types";
+import Navbar from "src/components/userPage/Navbar";
 
 const SingleRoom = ({ isLogged }) => {
   return (
     <>
+      <Navbar />
       <header className="style-hero">
         <div className="banner">
           <h1>Single Room</h1>
@@ -18,9 +20,9 @@ const SingleRoom = ({ isLogged }) => {
       </header>
       <section className="single-room">
         <div className="single-room-images">
-          <img src={img1} />
-          <img src={img1} />
-          <img src={img1} />
+          <img src={img1} alt="img1" />
+          <img src={img1} alt="img1" />
+          <img src={img1} alt="img1" />
         </div>
         <div className="single-room-info">
           <article className="desc">

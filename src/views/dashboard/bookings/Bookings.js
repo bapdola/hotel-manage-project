@@ -7,15 +7,7 @@ import {
   CTableHead,
   CTableHeaderCell,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import {
-  cilCloudUpload,
-  cilDelete,
-  cilList,
-  cilShieldAlt,
-} from "@coreui/icons";
 
-import { Link } from "react-router-dom";
 import PopupDelete from "./PopupDelete";
 import PopupUpdate from "./PopupUpdate";
 

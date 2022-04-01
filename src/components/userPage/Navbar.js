@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FaAlignRight } from "react-icons/fa";
 import logo from "../../images/logo.svg";
 
+import { VscAccount } from "react-icons/vsc";
+
 export default class Navbar extends Component {
   state = {
     isOpen: false,
@@ -36,7 +38,9 @@ export default class Navbar extends Component {
               <Link to="/rooms">Rooms</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login">
+                <VscAccount size="25" />
+              </Link>
             </li>
           </ul>
         </div>
