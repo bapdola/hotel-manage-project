@@ -27,6 +27,12 @@ const _nav = [
     to: "/admin/bookings",
     icon: <CIcon icon={cibStorybook} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: "Services",
+    to: "/admin/services",
+    icon: <MdOutlineHomeRepairService className="nav-icon" />,
+  },
 ];
 
 export default _nav;
