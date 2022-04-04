@@ -14,7 +14,6 @@ const RoomsFilter = () => {
           <select
             name="type"
             id="type"
-            
             className="form-control"
           >
           
