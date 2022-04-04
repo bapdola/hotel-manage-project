@@ -5,11 +5,13 @@ import { cilUser, cilRoom, cibStorybook } from "@coreui/icons";
 
 import { CNavItem } from "@coreui/react";
 
+import { MdOutlineHomeRepairService } from "react-icons/md";
+
 const _nav = [
   {
     component: CNavItem,
     name: "Rooms",
-    to: "/admin/rooms",
+    to: "/admin",
     icon: <CIcon icon={cilRoom} customClassName="nav-icon" />,
     badge: {
       color: "info",
