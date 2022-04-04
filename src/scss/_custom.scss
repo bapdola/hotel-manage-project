@@ -95,13 +95,16 @@ h6 {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.75rem 2rem;
   background: var(--offWhite);
   z-index: 1;
+
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
 }
 .nav-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .nav-btn {
   background: transparent;
@@ -118,6 +121,9 @@ h6 {
   overflow: hidden;
   transition: var(--mainTransition);
   list-style-type: none;
+}
+.nav-links li {
+  padding-top: 15px;
 }
 .nav-links a {
   display: block;
@@ -544,3 +550,5 @@ h6 {
   }
 }
 /* end of rooms fitler*/
+
+/*Sign In Form*/

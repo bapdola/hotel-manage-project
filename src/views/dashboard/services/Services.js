@@ -19,7 +19,10 @@ const Services = () => {
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Price</CTableHeaderCell>
-            <CTableHeaderCell scope="col"></CTableHeaderCell>
+            <CTableHeaderCell scope="col" className="text-center">
+              {" "}
+              <PopupAdd />{" "}
+            </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -27,14 +30,14 @@ const Services = () => {
             <CTableHeaderCell scope="row">Trọng Thiện</CTableHeaderCell>
             <CTableDataCell>10000$</CTableDataCell>
             <CTableDataCell className="text-center">
-              <PopupAdd /> <PopupUpdate /> <PopupDelete />
+              <PopupUpdate /> <PopupDelete />
             </CTableDataCell>
           </CTableRow>
           <CTableRow>
             <CTableHeaderCell scope="row">Trọng Thiện</CTableHeaderCell>
             <CTableDataCell>10000$</CTableDataCell>
             <CTableDataCell className="text-center">
-              <PopupAdd /> <PopupUpdate /> <PopupDelete />
+              <PopupUpdate /> <PopupDelete />
             </CTableDataCell>
           </CTableRow>
         </CTableBody>

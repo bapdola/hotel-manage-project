@@ -1,6 +1,6 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
-import { cilDrop, cilSpeedometer, cilUser } from "@coreui/icons";
+import { cilUser } from "@coreui/icons";
 import { CNavItem } from "@coreui/react";
 import {
   MdOutlineHomeRepairService,

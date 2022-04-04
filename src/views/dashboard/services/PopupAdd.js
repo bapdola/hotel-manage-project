@@ -5,10 +5,7 @@ import {
   CFormInput,
   CButton,
   CCol,
-  CFormSelect,
   CFormFeedback,
-  CInputGroup,
-  CInputGroupText,
 } from "@coreui/react";
 import {
   CModal,
@@ -36,7 +33,7 @@ const PopupAdd = () => {
   return (
     <>
       <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
-        <VscAdd size={20} />
+        <VscAdd size={15} /> Add
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>

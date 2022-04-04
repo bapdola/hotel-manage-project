@@ -5,10 +5,7 @@ import {
   CFormInput,
   CButton,
   CCol,
-  CFormSelect,
   CFormFeedback,
-  CInputGroup,
-  CInputGroupText,
 } from "@coreui/react";
 import {
   CModal,
@@ -18,12 +15,9 @@ import {
   CModalFooter,
 } from "@coreui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-import { cilCloudUpload, cilDelete } from "@coreui/icons";
+import { cilCloudUpload } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
-
-import { CDateRangePicker } from "@coreui/react-pro";
 
 const PopupUpdate = () => {
   const [validated, setValidated] = useState(false);
@@ -41,7 +35,7 @@ const PopupUpdate = () => {
   return (
     <>
       <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
-        <CIcon icon={cilCloudUpload} size="lg" />
+        <CIcon icon={cilCloudUpload} size="sm" /> Edit
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
