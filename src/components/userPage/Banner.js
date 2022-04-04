@@ -1,17 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
 
-const Banner = () => {
+const Banner = ({ children, title, subtitle }) => {
   return (
     <div className="banner">
-      <h1>luxurious rooms</h1>
+      <h1>{title}</h1>
       <div />
-      <p>deluxe rooms starting at $299</p>
-      <Link to="/rooms" className="btn-primary">
-        our rooms
-      </Link>
+      <p>{subtitle}</p>
+      {children}
     </div>
   );
 };
-
+Banner.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  children: PropTypes.element,
+};
 export default Banner;
