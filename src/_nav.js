@@ -1,33 +1,40 @@
-import React from 'react'
-import CIcon from '@coreui/icons-react'
+import React from "react";
+import CIcon from "@coreui/icons-react";
+import { cilUser } from "@coreui/icons";
+import { CNavItem } from "@coreui/react";
 import {
-  cilDrop,
-  cilSpeedometer,
-} from '@coreui/icons'
-import { CNavItem } from '@coreui/react'
-
+  MdOutlineHomeRepairService,
+  MdOutlineMeetingRoom,
+  MdStayCurrentPortrait,
+} from "react-icons/md";
 const _nav = [
   {
     component: CNavItem,
-    name: 'Rooms',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    name: "Rooms",
+    to: "/admin/rooms",
+    icon: <MdOutlineMeetingRoom className="nav-icon" />,
     badge: {
-      color: 'info',
+      color: "info",
     },
   },
   {
     component: CNavItem,
-    name: 'User',
-    to: '/user',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    name: "User",
+    to: "/admin/user",
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Bookings',
-    to: '/bookings',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    name: "Bookings",
+    to: "/admin/bookings",
+    icon: <MdStayCurrentPortrait className="nav-icon" />,
   },
-]
+  {
+    component: CNavItem,
+    name: "Services",
+    to: "/admin/services",
+    icon: <MdOutlineHomeRepairService className="nav-icon" />,
+  },
+];
 
-export default _nav
+export default _nav;
