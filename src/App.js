@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
 import PrivateRoutes from "./router/PrivateRoutes";
+import Rooms from "./views/pages/rooms/Rooms";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -19,10 +20,7 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
 const Home = React.lazy(() => import("./views/pages/home/Home"));
-
-const SingleRoom = React.lazy(() =>
-  import("./views/pages/singleRoom/SingleRoom")
-);
+const Room = React.lazy(() => import("./views/pages/rooms/Rooms"));
 
 const App = () => {
   const isLogged = true;
@@ -31,11 +29,7 @@ const App = () => {
       <Suspense fallback={loading}>
         <Routes>
           <Route path="/" name="Home Page" element={<Home />} />
-          <Route
-            path="/rooms/single-room"
-            name="Page"
-            element={<SingleRoom isLogged={isLogged} />}
-          />
+          <Route path="/rooms" name="Page" element={<Rooms />} />
 
           <Route
             element={
@@ -48,7 +42,7 @@ const App = () => {
               element={<Register />}
             />
           </Route>
-
+          <Route path="admin/login" name="Login Page" element={<Login />} />
           <Route
             element={
               <PrivateRoutes isLogged={isLogged} redirectLink="admin/login" />
@@ -56,7 +50,6 @@ const App = () => {
           >
             <Route path="/admin/*" element={<DefaultLayout />} />
           </Route>
-
           <Route path="admin/login" name="Login Page" element={<Login />} />
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="*" name="Page 404" element={<Page404 />} />
@@ -67,4 +60,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App
