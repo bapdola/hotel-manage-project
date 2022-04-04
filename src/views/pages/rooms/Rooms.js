@@ -1,8 +1,7 @@
 import React from "react";
 import Navbar from "src/components/userPage/Navbar";
 import Hero from "src/components/userPage/Hero";
-import RoomContainer from "src/components/userPage/RoomContainer"; 
-import '../../../scss/global.scss' 
+import RoomContainer from "src/components/userPage/RoomContainer";  
 
 
 const Rooms = () => {
@@ -10,7 +9,7 @@ const Rooms = () => {
     <>
       <Navbar />
       <Hero />
-      <RoomContainer className="pt80 pb80 cruise-grid-view" />
+      <RoomContainer />
     </>
   );
 };

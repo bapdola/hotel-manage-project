@@ -16,6 +16,7 @@ const RoomsFilter = () => {
             id="type"
             className="form-control"
           >
+          
           </select>
         </div>
      
