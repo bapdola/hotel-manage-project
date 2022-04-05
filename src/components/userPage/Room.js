@@ -6,12 +6,12 @@ const Room = () => {
   return (
     <article className="room">
       <div className="img-container">
-      <img src={defaultImg} alt="single room" />
+        <img src={defaultImg} alt="single room" />
         <div className="price-top">
           <h6>$5000</h6>
           <p>per night</p>
         </div>
-        <Link to={`/rooms/`} className="btn-primary room-link">
+        <Link to={`/rooms/single-room`} className="btn-primary room-link">
           features
         </Link>
       </div>

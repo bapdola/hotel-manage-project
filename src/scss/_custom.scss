@@ -58,7 +58,11 @@ h6 {
   display: inline-block;
   text-decoration: none;
   letter-spacing: var(--mainSpacing);
-  background: linear-gradient(90deg, rgba(182, 70, 185, 0.555) 0%, rgba(0,212,255,0.3203326740852591) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(182, 70, 185, 0.555) 0%,
+    rgba(0, 212, 255, 0.3203326740852591) 100%
+  );
   color: var(--mainBlack);
   padding: 0.4rem 0.9rem;
   border: 3px solid var(--primaryColor);
@@ -95,14 +99,17 @@ h6 {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.75rem 2rem;
   background: var(--offWhite);
   z-index: 1;
+
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
 }
 .nav-header {
   size: 3.6rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .nav-btn {
   background: transparent;
@@ -119,6 +126,9 @@ h6 {
   overflow: hidden;
   transition: var(--mainTransition);
   list-style-type: none;
+}
+.nav-links li {
+  padding-top: 15px;
 }
 .nav-links a {
   size: 3.6rem;
@@ -138,7 +148,7 @@ h6 {
 }
 
 .show-nav {
-  font-family: 'Segoe UI Light';
+  font-family: "Segoe UI Light";
   height: 100px;
 }
 @media screen and (min-width: 768px) {
@@ -157,7 +167,7 @@ h6 {
     margin-left: 4rem;
   }
   .nav-links a {
-    font-family: 'Segoe UI Light';
+    font-family: "Segoe UI Light";
     size: 3.6rem;
     margin: 0 1rem;
     padding: 0.5rem 0;
@@ -182,7 +192,12 @@ h6 {
 .banner {
   border-radius: 3px;
   display: inline-block;
-  background:  linear-gradient(90deg, rgba(2, 0, 36, 0.534) 0%, rgba(9, 9, 121, 0.534) 45%, rgba(0, 213, 255, 0.568) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0.534) 0%,
+    rgba(9, 9, 121, 0.534) 45%,
+    rgba(0, 213, 255, 0.568) 100%
+  );
   color: var(--mainWhite);
   padding: 2rem 1rem;
   text-align: center;
@@ -202,7 +217,7 @@ h6 {
 }
 .banner p {
   color: white;
-  font-family: 'Segoe UI Light';
+  font-family: "Segoe UI Light";
   font-size: 1.35rem;
   margin-bottom: 2rem;
 }
@@ -546,13 +561,48 @@ h6 {
 }
 /* end of rooms fitler*/
 
-.container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
-@media (min-width:576px)
-{.container{max-width:540px}}
-@media (min-width:768px)
-{.container{max-width:720px}}
-@media (min-width:992px)
-{.container{max-width:960px}}
-@media (min-width:1200px)
-{.container{max-width:1140px}}
-.container-fluid{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.buttonAdd {
+  background : linear-gradient(to right, rgba(97, 240, 26, 0.571), rgba(162, 178, 180, 0.79));
+  width: 196px;
+  height:45px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+

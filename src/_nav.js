@@ -1,13 +1,17 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
-import { cilUser, cilRoom,cibStorybook } from "@coreui/icons";
+
+import { cilUser, cilRoom, cibStorybook } from "@coreui/icons";
+
 import { CNavItem } from "@coreui/react";
+
+import { MdOutlineHomeRepairService } from "react-icons/md";
 
 const _nav = [
   {
     component: CNavItem,
     name: "Rooms",
-    to: "/admin/rooms",
+    to: "/admin",
     icon: <CIcon icon={cilRoom} customClassName="nav-icon" />,
     badge: {
       color: "info",
@@ -24,6 +28,12 @@ const _nav = [
     name: "Bookings",
     to: "/admin/bookings",
     icon: <CIcon icon={cibStorybook} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: "Services",
+    to: "/admin/services",
+    icon: <MdOutlineHomeRepairService className="nav-icon" />,
   },
 ];
 

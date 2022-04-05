@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Popup from './popupuser'
+import PopupAdd from './popupadd'
+
 import { 
     CTable,CTableHead,CTableBody,CTableRow,CTableDataCell,CTableHeaderCell,
     CButton,CButtonGroup,CModal,CModalTitle,CModalHeader,CModalBody,CModalFooter ,CPopover,CForm,
@@ -14,6 +16,7 @@ function User() {
     return (
         <div>
         <h1> User Management </h1>
+        <PopupAdd/>
         <CTable>
   <CTableHead>
     <CTableRow>

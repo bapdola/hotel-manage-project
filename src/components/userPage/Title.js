@@ -1,11 +1,14 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 
-const Title = () => {
+const Title = ({ title }) => {
   return (
     <div className="section-title">
-      <h4>FeaturedRooms</h4>
+      <h4>{title}</h4>
     </div>
   );
 };
-
+Title.propTypes = {
+  title: PropTypes.string,
+};
 export default Title;
