@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
-import PrivateRoutes from "./router/PrivateRoutes";
-import Navbar from "./components/userPage/Navbar";
+import ProtectedRoutes from "./router/ProtectedRoutes"
+ import Auth from "./Utils/Auth/auth"
 
 const loading = (
   <div className="pt-3 text-center">
@@ -33,47 +33,45 @@ const SingleRoom = React.lazy(() =>
 );
 
 const App = () => {
-  const isLogged = true;
+  const isAuth = Auth();
+  console.log(isAuth);
+
+ 
   return (
     <BrowserRouter>
-      <Navbar />
       <Suspense fallback={loading}>
         <Routes>
           <Route exact path="/" name="Home Page" element={<Home />} />
           <Route exact path="/rooms" name="Page" element={<Rooms />} />
-
+          
           {/* test config redux */}
           <Route exact path="/test" name="Page" element={<TestConfigRedux />} />
 
           <Route
-            path="/rooms/single-room"
-            name="Page"
-            element={<SingleRoom isLogged={isLogged} />}
+            path="/register"
+            name="Register Page"
+            element={<Register />}
           />
-          <Route
-            element={
-              <PrivateRoutes isLogged={isLogged} redirectLink="/login" />
-            }
-          >
             <Route
-              path="/register"
-              name="Register Page"
-              element={<Register />}
+              path="/rooms/single-room"
+              name="Page"
+              element={<SingleRoom isAuth={isAuth} />}
             />
-          </Route>
-          <Route path="admin/login" name="Login Page" element={<Login />} />
-          <Route
-            element={
-              <PrivateRoutes isLogged={isLogged} redirectLink="admin/login" />
-            }
-          >
-            <Route path="/admin/*" element={<DefaultLayout />} />
-          </Route>
-          <Route
+         <Route
             path="admin/login"
             name="Login Page"
             element={<AdminLogin />}
           />
+          <Route
+            element={
+              <ProtectedRoutes isAuth={isAuth} redirect="admin/login"/>
+            }
+          >
+            <Route path="/admin/*" element={<DefaultLayout />} />
+         
+          
+          </Route>
+          
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="*" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />

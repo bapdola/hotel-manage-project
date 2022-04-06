@@ -5,9 +5,13 @@ import RoomContainer from "src/components/userPage/RoomContainer";
 import Banner from "src/components/userPage/Banner";
 import { Link } from "react-router-dom";
 
+
+
+
 const Rooms = () => {
   return (
     <>
+    <Navbar />
       <Hero hero="roomsHero">
         <Banner title="our rooms">
           <Link to="/" className="btn-primary">

@@ -1,7 +1,9 @@
 import React from "react";
 import "./login.css";
+import { PropTypes } from "prop-types";
 
 const Login = () => {
+  
   return (
     <section className="body-userlogin">
       <div className="logo"></div>
@@ -9,7 +11,7 @@ const Login = () => {
         <h1>Login</h1>
         <input type="text" value="" placeholder="Username" id="username" />
         <input type="password" value="" placeholder="Password" id="password" />
-        <button className="btn-primary">Submit</button>
+        <button className="btn-primary" >Submit</button>
       </div>
     </section>
   );
