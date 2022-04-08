@@ -1,6 +1,8 @@
+import cookie from "react-cookies";
+
 const Auth = () => {
-  const user = { isLogged: true };
-  return user && user.isLogged;
+  let isLoggIn = cookie.load("ADMIN_DATA") == null ? false : true;
+  return isLoggIn;
 };
 
 export default Auth;

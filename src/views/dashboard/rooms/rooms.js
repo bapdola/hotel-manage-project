@@ -18,7 +18,7 @@ import { FetchData } from "src/Utils/store/action/roomAction";
 export default function Rooms() {
   const navigate = useNavigate();
   const AddRoom = () => {
-    navigate("/rooms/addroom");
+    navigate("/admin/addroom");
   };
 
   const dispatch = useDispatch();

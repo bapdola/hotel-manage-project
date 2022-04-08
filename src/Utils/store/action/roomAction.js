@@ -1,10 +1,10 @@
-import apiCaller from "src/Utils/apiCaller/apiCaller";
+import ApiCaller from "src/Utils/apiCaller/apiCaller";
 
 export const FetchData = () => {
   return async (dispatch) => {
     try {
-      const data = await apiCaller("room/findAll", "GET", null);
-      dispatch({ type: "GET_DATA", payload: data.data.result });
+      const data = await ApiCaller("login", "GET", null, "");
+      dispatch({ type: "GET_DATA", payload: data.data.data });
     } catch (error) {
       console.log(error);
     }
