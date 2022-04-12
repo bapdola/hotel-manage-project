@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CTable,
   CTableBody,
@@ -10,8 +10,16 @@ import {
 import PopupDelete from "./PopupDelete";
 import PopupUpdate from "./PopupUpdate";
 import PopupAdd from "./PopupAdd";
+import { FetchDataService } from "src/Utils/store/action/serviceAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const Services = () => {
+  const data = useSelector((state) => state.service.services);
+  const dispatch = useDispatch();
+  console.log("data service", data);
+  useEffect(() => {
+    dispatch(FetchDataService());
+  }, [dispatch]);
   return (
     <>
       <CTable striped>
@@ -26,20 +34,18 @@ const Services = () => {
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          <CTableRow>
-            <CTableHeaderCell scope="row">Trọng Thiện</CTableHeaderCell>
-            <CTableDataCell>10000$</CTableDataCell>
-            <CTableDataCell className="text-center">
-              <PopupUpdate /> <PopupDelete />
-            </CTableDataCell>
-          </CTableRow>
-          <CTableRow>
-            <CTableHeaderCell scope="row">Trọng Thiện</CTableHeaderCell>
-            <CTableDataCell>10000$</CTableDataCell>
-            <CTableDataCell className="text-center">
-              <PopupUpdate /> <PopupDelete />
-            </CTableDataCell>
-          </CTableRow>
+          {data &&
+            data.map((item, inx) => {
+              return (
+                <CTableRow key={inx}>
+                  <CTableHeaderCell scope="row">{item.name}</CTableHeaderCell>
+                  <CTableDataCell>${item.price}</CTableDataCell>
+                  <CTableDataCell className="text-center">
+                    <PopupUpdate /> <PopupDelete />
+                  </CTableDataCell>
+                </CTableRow>
+              );
+            })}
         </CTableBody>
       </CTable>
     </>

@@ -1,30 +1,27 @@
-import React from 'react'
+import React from "react";
 import {
   CAvatar,
-  CBadge,
   CDropdown,
-  CDropdownDivider,
-  CDropdownHeader,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-} from '@coreui/react'
-import {
-  cilBell,
-  cilCreditCard,
-  cilCommentSquare,
-  cilEnvelopeOpen,
-  cilFile,
-  cilLockLocked,
-  cilSettings,
-  cilTask,
-  cilUser,
-} from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
+} from "@coreui/react";
+import { cilLockLocked, cilSettings, cilUser } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
+import { useDispatch } from "react-redux";
+import { AdminLogut } from "src/Utils/store/action/adminLoginAction";
+import { useNavigate } from "react-router-dom";
 
-import avatar8 from './../../assets/images/avatars/8.jpg'
+import avatar8 from "./../../assets/images/avatars/8.jpg";
 
 const AppHeaderDropdown = () => {
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogOutAd = () => {
+    dispatch(AdminLogut());
+  };
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -39,13 +36,13 @@ const AppHeaderDropdown = () => {
           <CIcon icon={cilSettings} className="me-2" />
           Settings
         </CDropdownItem>
-        <CDropdownItem href="#">
+        <CDropdownItem href="admin/login" onClick={handleLogOutAd}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Logout Account
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
-  )
-}
+  );
+};
 
-export default AppHeaderDropdown
+export default AppHeaderDropdown;
