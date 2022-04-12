@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Popup from "./popupuser";
 import {
   CTable,
@@ -14,17 +14,6 @@ import {
   CModalHeader,
   CModalBody,
   CModalFooter,
-  CPopover,
-  CForm,
-  CCardText,
-  CCardTitle,
-  CCardBody,
-  CCardImage,
-  CCard,
-  CCardLink,
-  CListGroupItem,
-  CListGroup,
-  CTooltip,
 } from "@coreui/react";
 
 function User() {

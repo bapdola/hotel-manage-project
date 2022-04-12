@@ -1,15 +1,18 @@
 import ApiCaller from "src/Utils/apiCaller/apiCaller";
 import cookie from "react-cookies";
+const token = cookie.load("ADMIN_DATA");
 
-const result = cookie.load("ADMIN_DATA");
-const AdminLoginAction = ({ email, password }) => {
+const AdminLoginAction = ({ username, password }) => {
   return async (dispatch) => {
     try {
-      const res = await ApiCaller("login", "POST", { email, password }, result);
-      if (res && res.data.token) {
-        cookie.save("ADMIN_DATA", res.data.token);
-        dispatch({ type: "LOGIN_ADMIN", payload: res.data.token });
-      }
+      const res = await ApiCaller(
+        "login",
+        "POST",
+        { username, password },
+        token
+      );
+      cookie.save("ADMIN_DATA", res.data.Token);
+      dispatch({ type: "LOGIN_ADMIN", payload: res.data.Token });
     } catch (error) {
       console.log(error);
     }
@@ -17,3 +20,10 @@ const AdminLoginAction = ({ email, password }) => {
 };
 
 export default AdminLoginAction;
+
+export const AdminLogut = () => {
+  return (dispatch) => {
+    cookie.remove("ADMIN_DATA");
+    dispatch({ type: "LOGOUT_ADMIN" });
+  };
+};
