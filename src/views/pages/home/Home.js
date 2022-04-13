@@ -8,6 +8,8 @@ import Navbar from "src/components/userPage/Navbar";
 
 
 
+import { HashRouter, Route, Routes } from "react-router-dom";
+
 const Home = () => {
   return (
     <>

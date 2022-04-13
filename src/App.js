@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
+import PrivateRoutes from "./router/PrivateRoutes";
 
 import PrivateRoutes from "./router/PrivateRoutes";
 import Navbar from "./components/userPage/Navbar";
@@ -34,6 +35,7 @@ const SingleRoom = React.lazy(() =>
   import("./views/pages/singleRoom/SingleRoom")
 );
 
+<<<<<<< HEAD
 const App = () => {
   const isLogged = true;
   return (
@@ -54,6 +56,20 @@ const App = () => {
             element={<SingleRoom isLogged={isLogged} />}
           />
           <Route
+=======
+const Rooms = React.lazy(() => import("./components/userPage/Title"));
+
+const App = () => {
+  const isLogged = false;
+  return (
+    <BrowserRouter>
+      <Suspense fallback={loading}>
+        <Routes>
+          <Route path="/" name="Home Page" element={<Home />} />
+          <Route path="/rooms" name="Page" element={<Rooms />} />
+
+          <Route
+>>>>>>> main
             element={
               <PrivateRoutes isLogged={isLogged} redirectLink="/login" />
             }
@@ -65,6 +81,10 @@ const App = () => {
             />
           </Route>
           <Route path="admin/login" name="Login Page" element={<Login />} />
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
           <Route
             element={
               <PrivateRoutes isLogged={isLogged} redirectLink="admin/login" />
@@ -72,11 +92,16 @@ const App = () => {
           >
             <Route path="/admin/*" element={<DefaultLayout />} />
           </Route>
+<<<<<<< HEAD
           <Route
             path="admin/login"
             name="Login Page"
             element={<AdminLogin />}
           />
+=======
+
+          <Route path="admin/login" name="Login Page" element={<Login />} />
+>>>>>>> main
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="*" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
