@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CButton,
   CCard,
@@ -29,7 +29,7 @@ const AdminLogin = () => {
     event.preventDefault();
     dispatch(
       AdminLoginAction({
-        username: adminName,
+        email: adminName,
         password: password,
       })
     );

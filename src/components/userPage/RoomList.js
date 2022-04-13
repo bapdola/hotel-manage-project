@@ -18,8 +18,8 @@ export default function RoomList() {
 
       </div>
     </section>
-  );
+  
     </>
 
-  )
+);
 }

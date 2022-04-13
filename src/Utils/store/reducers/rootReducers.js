@@ -1,12 +1,14 @@
 import { combineReducers } from "redux";
 import listRoomReducer from "./RoomReducer";
-import listServiceReducer from "./ServiceReducer";
+import listUserReducer from "./UserReducer";
 import LoginAdmin from "./loginAdminReducer";
 
 const rootReducer = combineReducers({
   room: listRoomReducer,
   adminLogin: LoginAdmin,
-  service: listServiceReducer,
+
+  user: listUserReducer,
+
 });
 
 export default rootReducer;

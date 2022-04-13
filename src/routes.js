@@ -16,7 +16,7 @@ const routes = [
   // { path: "/users", name: "Users", element: Dashboard },
   { path: "/Bookings", name: "Bookings", element: Bookings },
   { path: "/", name: "Rooms", element: Rooms },
-  { path: "/addroom", name: "Rooms", element: AddRoom },
+  { path: "/Rooms/addroom", name: "Rooms", element: AddRoom },
   { path: "/user", name: "Users", element: Users },
   { path: "/login", name: "Login Admin", element: Login },
   { path: "/Services", name: "Services", element: Services },

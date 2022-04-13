@@ -4,7 +4,7 @@ import {
   CCol,CFormLabel,CFormInput,CFormFeedback,CFormCheck,CFormSelect,CInputGroupText,CInputGroup,CForm
 
 } from '@coreui/react'
-export default function Popup() {
+export default function PopupAdd() {
       const [validated, setValidated] = useState(false)
     const handleSubmit = (event) => {
       const form = event.currentTarget
@@ -17,7 +17,7 @@ export default function Popup() {
   const [visible, setVisible] = useState(false)
 return (
   <>
-    <CButton color="info" onClick={() => setVisible(!visible)}>Edit</CButton>
+    <button className="buttonAdd" onClick={() => setVisible(!visible)}>Add new User</button>
     <CModal alignment="center" visible={visible} onClose={() => setVisible(false)}>
       <CModalHeader>
         <CModalTitle>Invoice information</CModalTitle>
