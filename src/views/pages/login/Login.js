@@ -1,24 +1,29 @@
 import React from "react";
-import axios from "axios";
 import "./login.css";
+import { useState } from "react";
 
 const Login = () => {
-
-  try {
-    axios.get('https://reqres.in/api/users?page=2').then((res) => {
-      console.log('Dữ liệu lấy về',res.data.data);
-    })
-    
-   } catch (error) {
-    console.log('Failed to fetch room: ', error);
-   }
+  const [userName, setUserName] = useState("");
+  const [password, setPassWord] = useState("");
   return (
     <section className="body-userlogin">
       <div className="logo"></div>
       <div className="login-block">
         <h1>Login</h1>
-        <input type="text" value="" placeholder="Username" id="username" />
-        <input type="password" value="" placeholder="Password" id="password" />
+        <input
+          type="text"
+          defaultValue={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          placeholder="Username"
+          id="username"
+        />
+        <input
+          type="password"
+          defaultValue={password}
+          onChange={(e) => setPassWord(e.target.value)}
+          placeholder="Password"
+          id="password"
+        />
         <button className="btn-primary">Submit</button>
       </div>
     </section>

@@ -58,11 +58,9 @@ h6 {
   display: inline-block;
   text-decoration: none;
   letter-spacing: var(--mainSpacing);
-  background: linear-gradient(
-    90deg,
+  background: linear-gradient(90deg,
     rgba(182, 70, 185, 0.555) 0%,
-    rgba(0, 212, 255, 0.3203326740852591) 100%
-  );
+    rgba(0, 212, 255, 0.3203326740852591) 100%);
   color: var(--mainBlack);
   padding: 0.4rem 0.9rem;
   border: 3px solid var(--primaryColor);
@@ -101,9 +99,8 @@ h6 {
   width: 100%;
   background: var(--offWhite);
   z-index: 1;
-
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
+padding-top: 0.1rem;
+padding-bottom: 0.1rem;
 }
 .nav-header {
   size: 3.6rem;
@@ -192,12 +189,10 @@ h6 {
 .banner {
   border-radius: 3px;
   display: inline-block;
-  background: linear-gradient(
-    90deg,
+  background: linear-gradient(90deg,
     rgba(2, 0, 36, 0.534) 0%,
     rgba(9, 9, 121, 0.534) 45%,
-    rgba(0, 213, 255, 0.568) 100%
-  );
+    rgba(0, 213, 255, 0.568) 100%);
   color: var(--mainWhite);
   padding: 2rem 1rem;
   text-align: center;
@@ -568,26 +563,31 @@ h6 {
   margin-right: auto;
   margin-left: auto;
 }
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
   }
 }
+
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
   }
 }
+
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
   }
 }
+
 .container-fluid {
   width: 100%;
   padding-right: 15px;
@@ -595,14 +595,3 @@ h6 {
   margin-right: auto;
   margin-left: auto;
 }
-
-.buttonAdd {
-  background : linear-gradient(to right, rgba(97, 240, 26, 0.571), rgba(162, 178, 180, 0.79));
-  width: 196px;
-  height:45px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
