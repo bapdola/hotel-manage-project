@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import defaultImg from "../../assets/images/react.jpg";
+import defaultImg from "../../assets/react.jpg";
 const Room = () => {
   // console.log(name);
   return (

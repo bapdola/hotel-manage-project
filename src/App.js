@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
-import PrivateRoutes from "./router/PrivateRoutes";
 import Navbar from "./components/userPage/Navbar";
+import ProtectedRoutes from "./router/ProtectedRoutes";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -33,7 +33,6 @@ const SingleRoom = React.lazy(() =>
 );
 
 const App = () => {
-  const isLogged = true;
   return (
     <BrowserRouter>
       <Navbar />
@@ -51,10 +50,11 @@ const App = () => {
             element={<SingleRoom isLogged={isLogged} />}
           />
           <Route
-            element={
-              <PrivateRoutes isLogged={isLogged} redirectLink="/login" />
-            }
-          >
+            path="/rooms/single-room"
+            name="Page"
+            element={<SingleRoom />}
+          />
+          <Route element={<PrivateRoutes redirectLink="/login" />}>
             <Route
               path="/register"
               name="Register Page"
@@ -62,11 +62,7 @@ const App = () => {
             />
           </Route>
           <Route path="admin/login" name="Login Page" element={<Login />} />
-          <Route
-            element={
-              <PrivateRoutes isLogged={isLogged} redirectLink="admin/login" />
-            }
-          >
+          <Route element={<ProtectedRoutes redirectLink="admin/login" />}>
             <Route path="/admin/*" element={<DefaultLayout />} />
           </Route>
           <Route

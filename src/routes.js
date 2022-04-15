@@ -12,14 +12,23 @@ const Services = React.lazy(() =>
   import("./views/dashboard/services/Services")
 );
 
+//admin root page
+const Hotels = React.lazy(() => import("./views/dashboard/hotels/Hotels"));
+
 const routes = [
-  // { path: "/users", name: "Users", element: Dashboard },
   { path: "/Bookings", name: "Bookings", element: Bookings },
   { path: "/", name: "Rooms", element: Rooms },
   { path: "/Rooms/addroom", name: "Rooms", element: AddRoom },
   { path: "/user", name: "Users", element: Users },
   { path: "/login", name: "Login Admin", element: Login },
-  { path: "/Services", name: "Services", element: Services },
+  {
+    path: "/services",
+    exact: "exact",
+    name: "Services",
+    element: Services,
+  },
 ];
 
-export default routes;
+const routesRoot = [{ path: "/", name: "Hotels", element: Hotels }];
+
+export { routes, routesRoot };

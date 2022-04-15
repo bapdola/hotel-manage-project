@@ -37,4 +37,12 @@ const _nav = [
   },
 ];
 
-export default _nav;
+const _navRoot = [
+  {
+    component: CNavItem,
+    name: "Hotels",
+    to: "/admin",
+    icon: <MdOutlineHomeRepairService className="nav-icon" />,
+  },
+];
+export { _nav, _navRoot };
