@@ -1,8 +1,9 @@
 import ApiCaller from "src/Utils/apiCaller/apiCaller";
 import cookie from "react-cookies";
+
 import * as a from "../../constant";
 
-const AdminLoginAction = ({ username, password }) => {
+const AdminLoginAction = ({ email, password }) => {
   return async (dispatch) => {
     try {
       const res = await ApiCaller("login", "POST", { username, password });

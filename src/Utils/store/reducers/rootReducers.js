@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import listRoomReducer from "./RoomReducer";
-import listServiceReducer from "./ServiceReducer";
+import listUserReducer from "./UserReducer";
 import LoginAdmin from "./loginAdminReducer";
 import UsersReducer from "./UserReducers";
 import HotelReducer from "./HotelReducer";
