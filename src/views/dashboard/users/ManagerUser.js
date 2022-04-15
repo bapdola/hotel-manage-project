@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Popup from "./popupuser";
+import React, { useEffect } from "react";
+import PopupUpdate from "./PopupUpdate";
 import {
   CTable,
   CTableHead,
@@ -15,14 +15,23 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
+import PopupDelete from "./PopupDelete";
+import PopupAdd from "./PopupAdd";
+import { useDispatch, useSelector, connect } from "react-redux";
+import { FetchDataUser } from "src/Utils/store/action/userAction";
 
 function User() {
-  const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.user.users);
+
+  useEffect(() => {
+    dispatch(FetchDataUser());
+  }, [dispatch]);
 
   return (
-    <div>
-      <h1> User Management </h1>
-      <CTable>
+    <>
+      <CTable striped>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>
@@ -32,75 +41,45 @@ function User() {
             <CTableHeaderCell scope="col">Birthday</CTableHeaderCell>
             <CTableHeaderCell scope="col">Adress </CTableHeaderCell>
             <CTableHeaderCell scope="col">Phone </CTableHeaderCell>
-            <CTableHeaderCell scope="col">Roles </CTableHeaderCell>
-            <CTableHeaderCell scope="col"> </CTableHeaderCell>
+            <CTableHeaderCell scope="col">
+              <PopupAdd />{" "}
+            </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          <CTableRow color="secondary">
-            <CTableDataCell>#1</CTableDataCell>
-            <CTableHeaderCell scope="row">
-              Vmaxmartis@gmail.com
-            </CTableHeaderCell>
-            <CTableHeaderCell scope="row">215497833</CTableHeaderCell>
-            <CTableDataCell>Đinh Thiên Thoại</CTableDataCell>
-            <CTableDataCell>01/09/2000</CTableDataCell>
-            <CTableDataCell>55/12 NGO May</CTableDataCell>
-            <CTableDataCell>0387397253</CTableDataCell>
-            <CTableDataCell>User</CTableDataCell>
-            <CTableDataCell>
-              <CButtonGroup
-                role="group"
-                aria-label="Basic mixed styles example"
-              >
-                <Popup />
-                <CButton color="dark">Delete</CButton>
-              </CButtonGroup>
-            </CTableDataCell>
-          </CTableRow>
-
-          <CTableRow color="info">
-            <CTableDataCell>#2</CTableDataCell>
-            <CTableHeaderCell scope="row">Roin@gmail.com</CTableHeaderCell>
-            <CTableHeaderCell scope="row">215497833</CTableHeaderCell>
-            <CTableDataCell>Th@gmail.com</CTableDataCell>
-            <CTableDataCell>01/09/2000</CTableDataCell>
-            <CTableDataCell>55/12 NGO May</CTableDataCell>
-            <CTableDataCell>0387397253</CTableDataCell>
-            <CTableDataCell>User</CTableDataCell>
-
-            <CTableDataCell>
-              <CButtonGroup
-                role="group"
-                aria-label="Basic mixed styles example"
-              >
-                <Popup />
-                <>
-                  <CButton color="dark" onClick={() => setVisible(!visible)}>
-                    Delete
-                  </CButton>
-                  <CModal visible={visible} onClose={() => setVisible(false)}>
-                    <CModalHeader>
-                      <CModalTitle>Delete User</CModalTitle>
-                    </CModalHeader>
-                    <CModalBody>Delete user : Vmax martis</CModalBody>
-                    <CModalFooter>
-                      <CButton
-                        color="secondary"
-                        onClick={() => setVisible(false)}
-                      >
-                        Close
-                      </CButton>
-                      <CButton color="danger">Delete User</CButton>
-                    </CModalFooter>
-                  </CModal>
-                </>
-              </CButtonGroup>
-            </CTableDataCell>
-          </CTableRow>
+          {data &&
+            data.map((item, inx) => {
+              return (
+                <CTableRow key={item.uuid}>
+                  <CTableDataCell>{inx + 1}</CTableDataCell>
+                  <CTableHeaderCell scope="row">
+                    {item.username}
+                  </CTableHeaderCell>
+                  <CTableDataCell>{item.password}</CTableDataCell>
+                  <CTableDataCell scope="row">{item.fullName}</CTableDataCell>
+                  <CTableDataCell>{item.birtDate}</CTableDataCell>
+                  <CTableDataCell>{item.adress}</CTableDataCell>
+                  <CTableDataCell>{item.phone}</CTableDataCell>
+                  <CTableDataCell scope="row">
+                    <PopupUpdate
+                      userId={item?.uuid}
+                      nameUser={item?.username}
+                      Password={item?.password}
+                      FullName={item?.fullName}
+                      BirtDate={item?.birtDate}
+                      Adress={item?.adress}
+                      Phone={item?.phone}
+                      RoleId={item?.roleId}
+                      HotelId={item?.hotelId}
+                    />{" "}
+                    <PopupDelete userId={item?.uuid} />
+                  </CTableDataCell>
+                </CTableRow>
+              );
+            })}
         </CTableBody>
       </CTable>
-    </div>
+    </>
   );
 }
 

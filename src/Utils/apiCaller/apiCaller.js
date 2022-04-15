@@ -3,8 +3,10 @@ import axios from "axios";
 import * as Config from "./Config";
 import cookie from "react-cookies";
 
-export default async function ApiCaller(endpoint, method = "GET", body, token) {
+export default async function ApiCaller(endpoint, method = "GET", body) {
   try {
+    const loginData = cookie.load("ADMIN_DATA") || {}; // if undefined -> {}
+    const token = loginData.Token; // undefined.Token nên nó lỗi
     let res = await axios({
       method: method,
       url: `${Config.API_URL}/${endpoint}`,

@@ -14,7 +14,6 @@ import img1 from "../../../assets/images/react.jpg";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FetchData } from "src/Utils/store/action/roomAction";
-import ApiCaller from "src/Utils/apiCaller/apiCaller";
 
 export default function Rooms() {
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ export default function Rooms() {
     dispatch(FetchData());
   }, [dispatch]);
 
-  console.log("dataroom", data);
+  console.log("data service", data);
 
   return (
     <>

@@ -7,20 +7,20 @@ import {
   CTableHead,
   CTableHeaderCell,
 } from "@coreui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { HotelFetchData } from "src/Utils/store/action/hotelAction";
+import PopupAdd from "./PopupAdd";
 import PopupDelete from "./PopupDelete";
 import PopupUpdate from "./PopupUpdate";
-import PopupAdd from "./PopupAdd";
-import { FetchDataService } from "src/Utils/store/action/serviceAction";
-import { useDispatch, useSelector } from "react-redux";
 
-const Services = () => {
+const Hotels = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(FetchDataService());
+    dispatch(HotelFetchData());
   }, [dispatch]);
 
-  const data = useSelector((state) => state.service.services);
+  const data = useSelector((state) => state.hotel.hotels);
 
   return (
     <>
@@ -28,10 +28,11 @@ const Services = () => {
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Price</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Adress</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Phone</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Email</CTableHeaderCell>
             <CTableHeaderCell scope="col" className="text-center">
-              {" "}
-              <PopupAdd />{" "}
+              <PopupAdd />
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -41,15 +42,18 @@ const Services = () => {
               return (
                 <CTableRow key={inx}>
                   <CTableHeaderCell scope="row">{item.name}</CTableHeaderCell>
-                  <CTableDataCell>{item.price} VND</CTableDataCell>
+                  <CTableDataCell>{item.adress} </CTableDataCell>
+                  <CTableDataCell>{item.phone} </CTableDataCell>
+                  <CTableDataCell>{item.email} </CTableDataCell>
                   <CTableDataCell className="text-center">
                     <PopupUpdate
-                      serviceId={item?.uuid}
-                      nameSer={item?.name}
-                      priceSer={item?.price}
-                      hotelId={item?.hotelId}
+                      hotelId={item.uuid}
+                      nameHotel={item.name}
+                      dressHotel={item.adress}
+                      phoneHotel={item.phone}
+                      emailHotel={item.email}
                     />{" "}
-                    <PopupDelete serviceId={item?.uuid} />
+                    <PopupDelete hotelId={item.uuid} />
                   </CTableDataCell>
                 </CTableRow>
               );
@@ -60,4 +64,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Hotels;

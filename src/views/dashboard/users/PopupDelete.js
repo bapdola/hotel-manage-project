@@ -1,46 +1,44 @@
+import React, { useState } from "react";
 import {
   CButton,
   CModal,
-  CModalHeader,
   CModalTitle,
+  CModalHeader,
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState, useEffect } from "react";
-import React from "react";
-import { cilDelete } from "@coreui/icons";
-import CIcon from "@coreui/icons-react";
-import { DeleteDataService } from "src/Utils/store/action/serviceAction";
-import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
+import { DeleteDataUser } from "src/Utils/store/action/userAction";
+import { useDispatch } from "react-redux";
 
 const PopupDelete = (props) => {
   const [visible, setVisible] = useState(false);
-  const { serviceId } = props;
 
   const dispatch = useDispatch();
 
-  const handleClickDelSer = () => {
-    if (serviceId && serviceId !== "") {
-      dispatch(DeleteDataService(serviceId));
-      setVisible(false);
+  const { userId } = props;
+  const handleDeleteUser = () => {
+    if (userId && userId !== null) {
+      dispatch(DeleteDataUser(userId));
+      window.location.reload();
     }
   };
+
   return (
     <>
       <CButton color="danger" onClick={() => setVisible(!visible)}>
-        <CIcon icon={cilDelete} size="sm" /> Delete
+        Delete
       </CButton>
       <CModal visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
-          <CModalTitle>Delete</CModalTitle>
+          <CModalTitle>Delete User</CModalTitle>
         </CModalHeader>
         <CModalBody>Are you sure you want to delete?</CModalBody>
         <CModalFooter>
           <CButton color="secondary" onClick={() => setVisible(false)}>
             Close
           </CButton>
-          <CButton color="danger" type="submit" onClick={handleClickDelSer}>
+          <CButton color="danger" onClick={handleDeleteUser}>
             Yes
           </CButton>
         </CModalFooter>
@@ -50,7 +48,7 @@ const PopupDelete = (props) => {
 };
 
 PopupDelete.propTypes = {
-  serviceId: PropTypes.node,
+  userId: PropTypes.node,
 };
 
 export default PopupDelete;

@@ -11,6 +11,7 @@ import CIcon from "@coreui/icons-react";
 import { useDispatch } from "react-redux";
 import { AdminLogut } from "src/Utils/store/action/adminLoginAction";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import avatar8 from "./../../assets/images/avatars/8.jpg";
 
@@ -18,6 +19,8 @@ const AppHeaderDropdown = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const isLoggIn = useSelector((state) => state.adminLogin.currentUser);
 
   const handleLogOutAd = () => {
     dispatch(AdminLogut());

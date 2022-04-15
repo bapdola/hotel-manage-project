@@ -1,4 +1,5 @@
-//test config redux
+import * as a from "../../constant";
+
 const initialState = {
   rooms: [],
 };

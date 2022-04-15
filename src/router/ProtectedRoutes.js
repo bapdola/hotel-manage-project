@@ -3,6 +3,7 @@ import { PropTypes } from "prop-types";
 import Auth from "src/Utils/Auth/auth";
 
 import { Navigate, Outlet } from "react-router-dom";
+import cookie from "react-cookies";
 
 const ProtectedRoutes = ({ redirect }) => {
   const isAuth = Auth();

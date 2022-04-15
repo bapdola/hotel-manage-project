@@ -18,10 +18,20 @@ import { useState } from "react";
 
 import { cilCloudUpload } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
+import { useDispatch, useSelector } from "react-redux";
+import { UpdateDataService } from "src/Utils/store/action/serviceAction";
+import PropTypes from "prop-types";
 
-const PopupUpdate = () => {
+const PopupUpdate = (props) => {
+  const { nameSer, priceSer, hotelId, serviceId } = props;
   const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
+
+  const [updateSerName, setUpdateSerName] = useState(nameSer);
+  const [updatePriceSer, setUpdatePriceSer] = useState(priceSer);
+  const [updateHotelId, setUpdateHotelId] = useState(hotelId);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -30,6 +40,13 @@ const PopupUpdate = () => {
       event.stopPropagation();
     }
     setValidated(true);
+    const updateService = {
+      name: updateSerName,
+      price: updatePriceSer,
+      hotelId: updateHotelId,
+    };
+
+    dispatch(UpdateDataService(serviceId, updateService));
   };
 
   return (
@@ -53,7 +70,8 @@ const PopupUpdate = () => {
               <CFormInput
                 type="text"
                 id="validationTooltip01"
-                placeholder="Name"
+                value={updateSerName}
+                onChange={(e) => setUpdateSerName(e.target.value)}
                 required
               />
               <CFormFeedback tooltip valid>
@@ -65,7 +83,22 @@ const PopupUpdate = () => {
               <CFormInput
                 type="number"
                 id="validationTooltip02"
-                defaultValue=""
+                value={updatePriceSer}
+                onChange={(e) => setUpdatePriceSer(e.target.value)}
+                required
+              />
+              <CFormFeedback tooltip valid>
+                Looks good!
+              </CFormFeedback>
+            </CCol>
+            <CCol md={4} className="position-relative">
+              <CFormLabel htmlFor="validationTooltip03">Hotel Id</CFormLabel>
+              <CFormInput
+                type="text"
+                id="validationTooltip03"
+                value={updateHotelId}
+                onChange={(e) => setUpdateHotelId(e.target.value)}
+                disabled
                 required
               />
               <CFormFeedback tooltip valid>
@@ -87,5 +120,10 @@ const PopupUpdate = () => {
     </>
   );
 };
-
+PopupUpdate.propTypes = {
+  serviceId: PropTypes.node,
+  nameSer: PropTypes.node,
+  priceSer: PropTypes.node,
+  hotelId: PropTypes.node,
+};
 export default PopupUpdate;

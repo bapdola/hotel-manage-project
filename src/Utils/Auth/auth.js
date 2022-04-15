@@ -1,8 +1,10 @@
 import cookie from "react-cookies";
 
 const Auth = () => {
-  let isLoggIn = cookie.load("ADMIN_DATA") == null ? false : true;
-  return isLoggIn;
+  let isAdmin = cookie.load("ADMIN_DATA") || {};
+  if (isAdmin.role === "Root" || isAdmin.role === "Admin") {
+    return isAdmin.Token;
+  }
 };
 
 export default Auth;
