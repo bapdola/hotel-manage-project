@@ -18,6 +18,7 @@ export default function RoomList() {
       <div className="empty-search">
         <h3>unfortunately no rooms matched your search parameters</h3>
       </div>
+<<<<<<< HEAD
       <section className="roomslist">
         <div className="roomslist-center">
           <Room />
@@ -31,4 +32,21 @@ export default function RoomList() {
       );
     </>
   );
+=======
+    <section className="roomslist">
+      <div className="roomslist-center">
+      <Room  />
+      <Room  />
+      <Room  />
+      <Room  />
+      <Room  />
+      <Room  />
+
+      </div>
+    </section>
+  
+    </>
+
+);
+>>>>>>> 39132f8fd8ca2c94c8eca6825613bd257c69c030
 }

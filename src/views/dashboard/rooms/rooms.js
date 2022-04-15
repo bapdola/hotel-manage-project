@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +15,9 @@ import {
 import "./room.scss";
 import { useDispatch } from "react-redux";
 import { FetchData } from "src/Utils/store/action/roomAction";
-
+import img1 from "../../../assets/react.jpg";
 export default function Rooms() {
+  
   const navigate = useNavigate();
   const AddRoom = () => {
     navigate("/admin/addroom");
@@ -30,7 +30,7 @@ export default function Rooms() {
     dispatch(FetchData());
   }, [dispatch]);
 
-  console.log("data service", data);
+  console.log("dataroom", data);
 
   return (
     <CRow xs={{ cols: 1 }} md={{ cols: 3 }} className="g-4">

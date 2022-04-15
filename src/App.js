@@ -1,8 +1,9 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
-import Navbar from "./components/userPage/Navbar";
+
 import ProtectedRoutes from "./router/ProtectedRoutes";
+import Services from "./views/dashboard/services/Services";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -28,6 +29,7 @@ const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
 const Home = React.lazy(() => import("./views/pages/home/Home"));
 const Rooms = React.lazy(() => import("./views/pages/rooms/Rooms"));
+const Services = React.lazy(() => import("./views/pages/services/services"));
 const SingleRoom = React.lazy(() =>
   import("./views/pages/singleRoom/SingleRoom")
 );
@@ -40,6 +42,10 @@ const App = () => {
         <Routes>
           <Route exact path="/" name="Home Page" element={<Home />} />
           <Route exact path="/rooms" name="Page" element={<Rooms />} />
+          <Route exact path="/services" name="Page" element={<Services />} />
+
+          {/* test config redux */}
+          <Route exact path="/test" name="Page" element={<TestConfigRedux />} />
 
           {/* test config redux */}
           <Route exact path="/test" name="Page" element={<TestConfigRedux />} />
