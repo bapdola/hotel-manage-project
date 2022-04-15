@@ -16,10 +16,14 @@ import { sygnet } from "src/assets/brand/sygnet";
 import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";
 
+import cookie from "react-cookies";
+
 // sidebar nav config
-import navigation from "../_nav";
+import { _navRoot, _nav } from "../_nav";
 
 const AppSidebar = () => {
+  let isAdminRoot = cookie.load("ADMIN_DATA") || {};
+
   return (
     <CSidebar position="fixed">
       <CSidebarBrand className="d-none d-md-flex" to="/">
@@ -28,7 +32,13 @@ const AppSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav items={navigation} />
+          {isAdminRoot.role === "Root" ? (
+            <AppSidebarNav items={_navRoot} />
+          ) : isAdminRoot.role === "Admin" ? (
+            <AppSidebarNav items={_nav} />
+          ) : (
+            []
+          )}
         </SimpleBar>
       </CSidebarNav>
       <CSidebarToggler className="d-none d-lg-flex" />

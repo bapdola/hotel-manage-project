@@ -1,9 +1,5 @@
 import React from "react";
 
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
 import {
   CContainer,
   CHeader,
@@ -11,8 +7,6 @@ import {
   CHeaderNav,
   CHeaderToggler,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { cilMenu } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 import { cilMenu } from "@coreui/icons";
 

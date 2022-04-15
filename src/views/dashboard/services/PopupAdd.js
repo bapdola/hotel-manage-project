@@ -16,10 +16,18 @@ import {
 } from "@coreui/react";
 import { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import { AddDataService } from "src/Utils/store/action/serviceAction";
 
 const PopupAdd = () => {
   const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
+
+  const [nameService, setNameService] = useState("");
+  const [priceService, setPriceService] = useState("");
+  const [hotelId, setHotelId] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -28,6 +36,13 @@ const PopupAdd = () => {
       event.stopPropagation();
     }
     setValidated(true);
+    const newData = {
+      name: nameService,
+      price: priceService,
+      hotelId: hotelId,
+    };
+
+    dispatch(AddDataService(newData));
   };
 
   return (
@@ -52,6 +67,8 @@ const PopupAdd = () => {
                 type="text"
                 id="validationTooltip01"
                 placeholder="Name"
+                value={nameService}
+                onChange={(e) => setNameService(e.target.value)}
                 required
               />
               <CFormFeedback tooltip valid>
@@ -63,7 +80,23 @@ const PopupAdd = () => {
               <CFormInput
                 type="number"
                 id="validationTooltip02"
-                defaultValue=""
+                placeholder="Price"
+                value={priceService}
+                onChange={(e) => setPriceService(e.target.value)}
+                required
+              />
+              <CFormFeedback tooltip valid>
+                Looks good!
+              </CFormFeedback>
+            </CCol>
+            <CCol md={4} className="position-relative">
+              <CFormLabel htmlFor="validationTooltip03">HotelId</CFormLabel>
+              <CFormInput
+                type="text"
+                id="validationTooltip03"
+                placeholder="Hotel ID"
+                value={hotelId}
+                onChange={(e) => setHotelId(e.target.value)}
                 required
               />
               <CFormFeedback tooltip valid>

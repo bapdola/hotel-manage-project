@@ -6,13 +6,26 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { cilDelete } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
+import { DeleteDataService } from "src/Utils/store/action/serviceAction";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
-const PopupDelete = () => {
+const PopupDelete = (props) => {
   const [visible, setVisible] = useState(false);
+  const { serviceId } = props;
+
+  const dispatch = useDispatch();
+
+  const handleClickDelSer = () => {
+    if (serviceId && serviceId !== "") {
+      dispatch(DeleteDataService(serviceId));
+      setVisible(false);
+    }
+  };
   return (
     <>
       <CButton color="danger" onClick={() => setVisible(!visible)}>
@@ -27,11 +40,17 @@ const PopupDelete = () => {
           <CButton color="secondary" onClick={() => setVisible(false)}>
             Close
           </CButton>
-          <CButton color="danger">Yes</CButton>
+          <CButton color="danger" type="submit" onClick={handleClickDelSer}>
+            Yes
+          </CButton>
         </CModalFooter>
       </CModal>
     </>
   );
+};
+
+PopupDelete.propTypes = {
+  serviceId: PropTypes.node,
 };
 
 export default PopupDelete;
