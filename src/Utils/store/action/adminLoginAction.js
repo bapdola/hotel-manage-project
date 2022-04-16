@@ -3,7 +3,7 @@ import cookie from "react-cookies";
 
 import * as a from "../../constant";
 
-const AdminLoginAction = ({ email, password }) => {
+const AdminLoginAction = ({ username, password }) => {
   return async (dispatch) => {
     try {
       const res = await ApiCaller("login", "POST", { username, password });
