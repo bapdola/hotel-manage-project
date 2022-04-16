@@ -14,6 +14,8 @@ export const DELETE_DATA_SERVICE = "DELETE_DATA_SERVICE";
 
 //data Users
 export const GET_DATA_USERS = "GET_DATA_USERS";
+//data Role User
+export const GET_DATA_ROLE = "GET_DATA_ROLE";
 
 export const ADD_DATA_USERS = "ADD_DATA_USERS";
 export const ADD_DATA_USERS_FAILED = "ADD_DATA_USERS_FAILED";

@@ -16,33 +16,34 @@ import {
 } from "@coreui/react";
 import { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { AddDataService } from "src/Utils/store/action/serviceAction";
+import { useForm } from "react-hook-form";
 
 const PopupAdd = () => {
   const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
 
-  const [nameService, setNameService] = useState("");
-  const [priceService, setPriceService] = useState("");
+  const [name, setNameService] = useState("");
+  const [price, setPriceService] = useState("");
   const [hotelId, setHotelId] = useState("");
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    setValidated(true);
-    const newData = {
-      name: nameService,
-      price: priceService,
-      hotelId: hotelId,
-    };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+    mode: "onBlur",
+  });
 
-    dispatch(AddDataService(newData));
+  const handleOnSubmit = (data) => {
+    dispatch(AddDataService(data));
+    setValidated(true);
+    window.location.reload();
   };
 
   return (
@@ -58,8 +59,7 @@ const PopupAdd = () => {
           <CForm
             className="row g-3 needs-validation"
             noValidate
-            validated={validated}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(handleOnSubmit)}
           >
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip01">Name</CFormLabel>
@@ -67,13 +67,23 @@ const PopupAdd = () => {
                 type="text"
                 id="validationTooltip01"
                 placeholder="Name"
-                value={nameService}
+                value={name}
+                {...register("name", {
+                  required: true,
+                  pattern: /^[A-Za-z0-9 ]+$/i,
+                })}
                 onChange={(e) => setNameService(e.target.value)}
                 required
               />
-              <CFormFeedback tooltip valid>
-                Looks good!
-              </CFormFeedback>
+              {errors.name?.type === "required" && (
+                <p className="text-danger mt-2">Name Service is required</p>
+              )}
+              {errors.name?.type === "pattern" && (
+                <p className="text-danger mt-2">
+                  {" "}
+                  Name Service does not contain special characters
+                </p>
+              )}
             </CCol>
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip02">Price</CFormLabel>
@@ -81,13 +91,16 @@ const PopupAdd = () => {
                 type="number"
                 id="validationTooltip02"
                 placeholder="Price"
-                value={priceService}
+                defaultValue={price}
+                {...register("price", {
+                  required: true,
+                })}
                 onChange={(e) => setPriceService(e.target.value)}
                 required
               />
-              <CFormFeedback tooltip valid>
-                Looks good!
-              </CFormFeedback>
+              {errors.price?.type === "required" && (
+                <p className="text-danger mt-2"> Price Service is required</p>
+              )}
             </CCol>
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip03">HotelId</CFormLabel>
@@ -96,12 +109,15 @@ const PopupAdd = () => {
                 id="validationTooltip03"
                 placeholder="Hotel ID"
                 value={hotelId}
+                {...register("hotelId", {
+                  required: true,
+                })}
                 onChange={(e) => setHotelId(e.target.value)}
                 required
               />
-              <CFormFeedback tooltip valid>
-                Looks good!
-              </CFormFeedback>
+              {errors.hotelId?.type === "required" && (
+                <p className="text-danger mt-2"> Price Service is required</p>
+              )}
             </CCol>
 
             <CModalFooter>
@@ -118,5 +134,12 @@ const PopupAdd = () => {
     </>
   );
 };
-
+connect(
+  ({ name, price, hotelId }) => ({
+    name,
+    price,
+    hotelId,
+  }),
+  AddDataService
+)(PopupAdd);
 export default PopupAdd;

@@ -2,6 +2,7 @@ import ApiCaller from "src/Utils/apiCaller/apiCaller";
 import cookie from "react-cookies";
 
 import * as a from "../../constant";
+import { toast } from "react-toastify";
 
 const AdminLoginAction = ({ username, password }) => {
   return async (dispatch) => {
@@ -9,8 +10,9 @@ const AdminLoginAction = ({ username, password }) => {
       const res = await ApiCaller("login", "POST", { username, password });
       cookie.save("ADMIN_DATA", res.data);
       dispatch({ type: a.LOGIN_ADMIN, payload: res.data.Token });
+      toast.success("Login Success");
     } catch (error) {
-      console.log(error);
+      toast.error("Incorrect login or password!");
     }
   };
 };
@@ -22,8 +24,9 @@ export const AdminLogut = () => {
     try {
       cookie.remove("ADMIN_DATA");
       dispatch({ type: a.LOGOUT_ADMIN });
+      toast.success("Logout Success");
     } catch (error) {
-      console.log(error);
+      toast.error("Logout Failed!");
     }
   };
 };

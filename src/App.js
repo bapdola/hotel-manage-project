@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
 
 import ProtectedRoutes from "./router/ProtectedRoutes";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Services from "./views/dashboard/services/Services";
 
 const loading = (
@@ -72,7 +75,18 @@ const App = () => {
           <Route exact path="*" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
         </Routes>
-      </Suspense>
+      </Suspense>{" "}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </BrowserRouter>
   );
 };

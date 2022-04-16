@@ -12,10 +12,10 @@ export const FetchDataService = () => {
   };
 };
 
-export const AddDataService = (newData) => {
+export const AddDataService = (data) => {
   return async (dispatch) => {
     try {
-      const res = await ApiCaller("services/create", "POST", newData);
+      const res = await ApiCaller("services/create", "POST", data);
       dispatch({ type: a.ADD_DATA_SERVICE, payload: res.data.result });
     } catch (error) {
       console.log(error);
@@ -23,14 +23,10 @@ export const AddDataService = (newData) => {
   };
 };
 
-export const UpdateDataService = (id, updateService) => {
+export const UpdateDataService = (id, data) => {
   return async (dispatch) => {
     try {
-      const res = await ApiCaller(
-        `services/update/${id}`,
-        "PUT",
-        updateService
-      );
+      const res = await ApiCaller(`services/update/${id}`, "PUT", data);
       dispatch({ type: a.UPDATE_DATA_SERVICE, payload: res.data.result });
     } catch (error) {
       console.log(error);

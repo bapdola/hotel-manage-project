@@ -13,7 +13,7 @@ const listServiceReducer = (state = initialState, action) => {
     case a.DELETE_DATA_SERVICE:
       return {
         ...state,
-        services: state.services.filter((item) => item.uuid !== action.payload),
+        services: state.services.filter((item) => item.id !== action.payload),
       };
     case a.UPDATE_DATA_SERVICE:
       return { ...state, services: action.payload };

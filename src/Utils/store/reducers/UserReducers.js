@@ -2,18 +2,15 @@ import * as a from "../../constant";
 
 const initialState = {
   users: [],
-  error: "",
+  roles: [],
 };
 
 const UsersReducer = (state = initialState, action) => {
   switch (action.type) {
     case a.GET_DATA_USERS:
       return { ...state, users: action.payload };
-
     case a.ADD_DATA_USERS:
       return { ...state, users: action.payload };
-    case a.ADD_DATA_USERS_FAILED:
-      return { ...state, error: action.error };
 
     case a.UPDATE_DATA_USERS:
       return { ...state, users: action.payload };
@@ -21,8 +18,12 @@ const UsersReducer = (state = initialState, action) => {
     case a.DELETE_DATA_USERS:
       return {
         ...state,
-        users: state.services.filter((item) => item.uuid !== action.payload),
+        users: state.services.filter((item) => item.id !== action.payload),
       };
+
+    case a.GET_DATA_ROLE:
+      return { ...state, roles: action.payload };
+
     // case a.UPDATE_DATA_SERVICE:
     //   return { ...state, services: action.payload };
 

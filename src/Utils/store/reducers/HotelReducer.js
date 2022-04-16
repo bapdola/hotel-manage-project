@@ -15,7 +15,7 @@ const HotelReducer = (state = initialState, action) => {
     case a.DELETE_DATA_HOTEL:
       return {
         ...state,
-        hotels: state.hotels.filter((item) => item.uuid !== action.payload),
+        hotels: state.hotels.filter((item) => item.id !== action.payload),
       };
 
     default:

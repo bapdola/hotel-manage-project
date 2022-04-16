@@ -16,94 +16,113 @@ import {
 } from "@coreui/react";
 import { useState } from "react";
 
-import { cilCloudUpload } from "@coreui/icons";
-import CIcon from "@coreui/icons-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { UpdateDataService } from "src/Utils/store/action/serviceAction";
+import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
+import { VscAdd } from "react-icons/vsc";
 
 const PopupUpdate = (props) => {
-  const { nameSer, priceSer, hotelId, serviceId } = props;
+  const { nameSer, priceSer, HotelId, serviceId } = props;
   const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
 
-  const [updateSerName, setUpdateSerName] = useState(nameSer);
-  const [updatePriceSer, setUpdatePriceSer] = useState(priceSer);
-  const [updateHotelId, setUpdateHotelId] = useState(hotelId);
+  const [name, setNameService] = useState(nameSer);
+  const [price, setPriceService] = useState(priceSer);
+  const [hotelId, setHotelId] = useState(HotelId);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    setValidated(true);
-    const updateService = {
-      name: updateSerName,
-      price: updatePriceSer,
-      hotelId: updateHotelId,
-    };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    mode: "onChange",
+  });
 
-    dispatch(UpdateDataService(serviceId, updateService));
+  const handleOnSubmit = (data) => {
+    if (serviceId && serviceId !== null) {
+      dispatch(UpdateDataService(serviceId, data));
+      setValidated(true);
+      window.location.reload();
+    }
   };
 
   return (
     <>
       <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
-        <CIcon icon={cilCloudUpload} size="sm" /> Edit
+        <VscAdd size={15} /> Edit
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Update Services</CModalTitle>
+          <CModalTitle>Add Services</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
             className="row g-3 needs-validation"
             noValidate
-            validated={validated}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(handleOnSubmit)}
           >
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip01">Name</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip01"
-                value={updateSerName}
-                onChange={(e) => setUpdateSerName(e.target.value)}
+                placeholder="Name"
+                value={name}
+                {...register("name", {
+                  required: true,
+                  pattern: /^[A-Za-z0-9 ]+$/i,
+                })}
+                onChange={(e) => setNameService(e.target.value)}
                 required
               />
-              <CFormFeedback tooltip valid>
-                Looks good!
-              </CFormFeedback>
+              {errors.name?.type === "required" && (
+                <p className="text-danger mt-2">Name Service is required</p>
+              )}
+              {errors.name?.type === "pattern" && (
+                <p className="text-danger mt-2">
+                  {" "}
+                  Name Service does not contain special characters
+                </p>
+              )}
             </CCol>
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip02">Price</CFormLabel>
               <CFormInput
                 type="number"
                 id="validationTooltip02"
-                value={updatePriceSer}
-                onChange={(e) => setUpdatePriceSer(e.target.value)}
+                placeholder="Price"
+                value={price}
+                {...register("price", {
+                  required: true,
+                })}
+                onChange={(e) => setPriceService(e.target.value)}
                 required
               />
-              <CFormFeedback tooltip valid>
-                Looks good!
-              </CFormFeedback>
+              {errors.price?.type === "required" && (
+                <p className="text-danger mt-2"> Price Service is required</p>
+              )}
             </CCol>
             <CCol md={4} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip03">Hotel Id</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip03">HotelId</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip03"
-                value={updateHotelId}
-                onChange={(e) => setUpdateHotelId(e.target.value)}
-                disabled
+                placeholder="Hotel ID"
+                value={hotelId}
+                {...register("hotelId", {
+                  required: true,
+                })}
+                onChange={(e) => setHotelId(e.target.value)}
                 required
               />
-              <CFormFeedback tooltip valid>
-                Looks good!
-              </CFormFeedback>
+              {errors.hotelId?.type === "required" && (
+                <p className="text-danger mt-2"> Price Service is required</p>
+              )}
             </CCol>
 
             <CModalFooter>
@@ -111,7 +130,7 @@ const PopupUpdate = (props) => {
                 Close
               </CButton>
               <CButton color="success" type="submit">
-                Update
+                Add
               </CButton>
             </CModalFooter>
           </CForm>
@@ -124,6 +143,14 @@ PopupUpdate.propTypes = {
   serviceId: PropTypes.node,
   nameSer: PropTypes.node,
   priceSer: PropTypes.node,
-  hotelId: PropTypes.node,
+  HotelId: PropTypes.node,
 };
+connect(
+  ({ name, price, hotelId }) => ({
+    name,
+    price,
+    hotelId,
+  }),
+  UpdateDataService
+)(PopupUpdate);
 export default PopupUpdate;

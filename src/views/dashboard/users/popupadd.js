@@ -6,6 +6,7 @@ import {
   CButton,
   CCol,
   CFormFeedback,
+  CFormSelect,
 } from "@coreui/react";
 import {
   CModal,
@@ -31,9 +32,9 @@ const PopupAdd = () => {
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
   const [roleId, setRoleId] = useState("");
-  const [hotelId, setHotelId] = useState("");
 
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.user.roles);
 
   const {
     register,
@@ -41,6 +42,7 @@ const PopupAdd = () => {
     reset,
     formState: { errors },
   } = useForm({
+    mode: "onBlur",
     mode: "onChange",
   });
 
@@ -195,31 +197,22 @@ const PopupAdd = () => {
             </CCol>
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip07">Roles</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip07"
-                placeholder="Roles"
-                value={roleId}
+              <CFormSelect
+                aria-label="Default select example"
                 {...register("roleId", { required: true })}
                 onChange={(e) => setRoleId(e.target.value)}
-              />
+              >
+                {data &&
+                  data.map((item) => {
+                    return (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
+              </CFormSelect>
               {errors.roleId?.type === "required" && (
                 <p className="text-danger mt-2">roleId is required</p>
-              )}
-            </CCol>
-            <CCol md={4} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip08">HotelId</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip08"
-                placeholder="Roles"
-                value={hotelId}
-                {...register("hotelId", { required: true })}
-                onChange={(e) => setHotelId(e.target.value)}
-                required
-              />
-              {errors.hotelId?.type === "required" && (
-                <p className="text-danger mt-2">hotelId is required</p>
               )}
             </CCol>
 
@@ -239,22 +232,12 @@ const PopupAdd = () => {
 };
 
 connect(
-  ({
+  ({ username, password, fullName, phone, birtDate, roleId, adress }) => ({
     username,
     password,
     fullName,
     phone,
     birtDate,
-    hotelId,
-    roleId,
-    adress,
-  }) => ({
-    username,
-    password,
-    fullName,
-    phone,
-    birtDate,
-    hotelId,
     roleId,
     adress,
   }),
