@@ -6,6 +6,7 @@ import {
   CButton,
   CCol,
   CFormFeedback,
+  CFormSelect,
 } from "@coreui/react";
 import {
   CModal,
@@ -14,7 +15,7 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { UpdateDataUser } from "src/Utils/store/action/userAction";
@@ -32,7 +33,6 @@ const PopupUpdate = (props) => {
     Adress,
     Phone,
     RoleId,
-    HotelId,
     userId,
   } = props;
 
@@ -43,9 +43,9 @@ const PopupUpdate = (props) => {
   const [adress, setAdress] = useState(Adress);
   const [phone, setPhone] = useState(Phone);
   const [roleId, setRoleId] = useState(RoleId);
-  const [hotelId, setHotelId] = useState(HotelId);
 
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.user.roles);
 
   const {
     register,
@@ -53,15 +53,14 @@ const PopupUpdate = (props) => {
     reset,
     formState: { errors },
   } = useForm({
+    mode: "onBlur",
     mode: "onChange",
   });
 
   const handleOnSubmit = (data) => {
-    if (userId && userId !== null) {
-      dispatch(UpdateDataUser(data, userId));
-      reset({ ...data });
-    }
     window.location.reload();
+    dispatch(UpdateDataUser(data, userId));
+    reset({ ...data });
   };
 
   return (
@@ -209,31 +208,22 @@ const PopupUpdate = (props) => {
             </CCol>
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip07">Roles</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip07"
-                placeholder="Roles"
-                value={roleId}
+              <CFormSelect
+                aria-label="Default select example"
                 {...register("roleId", { required: true })}
                 onChange={(e) => setRoleId(e.target.value)}
-              />
+              >
+                {data &&
+                  data.map((item) => {
+                    return (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
+              </CFormSelect>
               {errors.roleId?.type === "required" && (
                 <p className="text-danger mt-2">roleId is required</p>
-              )}
-            </CCol>
-            <CCol md={4} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip08">HotelId</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip08"
-                placeholder="Roles"
-                value={hotelId}
-                {...register("hotelId", { required: true })}
-                onChange={(e) => setHotelId(e.target.value)}
-                required
-              />
-              {errors.hotelId?.type === "required" && (
-                <p className="text-danger mt-2">hotelId is required</p>
               )}
             </CCol>
 
@@ -253,22 +243,12 @@ const PopupUpdate = (props) => {
 };
 
 connect(
-  ({
+  ({ username, password, fullName, phone, birtDate, roleId, adress }) => ({
     username,
     password,
     fullName,
     phone,
     birtDate,
-    hotelId,
-    roleId,
-    adress,
-  }) => ({
-    username,
-    password,
-    fullName,
-    phone,
-    birtDate,
-    hotelId,
     roleId,
     adress,
   }),

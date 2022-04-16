@@ -14,6 +14,7 @@ import img1 from "../../../assets/images/react.jpg";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FetchData } from "src/Utils/store/action/roomAction";
+import { toast } from "react-toastify";
 
 export default function Rooms() {
   const navigate = useNavigate();
@@ -23,12 +24,11 @@ export default function Rooms() {
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state.room.rooms);
+  const isLoggIn = useSelector((state) => state.adminLogin.currentUser);
 
   useEffect(() => {
     dispatch(FetchData());
   }, [dispatch]);
-
-  console.log("data service", data);
 
   return (
     <>

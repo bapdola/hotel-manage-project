@@ -38,22 +38,22 @@ const Hotels = () => {
         </CTableHead>
         <CTableBody>
           {data &&
-            data.map((item, inx) => {
+            data.map((item) => {
               return (
-                <CTableRow key={inx}>
+                <CTableRow key={item.id}>
                   <CTableHeaderCell scope="row">{item.name}</CTableHeaderCell>
                   <CTableDataCell>{item.adress} </CTableDataCell>
                   <CTableDataCell>{item.phone} </CTableDataCell>
                   <CTableDataCell>{item.email} </CTableDataCell>
                   <CTableDataCell className="text-center">
                     <PopupUpdate
-                      hotelId={item.uuid}
+                      hotelId={item.id}
                       nameHotel={item.name}
                       dressHotel={item.adress}
                       phoneHotel={item.phone}
                       emailHotel={item.email}
                     />{" "}
-                    <PopupDelete hotelId={item.uuid} />
+                    <PopupDelete hotelId={item.id} />
                   </CTableDataCell>
                 </CTableRow>
               );

@@ -41,3 +41,14 @@ export const DeleteDataUser = (id) => {
     }
   };
 };
+
+export const LoadListRole = () => {
+  return async (dispatch) => {
+    try {
+      const res = await ApiCaller("role/findall", "GET", null);
+      dispatch({ type: a.GET_DATA_ROLE, payload: res.data.result });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
