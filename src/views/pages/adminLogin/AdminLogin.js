@@ -30,16 +30,6 @@ const AdminLogin = () => {
 
   const dispatch = useDispatch();
 
-<<<<<<< HEAD
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(
-      AdminLoginAction({
-        email: adminName,
-        password: password,
-      })
-    );
-=======
   const {
     register,
     handleSubmit,
@@ -52,7 +42,6 @@ const AdminLogin = () => {
 
   const handleOnSubmit = (data) => {
     dispatch(AdminLoginAction(data));
->>>>>>> truongtrongthien
   };
 
   return (
