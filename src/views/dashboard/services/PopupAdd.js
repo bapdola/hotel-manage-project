@@ -19,6 +19,8 @@ import { VscAdd } from "react-icons/vsc";
 import { useDispatch, connect } from "react-redux";
 import { AddDataService } from "src/Utils/store/action/serviceAction";
 import { useForm } from "react-hook-form";
+import { FetchDataService } from "src/Utils/store/action/serviceAction";
+import { useEffect } from "react";
 
 const PopupAdd = () => {
   const [validated, setValidated] = useState(false);
@@ -26,7 +28,7 @@ const PopupAdd = () => {
 
   const [name, setNameService] = useState("");
   const [price, setPriceService] = useState("");
-  const [hotelId, setHotelId] = useState("");
+  // const [hotelId, setHotelId] = useState("");
 
   const dispatch = useDispatch();
 
@@ -40,10 +42,13 @@ const PopupAdd = () => {
     mode: "onBlur",
   });
 
-  const handleOnSubmit = (data) => {
+  const handleOnSubmit = (data, e) => {
+    e.preventDefault();
+    setNameService("");
+    setPriceService("");
     dispatch(AddDataService(data));
-    setValidated(true);
-    window.location.reload();
+    reset({ ...data });
+    setVisibleLg(false);
   };
 
   return (
@@ -99,23 +104,6 @@ const PopupAdd = () => {
                 required
               />
               {errors.price?.type === "required" && (
-                <p className="text-danger mt-2"> Price Service is required</p>
-              )}
-            </CCol>
-            <CCol md={4} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip03">HotelId</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip03"
-                placeholder="Hotel ID"
-                value={hotelId}
-                {...register("hotelId", {
-                  required: true,
-                })}
-                onChange={(e) => setHotelId(e.target.value)}
-                required
-              />
-              {errors.hotelId?.type === "required" && (
                 <p className="text-danger mt-2"> Price Service is required</p>
               )}
             </CCol>

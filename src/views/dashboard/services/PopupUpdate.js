@@ -29,7 +29,6 @@ const PopupUpdate = (props) => {
 
   const [name, setNameService] = useState(nameSer);
   const [price, setPriceService] = useState(priceSer);
-  const [hotelId, setHotelId] = useState(HotelId);
 
   const dispatch = useDispatch();
 
@@ -44,11 +43,9 @@ const PopupUpdate = (props) => {
   });
 
   const handleOnSubmit = (data) => {
-    if (serviceId && serviceId !== null) {
-      dispatch(UpdateDataService(serviceId, data));
-      setValidated(true);
-      window.location.reload();
-    }
+    dispatch(UpdateDataService(serviceId, data));
+    reset({ ...data });
+    setVisibleLg(false);
   };
 
   return (
@@ -107,30 +104,13 @@ const PopupUpdate = (props) => {
                 <p className="text-danger mt-2"> Price Service is required</p>
               )}
             </CCol>
-            <CCol md={4} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip03">HotelId</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip03"
-                placeholder="Hotel ID"
-                value={hotelId}
-                {...register("hotelId", {
-                  required: true,
-                })}
-                onChange={(e) => setHotelId(e.target.value)}
-                required
-              />
-              {errors.hotelId?.type === "required" && (
-                <p className="text-danger mt-2"> Price Service is required</p>
-              )}
-            </CCol>
 
             <CModalFooter>
               <CButton color="secondary" onClick={() => setVisibleLg(false)}>
                 Close
               </CButton>
               <CButton color="success" type="submit">
-                Add
+                Update
               </CButton>
             </CModalFooter>
           </CForm>

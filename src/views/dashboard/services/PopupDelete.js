@@ -20,7 +20,8 @@ const PopupDelete = (props) => {
 
   const dispatch = useDispatch();
 
-  const handleClickDelSer = () => {
+  const handleClickDelSer = (e) => {
+    e.preventDefault();
     if (serviceId && serviceId !== "") {
       dispatch(DeleteDataService(serviceId));
       setVisible(false);

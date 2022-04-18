@@ -20,7 +20,8 @@ const PopupDelete = (props) => {
   const handleDeleteUser = () => {
     if (userId && userId !== null) {
       dispatch(DeleteDataUser(userId));
-      window.location.reload();
+      // window.location.reload();
+      setVisible(false);
     }
   };
 

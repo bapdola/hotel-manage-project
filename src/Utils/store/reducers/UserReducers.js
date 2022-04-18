@@ -10,15 +10,21 @@ const UsersReducer = (state = initialState, action) => {
     case a.GET_DATA_USERS:
       return { ...state, users: action.payload };
     case a.ADD_DATA_USERS:
-      return { ...state, users: action.payload };
+      const users = state.users.concat(action.payload);
+      return { ...state, users };
 
     case a.UPDATE_DATA_USERS:
-      return { ...state, users: action.payload };
+      return {
+        ...state,
+        users: state.users.map((item) =>
+          item.id === action.payload.id ? action.payload : item
+        ),
+      };
 
     case a.DELETE_DATA_USERS:
       return {
         ...state,
-        users: state.services.filter((item) => item.id !== action.payload),
+        users: action.payload,
       };
 
     case a.GET_DATA_ROLE:

@@ -45,7 +45,7 @@ const PopupAdd = () => {
     dispatch(AddDataHotel(data));
     reset({ ...data });
     setVisibleLg(false);
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

@@ -47,9 +47,10 @@ const PopupAdd = () => {
   });
 
   const handleOnSubmit = (data) => {
-    window.location.reload();
+    // window.location.reload();
     dispatch(AddDataUser(data));
     reset({ ...data });
+    setVisibleLg(false);
   };
 
   return (

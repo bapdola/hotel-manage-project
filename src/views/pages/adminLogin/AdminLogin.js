@@ -97,7 +97,6 @@ const AdminLogin = () => {
                           autoComplete="current-password"
                           {...register("password", {
                             required: true,
-                            minLength: 5,
                           })}
                           onChange={(e) => setPassWord(e.target.value)}
                           // onBlur={(e) => setPassWord(e.target.value)}
@@ -106,11 +105,7 @@ const AdminLogin = () => {
                       {errors.password?.type === "required" && (
                         <p className="text-danger">Password is required</p>
                       )}
-                      {errors.password?.type === "minLength" && (
-                        <p className="text-danger">
-                          Password must be 6 characters long
-                        </p>
-                      )}
+
                       <CRow>
                         <CCol xs={6}>
                           <CButton

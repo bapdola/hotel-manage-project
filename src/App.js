@@ -5,7 +5,6 @@ import ProtectedRoutes from "./router/ProtectedRoutes";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Services from "./views/dashboard/services/Services";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -32,6 +31,8 @@ const SingleRoom = React.lazy(() =>
   import("./views/pages/singleRoom/SingleRoom")
 );
 
+const BtnBooking = React.lazy(() => import("./components/userPage/btnBooking"));
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -39,7 +40,6 @@ const App = () => {
         <Routes>
           <Route exact path="/" name="Home Page" element={<Home />} />
           <Route exact path="/rooms" name="Page" element={<Rooms />} />
-          <Route path="/register" name="Register Page" element={<Register />} />
           <Route
             path="/rooms/single-room"
             name="Page"
@@ -54,6 +54,11 @@ const App = () => {
             <Route exact path="/admin/*" element={<DefaultLayout />} />
           </Route>
 
+          <Route exact element={<ProtectedRoutes redirect="/login" />}>
+            <Route exact path="/rooms/:id" element={<BtnBooking />} />
+          </Route>
+
+          <Route path="/register" name="Register Page" element={<Register />} />
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="*" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
