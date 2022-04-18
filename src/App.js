@@ -35,7 +35,6 @@ const SingleRoom = React.lazy(() =>
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Suspense fallback={loading}>
         <Routes>
           <Route exact path="/" name="Home Page" element={<Home />} />
@@ -46,13 +45,7 @@ const App = () => {
             name="Page"
             element={<SingleRoom />}
           />
-          <Route element={<PrivateRoutes redirectLink="/login" />}>
-            <Route
-              path="/register"
-              name="Register Page"
-              element={<Register />}
-            />
-          </Route>
+
           <Route
             path="admin/login"
             name="Login Page"

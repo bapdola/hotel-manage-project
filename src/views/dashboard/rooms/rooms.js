@@ -17,6 +17,7 @@ import "./room.scss";
 import { useDispatch } from "react-redux";
 import { FetchData } from "src/Utils/store/action/roomAction";
 import { toast } from "react-toastify";
+import img1 from "../../../images/room-1.jpeg";
 
 export default function Rooms() {
   const navigate = useNavigate();
