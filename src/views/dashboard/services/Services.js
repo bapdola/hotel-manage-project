@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   CTable,
   CTableBody,
@@ -10,8 +10,6 @@ import {
 import PopupDelete from "./PopupDelete";
 import PopupUpdate from "./PopupUpdate";
 import PopupAdd from "./PopupAdd";
-import { FetchDataService } from "src/Utils/store/action/serviceAction";
-import { useDispatch, useSelector } from "react-redux";
 
 const Services = () => {
   const dispatch = useDispatch();
