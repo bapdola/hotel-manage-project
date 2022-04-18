@@ -6,7 +6,6 @@ import ProtectedRoutes from "./router/ProtectedRoutes";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Services from "./views/dashboard/services/Services";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -16,9 +15,6 @@ const loading = (
 
 // Containers
 const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
-const TestConfigRedux = React.lazy(() =>
-  import("./views/pages/testConfigRedux/testConfigRedux")
-);
 
 // Pages
 const Login = React.lazy(() => import("./views/pages/login/Login"));
@@ -32,7 +28,6 @@ const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
 const Home = React.lazy(() => import("./views/pages/home/Home"));
 const Rooms = React.lazy(() => import("./views/pages/rooms/Rooms"));
-const Services = React.lazy(() => import("./views/pages/services/services"));
 const SingleRoom = React.lazy(() =>
   import("./views/pages/singleRoom/SingleRoom")
 );
@@ -45,10 +40,6 @@ const App = () => {
         <Routes>
           <Route exact path="/" name="Home Page" element={<Home />} />
           <Route exact path="/rooms" name="Page" element={<Rooms />} />
-          <Route exact path="/services" name="Page" element={<Services />} />
-
-          {/* test config redux */}
-          <Route exact path="/test" name="Page" element={<TestConfigRedux />} />
 
           <Route
             path="/rooms/single-room"
@@ -62,15 +53,15 @@ const App = () => {
               element={<Register />}
             />
           </Route>
-          <Route path="admin/login" name="Login Page" element={<Login />} />
-          <Route element={<ProtectedRoutes redirectLink="admin/login" />}>
-            <Route path="/admin/*" element={<DefaultLayout />} />
-          </Route>
           <Route
             path="admin/login"
             name="Login Page"
             element={<AdminLogin />}
           />
+          <Route element={<ProtectedRoutes redirectLink="admin/login" />}>
+            <Route path="/admin/*" element={<DefaultLayout />} />
+          </Route>
+
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="*" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
