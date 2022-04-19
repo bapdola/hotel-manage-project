@@ -10,8 +10,8 @@ import {
 import PopupDelete from "./PopupDelete";
 import PopupUpdate from "./PopupUpdate";
 import PopupAdd from "./PopupAdd";
-import { FetchDataService } from "src/Utils/store/action/serviceAction";
 import { useDispatch, useSelector } from "react-redux";
+import { FetchDataService } from "src/Utils/store/action/serviceAction";
 
 const Services = () => {
   const dispatch = useDispatch();

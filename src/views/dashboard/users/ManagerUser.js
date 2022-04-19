@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PopupUpdate from "./PopupUpdate";
+
 import {
   CTable,
   CTableHead,
@@ -9,11 +10,6 @@ import {
   CTableHeaderCell,
   CButton,
   CButtonGroup,
-  CModal,
-  CModalTitle,
-  CModalHeader,
-  CModalBody,
-  CModalFooter,
 } from "@coreui/react";
 import PopupDelete from "./PopupDelete";
 import PopupAdd from "./PopupAdd";

@@ -1,11 +1,14 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
+
 import ProtectedRoutes from "./router/ProtectedRoutes";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import cookie from "react-cookies";
+
 
 const loading = (
   <div className="pt-3 text-center">
@@ -40,18 +43,22 @@ const App = () => {
       <Suspense fallback={loading}>
         <Routes>
           <Route exact path="/" name="Home Page" element={<Home />} />
+
+          <Route exact path="/rooms" name="Page" element={<Rooms />} />
+
           <Route
             path="/rooms/single-room"
             name="Page"
             element={<SingleRoom />}
           />
+
           <Route
             path="admin/login"
             name="Login Page"
             element={<AdminLogin />}
           />
-          <Route exact element={<ProtectedRoutes redirect="admin/login" />}>
-            <Route exact path="/admin/*" element={<DefaultLayout />} />
+          <Route element={<ProtectedRoutes redirectLink="admin/login" />}>
+            <Route path="/admin/*" element={<DefaultLayout />} />
           </Route>
 
           <Route exact element={<ProtectedRoutes redirect="/login" />}>

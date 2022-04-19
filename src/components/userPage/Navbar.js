@@ -21,6 +21,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(AdminLogut());
   };
+
   console.log("check login", isAdminRoot.Token);
   return (
     <nav className="navbar">
@@ -47,7 +48,7 @@ const Navbar = () => {
               </Link>
             ) : (
               <Link to="/login">
-                <VscAccount size="25" />
+                <VscAccount size="27" />
               </Link>
             )}
           </li>

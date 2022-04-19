@@ -23,7 +23,7 @@ import {
 
 import { PropTypes } from "prop-types";
 
-const BtnBookings = ({ isAuth }) => {
+const BtnBookings = ({ isLogged }) => {
   const [visibleXL, setVisibleXL] = useState(false);
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const BtnBookings = ({ isAuth }) => {
     <>
       <CButton
         onClick={() => {
-          !isAuth ? navigate("/login") : setVisibleXL(!visibleXL);
+          !isLogged ? navigate("/login") : setVisibleXL(!visibleXL);
         }}
       >
         Booking now
@@ -203,6 +203,6 @@ const BtnBookings = ({ isAuth }) => {
   );
 };
 BtnBookings.propTypes = {
-  isAuth: PropTypes.bool,
+  isLogged: PropTypes.bool,
 };
 export default BtnBookings;
