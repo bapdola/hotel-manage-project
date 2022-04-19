@@ -6,12 +6,10 @@ import { PropTypes } from "prop-types";
 import Banner from "src/components/userPage/Banner";
 import Navbar from "src/components/userPage/Navbar";
 
-
-
 const SingleRoom = ({ isAuth }) => {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <hero className="roomsHero">
         <Banner title="Single-room">
           <Link to="/rooms" className="btn-primary">
@@ -65,7 +63,7 @@ const SingleRoom = ({ isAuth }) => {
       </section>
       <section className="room-booking">
         {" "}
-        <BtnBookings isAuth={isAuth} />{" "}
+        <BtnBookings />{" "}
       </section>
     </>
   );

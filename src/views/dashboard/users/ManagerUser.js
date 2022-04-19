@@ -32,7 +32,7 @@ function User() {
   }, []);
   return (
     <>
-      <CTable striped>
+      <CTable responsive striped>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>
@@ -40,9 +40,9 @@ function User() {
             <CTableHeaderCell scope="col">Password</CTableHeaderCell>
             <CTableHeaderCell scope="col">Full name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Birthday</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Adress </CTableHeaderCell>
+            <CTableHeaderCell scope="col">Address </CTableHeaderCell>
             <CTableHeaderCell scope="col">Phone </CTableHeaderCell>
-            <CTableHeaderCell scope="col">
+            <CTableHeaderCell scope="col" className="text-center">
               <PopupAdd />{" "}
             </CTableHeaderCell>
           </CTableRow>
@@ -52,16 +52,14 @@ function User() {
             data.map((item, inx) => {
               return (
                 <CTableRow key={item.id}>
-                  <CTableDataCell>{inx + 1}</CTableDataCell>
-                  <CTableHeaderCell scope="row">
-                    {item.username}
-                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="row">{inx + 1}</CTableHeaderCell>
+                  <CTableDataCell>{item.username}</CTableDataCell>
                   <CTableDataCell>{item.password}</CTableDataCell>
-                  <CTableDataCell scope="row">{item.fullName}</CTableDataCell>
+                  <CTableDataCell>{item.fullName}</CTableDataCell>
                   <CTableDataCell>{item.birtDate}</CTableDataCell>
                   <CTableDataCell>{item.adress}</CTableDataCell>
                   <CTableDataCell>{item.phone}</CTableDataCell>
-                  <CTableDataCell scope="row">
+                  <CTableDataCell className="text-center">
                     <PopupUpdate
                       userId={item?.id}
                       nameUser={item?.username}

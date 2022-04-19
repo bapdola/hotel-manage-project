@@ -49,7 +49,7 @@ const PopupUpdate = (props) => {
       reset({ ...data });
       setVisibleLg(false);
     }
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

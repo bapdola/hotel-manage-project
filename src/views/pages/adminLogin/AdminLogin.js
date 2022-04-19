@@ -19,14 +19,16 @@ import {
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
 import { useDispatch, useSelector, connect } from "react-redux";
-import AdminLoginAction from "src/Utils/store/action/adminLoginAction";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AdminLoginAction } from "src/Utils/store/action/adminLoginAction";
+import cookie from "react-cookies";
 
 const AdminLogin = () => {
   const [username, setAdminName] = useState("");
   const [password, setPassWord] = useState("");
-  const isLoggIn = useSelector((state) => state.adminLogin.currentUser);
+  const isLoggIn = useSelector((state) => state.adminLogin.currentAdmin);
+  let isAdmin = cookie.load("ADMIN_DATA") || {};
 
   const dispatch = useDispatch();
 
@@ -42,11 +44,20 @@ const AdminLogin = () => {
 
   const handleOnSubmit = (data) => {
     dispatch(AdminLoginAction(data));
+    setAdminName("");
+    setPassWord("");
   };
 
   return (
     <>
-      {isLoggIn ? <Navigate to="/admin" /> : []}
+      {(isLoggIn && isAdmin.role === "Root") ||
+      (isLoggIn && isAdmin.role === "Admin") ? (
+        <Navigate to="/admin" />
+      ) : isLoggIn && isAdmin.role === "User" ? (
+        <Navigate to="admin/login" />
+      ) : (
+        []
+      )}
       <div className="bg-light min-vh-100 d-flex  flex-row align-items-center">
         <CContainer>
           <CRow className="justify-content-center">
@@ -97,7 +108,6 @@ const AdminLogin = () => {
                           autoComplete="current-password"
                           {...register("password", {
                             required: true,
-                            minLength: 5,
                           })}
                           onChange={(e) => setPassWord(e.target.value)}
                           // onBlur={(e) => setPassWord(e.target.value)}
@@ -106,11 +116,7 @@ const AdminLogin = () => {
                       {errors.password?.type === "required" && (
                         <p className="text-danger">Password is required</p>
                       )}
-                      {errors.password?.type === "minLength" && (
-                        <p className="text-danger">
-                          Password must be 6 characters long
-                        </p>
-                      )}
+
                       <CRow>
                         <CCol xs={6}>
                           <CButton
