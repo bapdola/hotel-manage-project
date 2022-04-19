@@ -233,7 +233,7 @@ const PopupUpdate = (props) => {
                 Close
               </CButton>
               <CButton color="success" type="submit">
-                Add
+                Update
               </CButton>
             </CModalFooter>
           </CForm>

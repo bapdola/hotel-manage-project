@@ -1,6 +1,6 @@
 .body-userlogin {
   width: 100%;
-  height: 43em;
+  height: 45em;
   background-image: url("src/images/defaultBcg.jpeg");
   background-size: cover;
 }
@@ -41,7 +41,9 @@
   box-sizing: border-box;
   border-radius: 5px;
   border: 1px solid #ccc;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
+  margin-top: 5px;
+
   font-size: 14px;
   font-family: Montserrat;
   padding: 0 20px 0 20px;
@@ -72,4 +74,12 @@
   background: rgba(13, 13, 13, 0.2);
   border: 4px solid #af9a7d;
   color: white;
+}
+.login-block a {
+  text-decoration: none;
+  margin-top: 10px;
+  color: #000;
+}
+.login-block a:hover {
+  color: rgb(65, 65, 65);
 }

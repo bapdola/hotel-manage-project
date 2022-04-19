@@ -24,7 +24,7 @@ const Hotels = () => {
 
   return (
     <>
-      <CTable striped>
+      <CTable responsive striped>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>

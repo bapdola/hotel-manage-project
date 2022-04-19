@@ -5,6 +5,7 @@ import ProtectedRoutes from "./router/ProtectedRoutes";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import cookie from "react-cookies";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -39,7 +40,6 @@ const App = () => {
       <Suspense fallback={loading}>
         <Routes>
           <Route exact path="/" name="Home Page" element={<Home />} />
-          <Route exact path="/rooms" name="Page" element={<Rooms />} />
           <Route
             path="/rooms/single-room"
             name="Page"
@@ -55,9 +55,8 @@ const App = () => {
           </Route>
 
           <Route exact element={<ProtectedRoutes redirect="/login" />}>
-            <Route exact path="/rooms/:id" element={<BtnBooking />} />
+            <Route exact path="/rooms" name="Page" element={<Rooms />} />
           </Route>
-
           <Route path="/register" name="Register Page" element={<Register />} />
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="*" name="Page 404" element={<Page404 />} />

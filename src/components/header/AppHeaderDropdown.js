@@ -10,8 +10,6 @@ import { cilLockLocked, cilSettings, cilUser } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 import { useDispatch } from "react-redux";
 import { AdminLogut } from "src/Utils/store/action/adminLoginAction";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import avatar8 from "./../../assets/images/avatars/8.jpg";
 
