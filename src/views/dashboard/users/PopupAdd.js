@@ -6,6 +6,7 @@ import {
   CButton,
   CCol,
   CFormFeedback,
+  CFormSelect,
 } from "@coreui/react";
 import {
   CModal,
@@ -19,6 +20,8 @@ import { VscAdd } from "react-icons/vsc";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { AddDataUser } from "src/Utils/store/action/userAction";
 import { useForm } from "react-hook-form";
+import { formatDate } from "../../../Utils/DateTme/dateTime";
+import { cilReload } from "@coreui/icons";
 
 const PopupAdd = () => {
   const [validated, setValidated] = useState(false);
@@ -31,9 +34,9 @@ const PopupAdd = () => {
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
   const [roleId, setRoleId] = useState("");
-  const [hotelId, setHotelId] = useState("");
 
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.user.roles);
 
   const {
     register,
@@ -41,13 +44,26 @@ const PopupAdd = () => {
     reset,
     formState: { errors },
   } = useForm({
+    mode: "onBlur",
     mode: "onChange",
   });
 
   const handleOnSubmit = (data) => {
-    window.location.reload();
-    dispatch(AddDataUser(data));
-    reset({ ...data });
+    if (data) {
+      dispatch(AddDataUser(data));
+    }
+    setVisibleLg(false);
+  };
+  const handleReset = () => {
+    reset({});
+    setUserName("");
+    setPassword("");
+    setFullName("");
+    setBirthday("");
+    setAdress("");
+    setPhone("");
+    setRoleId("");
+    setVisibleLg(false);
   };
 
   return (
@@ -55,7 +71,7 @@ const PopupAdd = () => {
       <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Add
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={handleReset}>
         <CModalHeader>
           <CModalTitle>Add Users</CModalTitle>
         </CModalHeader>
@@ -172,8 +188,8 @@ const PopupAdd = () => {
                 value={phone}
                 {...register("phone", {
                   required: true,
-                  minLength: 11,
-                  maxLength: 11,
+                  minLength: 10,
+                  maxLength: 10,
                 })}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -183,48 +199,39 @@ const PopupAdd = () => {
               {errors.phone?.type === "minLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone must be 11 characters long
+                  Number phone must be 10 characters long
                 </p>
               )}
               {errors.phone?.type === "maxLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone not than 11 characters long
+                  Number phone not than 10 characters long
                 </p>
               )}
             </CCol>
             <CCol md={4} className="position-relative">
               <CFormLabel htmlFor="validationTooltip07">Roles</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip07"
-                placeholder="Roles"
-                value={roleId}
+              <CFormSelect
+                aria-label="Default select example"
                 {...register("roleId", { required: true })}
                 onChange={(e) => setRoleId(e.target.value)}
-              />
+              >
+                {data &&
+                  data.map((item) => {
+                    return (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
+              </CFormSelect>
               {errors.roleId?.type === "required" && (
                 <p className="text-danger mt-2">roleId is required</p>
               )}
             </CCol>
-            <CCol md={4} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip08">HotelId</CFormLabel>
-              <CFormInput
-                type="text"
-                id="validationTooltip08"
-                placeholder="Roles"
-                value={hotelId}
-                {...register("hotelId", { required: true })}
-                onChange={(e) => setHotelId(e.target.value)}
-                required
-              />
-              {errors.hotelId?.type === "required" && (
-                <p className="text-danger mt-2">hotelId is required</p>
-              )}
-            </CCol>
 
             <CModalFooter>
-              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton color="secondary" onClick={handleReset}>
                 Close
               </CButton>
               <CButton color="success" type="submit">
@@ -239,22 +246,12 @@ const PopupAdd = () => {
 };
 
 connect(
-  ({
+  ({ username, password, fullName, phone, birtDate, roleId, adress }) => ({
     username,
     password,
     fullName,
     phone,
     birtDate,
-    hotelId,
-    roleId,
-    adress,
-  }) => ({
-    username,
-    password,
-    fullName,
-    phone,
-    birtDate,
-    hotelId,
     roleId,
     adress,
   }),

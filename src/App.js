@@ -3,10 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
 
 import ProtectedRoutes from "./router/ProtectedRoutes";
-import Navbar from "src/components/userPage/Navbar";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import cookie from "react-cookies";
+
 
 const loading = (
   <div className="pt-3 text-center">
@@ -38,24 +40,8 @@ const BtnBooking = React.lazy(() => import("./components/userPage/btnBooking"));
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Suspense fallback={loading}>
         <Routes>
-          <Route exact path="/" name="Home Page" element={<Home />} />
-          <Route exact path="/rooms" name="Page" element={<Rooms />} />
-
-          <Route
-            path="/rooms/single-room"
-            name="Page"
-            element={<SingleRoom />}
-          />
-          {/* <Route element={<PrivateRoutes redirectLink="/login" />}>
-            <Route
-              path="/register"
-              name="Register Page"
-              element={<Register />}
-            />
-          </Route> */}
           <Route
             path="admin/login"
             name="Login Page"
@@ -66,7 +52,13 @@ const App = () => {
           </Route>
 
           <Route exact element={<ProtectedRoutes redirect="/login" />}>
-            <Route exact path="/rooms/:id" element={<BtnBooking />} />
+            <Route exact path="/" name="Home Page" element={<Home />} />
+            <Route exact path="/rooms" name="Page" element={<Rooms />} />
+            <Route
+              path="/rooms/single-room"
+              name="Page"
+              element={<SingleRoom />}
+            />
           </Route>
 
           <Route path="/register" name="Register Page" element={<Register />} />

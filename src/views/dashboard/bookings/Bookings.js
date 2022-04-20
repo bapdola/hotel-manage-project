@@ -22,7 +22,7 @@ import PopupUpdate from "./PopupUpdate";
 function Bookings() {
   return (
     <>
-      <CTable striped>
+      <CTable responsive striped>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>

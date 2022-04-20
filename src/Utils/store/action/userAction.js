@@ -64,3 +64,14 @@ export const LoadListRole = () => {
     }
   };
 };
+
+export const CurrentUserLogin = () => {
+  return async (dispatch) => {
+    try {
+      const res = await ApiCaller("users/userCurentLogin", "GET", null);
+      dispatch({ type: a.GET_DATA_USERS_LOGIN, payload: res.data.result });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

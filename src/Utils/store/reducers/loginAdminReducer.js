@@ -2,22 +2,18 @@ import * as a from "../../constant";
 import { toast } from "react-toastify";
 
 const initialState = {
-  currentUser: null,
-  error: false,
+  currentAdmin: "",
 };
 
 export default function LoginAdmin(state = initialState, action) {
   switch (action.type) {
     case a.LOGIN_ADMIN:
-      return { ...state, error: false, currentUser: action.payload };
+      return { ...state, currentAdmin: action.payload };
+    case a.LOGIN_USER:
+      return { ...state, currentAdmin: action.payload };
     case a.LOGOUT_ADMIN:
-      return { ...state, currentUser: null };
-    case "LOGIN_ADMIN_FAILED":
-      return {
-        ...state,
-        error: true,
-        currentUser: null,
-      };
+      return { ...state, currentAdmin: null };
+
     default:
       return state;
   }

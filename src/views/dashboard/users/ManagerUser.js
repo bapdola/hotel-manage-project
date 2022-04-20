@@ -16,6 +16,10 @@ import PopupAdd from "./PopupAdd";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { FetchDataUser } from "src/Utils/store/action/userAction";
 import { LoadListRole } from "src/Utils/store/action/userAction";
+<<<<<<< HEAD
+=======
+import { formatDate } from "../../../Utils/DateTme/dateTime";
+>>>>>>> 2ced03a38a08e00dd7293dcbf823faae0736e0b7
 
 function User() {
   const dispatch = useDispatch();
@@ -32,7 +36,7 @@ function User() {
   }, []);
   return (
     <>
-      <CTable striped>
+      <CTable responsive striped>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>
@@ -40,9 +44,10 @@ function User() {
             <CTableHeaderCell scope="col">Password</CTableHeaderCell>
             <CTableHeaderCell scope="col">Full name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Birthday</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Adress </CTableHeaderCell>
+            <CTableHeaderCell scope="col">Address </CTableHeaderCell>
             <CTableHeaderCell scope="col">Phone </CTableHeaderCell>
-            <CTableHeaderCell scope="col">
+            <CTableHeaderCell scope="col">Role </CTableHeaderCell>
+            <CTableHeaderCell scope="col" className="text-center">
               <PopupAdd />{" "}
             </CTableHeaderCell>
           </CTableRow>
@@ -52,16 +57,23 @@ function User() {
             data.map((item, inx) => {
               return (
                 <CTableRow key={item.id}>
-                  <CTableDataCell>{inx + 1}</CTableDataCell>
-                  <CTableHeaderCell scope="row">
-                    {item.username}
-                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="row">{inx + 1}</CTableHeaderCell>
+                  <CTableDataCell>{item.username}</CTableDataCell>
                   <CTableDataCell>{item.password}</CTableDataCell>
-                  <CTableDataCell scope="row">{item.fullName}</CTableDataCell>
-                  <CTableDataCell>{item.birtDate}</CTableDataCell>
+                  <CTableDataCell>{item.fullName}</CTableDataCell>
+                  <CTableDataCell>{formatDate(item.birtDate)}</CTableDataCell>
                   <CTableDataCell>{item.adress}</CTableDataCell>
                   <CTableDataCell>{item.phone}</CTableDataCell>
-                  <CTableDataCell scope="row">
+                  <CTableDataCell>
+                    {dataRole.map((role) => {
+                      return (
+                        <p key={role.id}>
+                          {role.id == item.roleId ? role.name : []}
+                        </p>
+                      );
+                    })}
+                  </CTableDataCell>
+                  <CTableDataCell className="text-center">
                     <PopupUpdate
                       userId={item?.id}
                       nameUser={item?.username}

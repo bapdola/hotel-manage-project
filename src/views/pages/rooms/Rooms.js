@@ -4,22 +4,30 @@ import Hero from "src/components/userPage/Hero";
 import RoomContainer from "src/components/userPage/RoomContainer";
 import Banner from "src/components/userPage/Banner";
 import { Link } from "react-router-dom";
-
-
-
+import cookie from "react-cookies";
+import { Navigate } from "react-router-dom";
 
 const Rooms = () => {
+  let isAdminRoot = cookie.load("ADMIN_DATA") || {};
+
   return (
     <>
-    <Navbar />
-      <Hero hero="roomsHero">
-        <Banner title="our rooms">
-          <Link to="/" className="btn-primary">
-            return home
-          </Link>
-        </Banner>
-      </Hero>
-      <RoomContainer />
+      {isAdminRoot.role === "User" ? (
+        <>
+          {" "}
+          <Navbar />
+          <Hero hero="roomsHero">
+            <Banner title="our rooms">
+              <Link to="/" className="btn-primary">
+                return home
+              </Link>
+            </Banner>
+          </Hero>
+          <RoomContainer />
+        </>
+      ) : (
+        <Navigate to="/login" />
+      )}
     </>
   );
 };

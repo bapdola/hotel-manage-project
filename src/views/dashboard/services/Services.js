@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CTable,
   CTableBody,
@@ -10,10 +10,8 @@ import {
 import PopupDelete from "./PopupDelete";
 import PopupUpdate from "./PopupUpdate";
 import PopupAdd from "./PopupAdd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FetchDataService } from "src/Utils/store/action/serviceAction";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const Services = () => {
   const dispatch = useDispatch();
@@ -27,7 +25,7 @@ const Services = () => {
 
   return (
     <>
-      <CTable striped>
+      <CTable responsive striped>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>

@@ -27,8 +27,7 @@ const AppSidebar = () => {
   return (
     <CSidebar position="fixed">
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        <h3 className="pt-3">Admin Manage</h3>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

@@ -24,6 +24,7 @@ import { VscAdd } from "react-icons/vsc";
 
 const PopupUpdate = (props) => {
   const { nameSer, priceSer, HotelId, serviceId } = props;
+  const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
 
   const [name, setNameService] = useState(nameSer);
@@ -42,15 +43,16 @@ const PopupUpdate = (props) => {
   });
 
   const handleOnSubmit = (data) => {
-    dispatch(UpdateDataService(serviceId, data));
-    reset({ ...data });
+    if (serviceId && data) {
+      dispatch(UpdateDataService(serviceId, data));
+    }
     setVisibleLg(false);
   };
 
   return (
     <>
       <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
-        <VscAdd size={6} /> Edit
+        <VscAdd size={15} /> Edit
       </CButton>
       <CModal size="mg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>

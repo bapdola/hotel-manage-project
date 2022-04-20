@@ -8,7 +8,7 @@ const Auth = () => {
     isAdmin.role === "User"
   ) {
     return isAdmin.Token;
-  }
+  } else return false;
 };
 
 export default Auth;
