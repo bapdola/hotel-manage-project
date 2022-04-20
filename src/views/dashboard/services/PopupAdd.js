@@ -23,15 +23,7 @@ import { FetchDataService } from "src/Utils/store/action/serviceAction";
 import { useEffect } from "react";
 
 const PopupAdd = () => {
-  const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
-
-  const [name, setNameService] = useState("");
-  const [price, setPriceService] = useState("");
-  // const [hotelId, setHotelId] = useState("");
-
-  const dispatch = useDispatch();
-
   const {
     register,
     handleSubmit,
@@ -42,12 +34,23 @@ const PopupAdd = () => {
     mode: "onBlur",
   });
 
+  const [name, setNameService] = useState("");
+  const [price, setPriceService] = useState("");
+
+  const dispatch = useDispatch();
+
   const handleOnSubmit = (data, e) => {
     e.preventDefault();
+    if (data) {
+      dispatch(AddDataService(data));
+    }
+    setVisibleLg(false);
+  };
+
+  const handleReset = () => {
+    reset({});
     setNameService("");
     setPriceService("");
-    dispatch(AddDataService(data));
-    reset({ ...data });
     setVisibleLg(false);
   };
 
@@ -56,7 +59,7 @@ const PopupAdd = () => {
       <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Add
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={handleReset}>
         <CModalHeader>
           <CModalTitle>Add Services</CModalTitle>
         </CModalHeader>
@@ -96,7 +99,7 @@ const PopupAdd = () => {
                 type="number"
                 id="validationTooltip02"
                 placeholder="Price"
-                defaultValue={price}
+                value={price}
                 {...register("price", {
                   required: true,
                 })}
@@ -109,7 +112,7 @@ const PopupAdd = () => {
             </CCol>
 
             <CModalFooter>
-              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton color="secondary" onClick={handleReset}>
                 Close
               </CButton>
               <CButton color="success" type="submit">

@@ -33,9 +33,8 @@ const Login = () => {
 
   return (
     <div className="bg-dark min-vh-100 d-flex  flex-row align-items-center">
-      {isLoggIn ? <Navigate to="/rooms" /> : []}
+      {isLoggIn ? <Navigate to="/" /> : []}
       <section className="body-userlogin  min-vh-100">
-        <div className="logo"></div>
         <div className="login-block">
           <h1>Login</h1>
           <form onSubmit={handleSubmit(handleOnSubmit)}>

@@ -42,15 +42,6 @@ const App = () => {
     <BrowserRouter>
       <Suspense fallback={loading}>
         <Routes>
-          <Route exact path="/" name="Home Page" element={<Home />} />
-
-          <Route exact path="/rooms" name="Page" element={<Rooms />} />
-
-          <Route
-            path="/rooms/single-room"
-            name="Page"
-            element={<SingleRoom />}
-          />
 
           <Route
             path="admin/login"
@@ -62,8 +53,15 @@ const App = () => {
           </Route>
 
           <Route exact element={<ProtectedRoutes redirect="/login" />}>
+            <Route exact path="/" name="Home Page" element={<Home />} />
             <Route exact path="/rooms" name="Page" element={<Rooms />} />
+            <Route
+              path="/rooms/single-room"
+              name="Page"
+              element={<SingleRoom />}
+            />
           </Route>
+
           <Route path="/register" name="Register Page" element={<Register />} />
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="*" name="Page 404" element={<Page404 />} />

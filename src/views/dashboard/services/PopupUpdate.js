@@ -43,8 +43,9 @@ const PopupUpdate = (props) => {
   });
 
   const handleOnSubmit = (data) => {
-    dispatch(UpdateDataService(serviceId, data));
-    reset({ ...data });
+    if (serviceId && data) {
+      dispatch(UpdateDataService(serviceId, data));
+    }
     setVisibleLg(false);
   };
 
@@ -55,7 +56,7 @@ const PopupUpdate = (props) => {
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Add Services</CModalTitle>
+          <CModalTitle>Update Services</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
