@@ -58,9 +58,9 @@ const PopupUpdate = (props) => {
   });
 
   const handleOnSubmit = (data) => {
-    // window.location.reload();
-    dispatch(UpdateDataUser(data, userId));
-    reset({ ...data });
+    if (userId && data) {
+      dispatch(UpdateDataUser(data, userId));
+    }
     setVisibleLg(false);
   };
 

@@ -7,6 +7,7 @@ import { BiLogOut } from "react-icons/bi";
 import { AdminLogut } from "src/Utils/store/action/adminLoginAction";
 import { useSelector, useDispatch } from "react-redux";
 import cookie from "react-cookies";
+import "../../views/pages/login/login.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +22,13 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(AdminLogut());
   };
-  console.log("check login", isAdminRoot.Token);
+
   return (
     <nav className="navbar">
       <div className="nav-center">
-        <div className="nav-header">
-          <Link to="/">
-            <img src={logo} alt="Beach Resort" />
+        <div className="nav-header ">
+          <Link to="/" className="text-center">
+            <h3>{isAdminRoot.hotelName}</h3>
           </Link>
           <button type="button" className="nav-btn" onClick={handleToggle}>
             <FaAlignRight className="nav-icon" />

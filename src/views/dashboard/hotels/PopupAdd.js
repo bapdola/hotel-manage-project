@@ -41,11 +41,18 @@ const PopupAdd = () => {
   const dispatch = useDispatch();
 
   const handleOnSubmit = (data) => {
-    // console.log(data);
-    dispatch(AddDataHotel(data));
-    reset({ ...data });
+    if (data) {
+      dispatch(AddDataHotel(data));
+    }
     setVisibleLg(false);
-    // window.location.reload();
+  };
+  const handleReset = () => {
+    reset({});
+    setNameHotel("");
+    setAdressHotel("");
+    setPhoneHotel("");
+    setEmail("");
+    setVisibleLg(false);
   };
 
   return (
@@ -53,7 +60,7 @@ const PopupAdd = () => {
       <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Add
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={handleReset}>
         <CModalHeader>
           <CModalTitle>Add Services</CModalTitle>
         </CModalHeader>
@@ -112,8 +119,8 @@ const PopupAdd = () => {
                 value={phone}
                 {...register("phone", {
                   required: true,
-                  minLength: 11,
-                  maxLength: 11,
+                  minLength: 10,
+                  maxLength: 10,
                 })}
                 onChange={(e) => setPhoneHotel(e.target.value)}
                 required
@@ -124,13 +131,13 @@ const PopupAdd = () => {
               {errors.phone?.type === "minLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone must be 11 characters long
+                  Number phone must be 10 characters long
                 </p>
               )}
               {errors.phone?.type === "maxLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone not than 11 characters long
+                  Number phone not than 10 characters long
                 </p>
               )}
             </CCol>
@@ -159,7 +166,7 @@ const PopupAdd = () => {
             </CCol>
 
             <CModalFooter>
-              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton color="secondary" onClick={handleReset}>
                 Close
               </CButton>
               <CButton color="success" type="submit">

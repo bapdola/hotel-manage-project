@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 
-export function formatDate(date) {
-  return <></>;
-}
+export const formatDate = (date) => {
+  var localizedFormat = require("dayjs/plugin/localizedFormat");
+  dayjs.extend(localizedFormat);
+  return dayjs(date).format("L");
+};

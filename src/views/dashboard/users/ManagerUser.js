@@ -20,6 +20,7 @@ import PopupAdd from "./PopupAdd";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { FetchDataUser } from "src/Utils/store/action/userAction";
 import { LoadListRole } from "src/Utils/store/action/userAction";
+import { formatDate } from "../../../Utils/DateTme/dateTime";
 
 function User() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function User() {
             <CTableHeaderCell scope="col">Birthday</CTableHeaderCell>
             <CTableHeaderCell scope="col">Address </CTableHeaderCell>
             <CTableHeaderCell scope="col">Phone </CTableHeaderCell>
+            <CTableHeaderCell scope="col">Role </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="text-center">
               <PopupAdd />{" "}
             </CTableHeaderCell>
@@ -60,9 +62,18 @@ function User() {
                   <CTableDataCell>{item.username}</CTableDataCell>
                   <CTableDataCell>{item.password}</CTableDataCell>
                   <CTableDataCell>{item.fullName}</CTableDataCell>
-                  <CTableDataCell>{item.birtDate}</CTableDataCell>
+                  <CTableDataCell>{formatDate(item.birtDate)}</CTableDataCell>
                   <CTableDataCell>{item.adress}</CTableDataCell>
                   <CTableDataCell>{item.phone}</CTableDataCell>
+                  <CTableDataCell>
+                    {dataRole.map((role) => {
+                      return (
+                        <p key={role.id}>
+                          {role.id == item.roleId ? role.name : []}
+                        </p>
+                      );
+                    })}
+                  </CTableDataCell>
                   <CTableDataCell className="text-center">
                     <PopupUpdate
                       userId={item?.id}

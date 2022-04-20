@@ -1,49 +1,38 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 import Title from "./Title";
-export default class Services extends Component {
-  state = {
-    services: [
-      {
-        icon: <FaCocktail />,
-        title: "Free Cocktails",
-        info: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias molestias eius libero?",
-      },
-      {
-        icon: <FaHiking />,
-        title: "Endless Hiking",
-        info: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias molestias eius libero?",
-      },
-      {
-        icon: <FaShuttleVan />,
-        title: "Free Shuttle",
-        info: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias molestias eius libero?",
-      },
-      {
-        icon: <FaBeer />,
-        title: "Strongest Beer",
-        info: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias molestias eius libero?",
-      },
-    ],
-  };
-  render() {
-    return (
-      <section className="services">
-        <div className="section-title">
-          <h4>Services</h4>
-        </div>
-        <div className="services-center">
-          {this.state.services.map((item) => {
-            return (
-              <article key={`item-${item.title}`} className="service">
-                <span>{item.icon}</span>
-                <h6>{item.title}</h6>
-                <p>{item.info}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-    );
-  }
-}
+import { useSelector, useDispatch } from "react-redux";
+import { FetchDataService } from "src/Utils/store/action/serviceAction";
+
+import { MdRedeem } from "react-icons/md";
+
+const Services = () => {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.service.services);
+
+  useEffect(() => {
+    dispatch(FetchDataService());
+  }, [dispatch]);
+
+  return (
+    <section className="services">
+      <div className="section-title">
+        <h4>Services</h4>
+      </div>
+      <div className="services-center">
+        {data.map((item) => {
+          return (
+            <article key={`item-${item.name}`} className="service">
+              <span>
+                <MdRedeem />
+              </span>
+              <h6>{item.name}</h6>
+              <p>{item.price} VND</p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+export default Services;

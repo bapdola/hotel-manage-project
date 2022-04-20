@@ -19,9 +19,12 @@ export const AddDataHotel = (data) => {
   return async (dispatch) => {
     try {
       const res = await ApiCaller("hotel/create", "POST", data);
-      dispatch({ type: a.ADD_DATA_HOTEL, payload: res.data.inforHotel });
+      if (res.status === 200) {
+        dispatch({ type: a.ADD_DATA_HOTEL, payload: res.data.inforHotel });
+        toast.success("Successfully added new!!");
+      }
     } catch (error) {
-      console.log(error);
+      toast.error("Add new failed!!");
     }
   };
 };
@@ -31,8 +34,9 @@ export const DeleteDataHotel = (id) => {
     try {
       const res = await ApiCaller(`hotel/delete/${id}`, "DELETE", null);
       dispatch({ type: a.DELETE_DATA_HOTEL, payload: res.data.inforHotel });
+      toast.success("Deleted Successfully!!");
     } catch (error) {
-      console.log(error);
+      toast.error("Deleted failed!!");
     }
   };
 };
@@ -40,9 +44,12 @@ export const UpdateDataHotel = (data, id) => {
   return async (dispatch) => {
     try {
       const res = await ApiCaller(`hotel/update/${id}`, "PUT", data);
-      dispatch({ type: a.UPDATE_DATA_HOTEL, payload: res.data.inforHotel });
+      if (res.status === 200) {
+        dispatch({ type: a.UPDATE_DATA_HOTEL, payload: res.data.inforHotel });
+        toast.success("Update Successfully!!");
+      }
     } catch (error) {
-      console.log(error);
+      toast.error("Update failed!!");
     }
   };
 };
