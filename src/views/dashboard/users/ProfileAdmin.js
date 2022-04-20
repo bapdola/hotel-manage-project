@@ -18,11 +18,13 @@ import PropTypes from "prop-types";
 import { CurrentUserLogin } from "src/Utils/store/action/userAction";
 import { LoadListRole } from "src/Utils/store/action/userAction";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [visibleLg, setVisibleLg] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const dataRole = useSelector((state) => state.user.roles);
   const dataUserLogin = useSelector((state) => state.user.currentUserlogin);
@@ -53,14 +55,14 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(LoadListRole());
-  }, []);
+  }, [dispatch]);
 
   const handleOnSubmit = (data) => {
     const id = dataUserLogin.id;
     if (data) {
       dispatch(UpdateDataUser(data, id));
     }
-    setVisibleLg(false);
+    navigate("/admin");
   };
 
   return (
