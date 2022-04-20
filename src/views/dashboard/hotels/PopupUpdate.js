@@ -30,6 +30,7 @@ const PopupUpdate = (props) => {
     reset,
     formState: { errors },
   } = useForm({
+    mode: "onBlur",
     mode: "onChange",
   });
 

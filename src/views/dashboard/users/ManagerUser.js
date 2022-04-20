@@ -1,11 +1,5 @@
+import React, { useEffect } from "react";
 import PopupUpdate from "./PopupUpdate";
-
-import React, { useEffect, useState } from "react";
-import PopupAdd from "./popupadd";
-import { useDispatch, useSelector } from "react-redux";
-import { FetchDataUser } from "src/Utils/store/action/userAction";
-
-// import axios from "axios"
 
 import {
   CTable,
@@ -21,16 +15,21 @@ import PopupDelete from "./PopupDelete";
 import PopupAdd from "./PopupAdd";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { FetchDataUser } from "src/Utils/store/action/userAction";
+import { LoadListRole } from "src/Utils/store/action/userAction";
 
 function User() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.user.users);
+  const dataRole = useSelector((state) => state.user.roles);
 
   useEffect(() => {
     dispatch(FetchDataUser());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(LoadListRole());
+  }, []);
   return (
     <>
       <CTable striped>
@@ -52,7 +51,7 @@ function User() {
           {data &&
             data.map((item, inx) => {
               return (
-                <CTableRow key={item.uuid}>
+                <CTableRow key={item.id}>
                   <CTableDataCell>{inx + 1}</CTableDataCell>
                   <CTableHeaderCell scope="row">
                     {item.username}
@@ -64,7 +63,7 @@ function User() {
                   <CTableDataCell>{item.phone}</CTableDataCell>
                   <CTableDataCell scope="row">
                     <PopupUpdate
-                      userId={item?.uuid}
+                      userId={item?.id}
                       nameUser={item?.username}
                       Password={item?.password}
                       FullName={item?.fullName}
@@ -74,7 +73,7 @@ function User() {
                       RoleId={item?.roleId}
                       HotelId={item?.hotelId}
                     />{" "}
-                    <PopupDelete userId={item?.uuid} />
+                    <PopupDelete userId={item?.id} />
                   </CTableDataCell>
                 </CTableRow>
               );

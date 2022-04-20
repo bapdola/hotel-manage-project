@@ -1,52 +1,47 @@
 import React from "react";
 import Room from "./Room";
+import defaultImg from "../../assets/images/react.jpg";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FetchData } from "src/Utils/store/action/roomAction";
+import { FetchDataRoom } from "src/Utils/store/action/roomAction";
 
 export default function RoomList() {
+  const res = useSelector((state) => state.room.rooms);
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.room.rooms);
 
   useEffect(() => {
-    dispatch(FetchData());
+    dispatch(FetchDataRoom());
   }, [dispatch]);
 
-  console.log(data);
   return (
     <>
       <div className="empty-search">
-        <h3>unfortunately no rooms matched your search parameters</h3>
+        <h2>The List room</h2>
       </div>
-<<<<<<< HEAD
       <section className="roomslist">
         <div className="roomslist-center">
-          <Room />
-          <Room />
-          <Room />
-          <Room />
-          <Room />
+          {res.map((item, index) => {
+            <article className="room" key={index}>
+              <div className="img-container">
+                <img src={defaultImg} alt="single room" />
+                <div className="price-top">
+                  <h6>{item.price}</h6>
+                  <p>per night</p>
+                </div>
+                <Link
+                  to={`/rooms/single-room`}
+                  className="btn-primary room-link"
+                >
+                  features
+                </Link>
+              </div>
+              <p className="room-info">{item.name}</p>
+            </article>;
+          })}
           <Room />
         </div>
       </section>
-      );
     </>
   );
-=======
-    <section className="roomslist">
-      <div className="roomslist-center">
-      <Room  />
-      <Room  />
-      <Room  />
-      <Room  />
-      <Room  />
-      <Room  />
-
-      </div>
-    </section>
-  
-    </>
-
-);
->>>>>>> 39132f8fd8ca2c94c8eca6825613bd257c69c030
 }

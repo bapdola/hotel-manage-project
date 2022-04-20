@@ -6,42 +6,41 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState} from "react";
-import React from "react";
-import { cilDelete } from "@coreui/icons";
-import CIcon from "@coreui/icons-react";
-import { DeleteDataService } from "src/Utils/store/action/serviceAction";
+import React ,{ useState } from "react";
+import { DeleteDataRoom } from "src/Utils/store/action/roomAction";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 const PopupDelete = (props) => {
   const [visible, setVisible] = useState(false);
-  const { serviceId } = props;
+  const { roomId,nameRoom } = props;
+  const [nameroom, setNameRoom] = useState(nameRoom);
+
 
   const dispatch = useDispatch();
 
-  const handleClickDelSer = (e) => {
+  const handleClickDeleteRoom = (e) => {
     e.preventDefault();
-    if (serviceId && serviceId !== "") {
-      dispatch(DeleteDataService(serviceId));
+    if (roomId && roomId !== "") {
+      dispatch(DeleteDataRoom(roomId));
       setVisible(false);
     }
   };
   return (
     <>
-      <CButton color="danger" onClick={() => setVisible(!visible)}>
-        <CIcon icon={cilDelete} size="sm" /> Delete
+      <CButton shape="rounded-pill" color="danger" variant="outline" className="me-md-4" onClick={() => setVisible(!visible)}>
+        Delete
       </CButton>
       <CModal visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
-          <CModalTitle>Delete</CModalTitle>
+          <CModalTitle>Delete room</CModalTitle>
         </CModalHeader>
-        <CModalBody>Are you sure you want to delete?</CModalBody>
+        <CModalBody> Are you sure you want to delete {nameroom} ?</CModalBody>
         <CModalFooter>
           <CButton color="secondary" onClick={() => setVisible(false)}>
             Close
           </CButton>
-          <CButton color="danger" type="submit" onClick={handleClickDelSer}>
+          <CButton color="danger" type="submit" onClick={handleClickDeleteRoom}>
             Yes
           </CButton>
         </CModalFooter>
@@ -51,7 +50,8 @@ const PopupDelete = (props) => {
 };
 
 PopupDelete.propTypes = {
-  serviceId: PropTypes.node,
+  roomId: PropTypes.node,
+  nameRoom: PropTypes.node,
 };
 
 export default PopupDelete;

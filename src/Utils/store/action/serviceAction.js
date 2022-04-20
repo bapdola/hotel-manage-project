@@ -1,5 +1,6 @@
 import ApiCaller from "src/Utils/apiCaller/apiCaller";
 import * as a from "../../constant";
+import { toast } from "react-toastify";
 
 export const FetchDataService = () => {
   return async (dispatch) => {
@@ -12,28 +13,33 @@ export const FetchDataService = () => {
   };
 };
 
-export const AddDataService = (newData) => {
+export const AddDataService = (data) => {
   return async (dispatch) => {
     try {
-      const res = await ApiCaller("services/create", "POST", newData);
-      dispatch({ type: a.ADD_DATA_SERVICE, payload: res.data.result });
+      const res = await ApiCaller("services/create", "POST", data);
+      if (res.status === 200) {
+        dispatch({ type: a.ADD_DATA_SERVICE, payload: res.data.inforService });
+        toast.success("Successfully added new!!");
+      }
     } catch (error) {
-      console.log(error);
+      toast.error("Add new failed!!");
     }
   };
 };
 
-export const UpdateDataService = (id, updateService) => {
+export const UpdateDataService = (id, data) => {
   return async (dispatch) => {
     try {
-      const res = await ApiCaller(
-        `services/update/${id}`,
-        "PUT",
-        updateService
-      );
-      dispatch({ type: a.UPDATE_DATA_SERVICE, payload: res.data.result });
+      const res = await ApiCaller(`services/update/${id}`, "PUT", data);
+      if (res.status === 200) {
+        dispatch({
+          type: a.UPDATE_DATA_SERVICE,
+          payload: res.data.inforService,
+        });
+        toast.success("Update Successfully!!");
+      }
     } catch (error) {
-      console.log(error);
+      toast.error("Update failed!!");
     }
   };
 };
@@ -46,9 +52,10 @@ export const DeleteDataService = (serviceId) => {
         "DELETE",
         null
       );
-      dispatch({ type: a.DELETE_DATA_SERVICE, payload: serviceId });
+      dispatch({ type: a.DELETE_DATA_SERVICE, payload: res.data.inforService });
+      toast.success("Deleted Successfully!!");
     } catch (error) {
-      console.log(error);
+      toast.error("Deleted failed!!");
     }
   };
 };

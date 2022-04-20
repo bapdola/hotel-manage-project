@@ -29,6 +29,7 @@ const PopupAdd = () => {
     reset,
     formState: { errors },
   } = useForm({
+    mode: "onBlur",
     mode: "onChange",
   });
 
@@ -39,13 +40,12 @@ const PopupAdd = () => {
 
   const dispatch = useDispatch();
 
-  const handleOnSubmit = (data, event) => {
+  const handleOnSubmit = (data) => {
     // console.log(data);
-    event.preventDefault();
     dispatch(AddDataHotel(data));
     reset({ ...data });
     setVisibleLg(false);
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

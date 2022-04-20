@@ -1,7 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import "./room.scss";
 import {
   CRow,
   CCol,
@@ -10,50 +8,102 @@ import {
   CCardBody,
   CCardTitle,
   CCardText,
-  CButton,
+  CBadge,
 } from "@coreui/react";
-import "./room.scss";
-import { useDispatch } from "react-redux";
-import { FetchData } from "src/Utils/store/action/roomAction";
-import img1 from "../../../assets/react.jpg";
-export default function Rooms() {
-  
-  const navigate = useNavigate();
-  const AddRoom = () => {
-    navigate("/admin/addroom");
-  };
+import img1 from "../../../assets/images/react.jpg";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  FetchDataRoom,
+  FetchDataTypeRoom,
+} from "src/Utils/store/action/roomAction";
+import PopupAdd from "./popupAdd";
+import PopupUpdate from "./popupUpdate";
+import PopupDelete from "./popupDelete";
 
+export default function Rooms() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.room.rooms);
+
+  const dataType = useSelector((state) => state.room.typeRoom);
 
   useEffect(() => {
-    dispatch(FetchData());
+    dispatch(FetchDataTypeRoom());
   }, [dispatch]);
 
-  console.log("dataroom", data);
+  console.log("data_type", dataType);
+
+  const data = useSelector((state) => state.room.rooms);
+  useEffect(() => {
+    dispatch(FetchDataRoom());
+  }, [dispatch]);
 
   return (
-    <CRow xs={{ cols: 1 }} md={{ cols: 3 }} className="g-4">
-      {data.map((item, inx) => {
-        return (
-          <CCol xs key={inx}>
-            <CCard className="h-100">
-              <CCardImage orientation="top" src={img1} />
-              <CCardBody>
-                <CCardTitle>{item.name}</CCardTitle>
-                <CCardText>${item.price}</CCardText>
-                <CCardText>Type: {item.type}</CCardText>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        );
-      })}
+    <>
+      <CRow xs={{ cols: 4 }} md={{ cols: 4 }} className="g-4">
+        <CCol xs>
+          <CCard className="h-100">
+            <CCardImage orientation="top" src={img1} />
+            <CCardBody>
+              <h1 className="Title">CREAT NEW ROOM</h1>
+            </CCardBody>
+            <CCardBody>
+              <PopupAdd />
+            </CCardBody>
+          </CCard>
+        </CCol>
+        {data.map((item, inx) => {
+          return (
+            <CCol xs key={inx}>
+              <CCard textColor="primary" className="h-100'">
+                <CCardImage orientation="top" src={img1} />
+                <CCardBody>
+                  <CCardTitle>
+                    {" "}
+                    <h2 className="Title">
+                      {item.name}
+                      {"       "}
+                      {item.status === 1 ? (
+                        <CBadge shape="rounded-pill" color="success">
+                          Active
+                        </CBadge>
+                      ) : (
+                        <CBadge shape="rounded-pill" color="secondary">
+                          Empty
+                        </CBadge>
+                      )}
+                    </h2>
+                  </CCardTitle>
+                  <CCardText>{item.price}</CCardText>
 
-      <CCol xs={12}>
-        <CButton type="submit" onClick={() => AddRoom()}>
-          AddRoom
-        </CButton>
-      </CCol>
-    </CRow>
+                  <CCardText>
+                    {dataType.map((type) => {
+                      return (
+                        <>
+                          <div className="type" key={type.id}>
+                            {" "}
+                            {type.id === item.roomTypeId ? type.type : []}{" "}
+                            <span className="Title">
+                              {type.id === item.roomTypeId ? `${type.price}đ`  : []}{" "} 
+                            </span>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </CCardText>
+                  <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <PopupUpdate
+                      roomId={item?.id}
+                      nameRoom={item?.name}
+                      typeRoom={item?.roomType}
+                    />
+                    <PopupDelete roomId={item?.id} nameRoom={item?.name} />
+                  </div>
+                </CCardBody>
+              </CCard>
+            </CCol>
+          );
+        })}
+      </CRow>
+    </>
   );
 }
