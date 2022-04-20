@@ -22,7 +22,7 @@ const Hotels = React.lazy(() => import("./views/dashboard/hotels/Hotels"));
 const routes = [
   { path: "/Bookings", name: "Bookings", element: Bookings },
   { path: "/", name: "Rooms", element: Rooms },
-  { path: "/addroom", name: "Rooms", element: AddRoom },
+  { path: "/Rooms/addroom", name: "Rooms", element: AddRoom },
   { path: "/user", name: "Users", element: Users },
   { path: "/login", name: "Login Admin", element: Login },
   {
