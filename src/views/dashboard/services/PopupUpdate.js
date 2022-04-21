@@ -24,7 +24,6 @@ import { VscAdd } from "react-icons/vsc";
 
 const PopupUpdate = (props) => {
   const { nameSer, priceSer, HotelId, serviceId } = props;
-  const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
 
   const [name, setNameService] = useState(nameSer);
@@ -54,9 +53,9 @@ const PopupUpdate = (props) => {
       <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Edit
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="mg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Update Services</CModalTitle>
+          <CModalTitle>Add Services</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -64,7 +63,7 @@ const PopupUpdate = (props) => {
             noValidate
             onSubmit={handleSubmit(handleOnSubmit)}
           >
-            <CCol md={4} className="position-relative">
+            <CCol md={6} className="position-relative">
               <CFormLabel htmlFor="validationTooltip01">Name</CFormLabel>
               <CFormInput
                 type="text"
@@ -88,7 +87,7 @@ const PopupUpdate = (props) => {
                 </p>
               )}
             </CCol>
-            <CCol md={4} className="position-relative">
+            <CCol md={6} className="position-relative">
               <CFormLabel htmlFor="validationTooltip02">Price</CFormLabel>
               <CFormInput
                 type="number"

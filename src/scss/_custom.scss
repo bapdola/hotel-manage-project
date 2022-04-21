@@ -341,7 +341,7 @@ padding-bottom: 0.1rem;
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(200, 89, 29, 0.457);
   color: var(--mainWhite);
   padding: 0.3rem 0.6rem 0.5rem;
   border-bottom-right-radius: 1rem;
@@ -375,11 +375,21 @@ padding-bottom: 0.1rem;
   transform: translate(-50%, -50%) scale(1);
 }
 .room-info {
-  background: var(--darkGrey);
+  background: rgba(78, 211, 78, 0.578);
   text-transform: capitalize;
-  padding: 0.5rem 0;
+  padding: 0rem 0;
   text-align: center;
-  font-weight: 700;
+  font-weight: 700px;
+  height: 100%;
+  letter-spacing: var(--mainSpacing);
+}
+.room-infox {
+  background: rgba(65, 65, 132, 0.568);
+  text-transform: capitalize;
+  padding: 0rem 0;
+  text-align: center;
+  font-weight: 700px;
+  height: 100%;
   letter-spacing: var(--mainSpacing);
 }
 /* end of room  */

@@ -5,7 +5,11 @@ export const LOGIN_USER = "LOGIN_USER";
 
 //Data Admin-----------
 //data room
-export const GET_DATA = "GET_DATA";
+export const ADD_DATA_ROOM = "ADD_DATA_ROOM";
+export const UPDATE_DATA_ROOM = "UPDATE_DATA_ROOM";
+export const DELETE_DATA_ROOM = "DELETE_DATA_ROOM";
+export const GET_DATA_ROOM = "GET_DATA";
+export const GET_TYPE_DATA = "GET_TYPE_DATA";
 
 //data service
 export const GET_DATA_SERVICE = "GET_DATA_SERVICE";
