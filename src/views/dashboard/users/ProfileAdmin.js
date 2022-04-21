@@ -228,7 +228,7 @@ const Profile = () => {
                 textDecoration: "none",
                 color: "#000",
               }}
-              to="/admin"
+              to="/admin/room"
             >
               Back
             </Link>

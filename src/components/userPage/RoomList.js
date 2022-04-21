@@ -12,20 +12,17 @@ export default function RoomList() {
     dispatch(FetchData());
   }, [dispatch]);
 
-  console.log(data);
   return (
     <>
-      <div className="empty-search">
+      {/* <div className="empty-search">
         <h3>unfortunately no rooms matched your search parameters</h3>
-      </div>
+      </div> */}
       <section className="roomslist">
         <div className="roomslist-center">
-          <Room />
-          <Room />
-          <Room />
-          <Room />
-          <Room />
-          <Room />
+          {data &&
+            data.map((item) => {
+              return <Room name={item.name} key={item.id} />;
+            })}
         </div>
       </section>
       );
