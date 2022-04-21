@@ -16,10 +16,7 @@ import PopupAdd from "./PopupAdd";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { FetchDataUser } from "src/Utils/store/action/userAction";
 import { LoadListRole } from "src/Utils/store/action/userAction";
-<<<<<<< HEAD
-=======
 import { formatDate } from "../../../Utils/DateTme/dateTime";
->>>>>>> 2ced03a38a08e00dd7293dcbf823faae0736e0b7
 
 function User() {
   const dispatch = useDispatch();

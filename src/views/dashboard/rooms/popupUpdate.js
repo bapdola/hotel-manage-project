@@ -137,7 +137,7 @@ PopupUpdate.propTypes = {
   typeRoom: PropTypes.node,
 };
 connect(
-  ({ name, roomTypeId }) => ({
+  ({ name, roomTypeId, }) => ({
     name,
     roomTypeId,
   }),

@@ -35,7 +35,7 @@ const SingleRoom = React.lazy(() =>
   import("./views/pages/singleRoom/SingleRoom")
 );
 
-const BtnBooking = React.lazy(() => import("./components/userPage/btnBooking"));
+// const BtnBooking = React.lazy(() => import("./components/userPage/btnBooking"));
 
 const App = () => {
   return (

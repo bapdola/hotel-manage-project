@@ -24,7 +24,6 @@ import { VscAdd } from "react-icons/vsc";
 
 const PopupUpdate = (props) => {
   const { nameSer, priceSer, HotelId, serviceId } = props;
-  const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
 
   const [name, setNameService] = useState(nameSer);

@@ -3,21 +3,16 @@ import "./login.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector, connect } from "react-redux";
-<<<<<<< HEAD
-=======
-import { Link } from "react-router-dom";
+import { Link } from
+ "react-router-dom";
 import { UserLoginAction } from "src/Utils/store/action/adminLoginAction";
 import { Navigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
->>>>>>> 2ced03a38a08e00dd7293dcbf823faae0736e0b7
 
 const Login = () => {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
-<<<<<<< HEAD
-=======
   const isLoggIn = useSelector((state) => state.adminLogin.currentAdmin);
->>>>>>> 2ced03a38a08e00dd7293dcbf823faae0736e0b7
 
   const {
     register,
@@ -32,13 +27,9 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleOnSubmit = (data) => {
-<<<<<<< HEAD
-    dispatch();
-=======
     dispatch(UserLoginAction(data));
     setUserName("");
     setPassWord("");
->>>>>>> 2ced03a38a08e00dd7293dcbf823faae0736e0b7
   };
 
   return (
