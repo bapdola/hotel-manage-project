@@ -20,7 +20,7 @@ import { VscAdd } from "react-icons/vsc";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { AddDataUser } from "src/Utils/store/action/userAction";
 import { useForm } from "react-hook-form";
-import { formatDate } from "../../../Utils/DateTme/dateTime";
+import { formatBirthDate } from "../../../Utils/DateTme/dateTime";
 import { cilReload } from "@coreui/icons";
 
 const PopupAdd = () => {
@@ -156,7 +156,7 @@ const PopupAdd = () => {
               <CFormInput
                 type="date"
                 id="validationTooltip04"
-                placeholder="Birthday"
+                placeholder="dd-mm-yyyy"
                 value={birtDate}
                 {...register("birtDate", { required: true })}
                 onChange={(e) => setBirthday(e.target.value)}

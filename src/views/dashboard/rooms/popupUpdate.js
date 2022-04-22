@@ -51,13 +51,13 @@ const PopupUpdate = (props) => {
         shape="rounded-pill"
         color="info"
         variant="outline"
-        className="me-md-2"
+        className="me-md-2 "
         onClick={() => setVisibleLg(!visibleLg)}
       >
         Update
       </CButton>
 
-      <CModal visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
           <CModalTitle>Update Rooms</CModalTitle>
         </CModalHeader>
@@ -97,22 +97,19 @@ const PopupUpdate = (props) => {
                 Choose TypeRoom
               </CFormLabel>
               <CFormSelect
-              color="success"
+                color="success"
                 size="lg"
                 className="mb-3"
                 aria-label="Large select example"
                 {...register("roomTypeId", { required: true })}
                 ontChange={(e) => setTypeRoom(e.target.value)}
               >
-               <option>Please choose type room</option>
+                {/* <option>Please choose type room</option> */}
                 {dataType.map((item) => {
                   return (
-                    <>
-                      {" "}
-                      <option key={item.id} value={item.id}>
-                        {item.type}
-                      </option>
-                    </>
+                    <option key={item.id} value={item.id}>
+                      {item.type}
+                    </option>
                   );
                 })}
               </CFormSelect>
@@ -137,7 +134,7 @@ PopupUpdate.propTypes = {
   typeRoom: PropTypes.node,
 };
 connect(
-  ({ name, roomTypeId, }) => ({
+  ({ name, roomTypeId }) => ({
     name,
     roomTypeId,
   }),

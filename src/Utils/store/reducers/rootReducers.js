@@ -4,6 +4,7 @@ import LoginAdmin from "./loginAdminReducer";
 import listUserReducer from "./UserReducers";
 import HotelReducer from "./HotelReducer";
 import BookingReducer from "./BookingReducer";
+import listServiceReducer from "./ServiceReducer";
 
 const rootReducer = combineReducers({
   room: listRoomReducer,

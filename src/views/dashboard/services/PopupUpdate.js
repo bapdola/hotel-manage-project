@@ -53,7 +53,7 @@ const PopupUpdate = (props) => {
       <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Edit
       </CButton>
-      <CModal size="mg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
           <CModalTitle>Add Services</CModalTitle>
         </CModalHeader>

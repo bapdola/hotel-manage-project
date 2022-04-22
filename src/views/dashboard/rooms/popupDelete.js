@@ -6,16 +6,15 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import React ,{ useState } from "react";
+import React, { useState } from "react";
 import { DeleteDataRoom } from "src/Utils/store/action/roomAction";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 const PopupDelete = (props) => {
   const [visible, setVisible] = useState(false);
-  const { roomId,nameRoom } = props;
+  const { roomId, nameRoom } = props;
   const [nameroom, setNameRoom] = useState(nameRoom);
-
 
   const dispatch = useDispatch();
 
@@ -28,10 +27,16 @@ const PopupDelete = (props) => {
   };
   return (
     <>
-      <CButton shape="rounded-pill" color="danger" variant="outline" className="me-md-4" onClick={() => setVisible(!visible)}>
+      <CButton
+        shape="rounded-pill"
+        color="danger"
+        variant="outline"
+        className="me-md-4"
+        onClick={() => setVisible(!visible)}
+      >
         Delete
       </CButton>
-      <CModal visible={visible} onClose={() => setVisible(false)}>
+      <CModal size="lg" visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
           <CModalTitle>Delete room</CModalTitle>
         </CModalHeader>

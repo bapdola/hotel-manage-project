@@ -6,7 +6,7 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState} from "react";
+import { useState } from "react";
 import React from "react";
 import { cilDelete } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
@@ -32,7 +32,7 @@ const PopupDelete = (props) => {
       <CButton color="danger" onClick={() => setVisible(!visible)}>
         <CIcon icon={cilDelete} size="sm" /> Delete
       </CButton>
-      <CModal visible={visible} onClose={() => setVisible(false)}>
+      <CModal size="lg" visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
           <CModalTitle>Delete</CModalTitle>
         </CModalHeader>

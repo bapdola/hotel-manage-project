@@ -24,7 +24,7 @@ const routes = [
   { path: "/Bookings", exact: "exact", name: "Bookings", element: Bookings },
   { path: "/room", exact: "exact", name: "Rooms", element: Rooms },
   { path: "/", exact: "exact", name: "Rooms", element: Dashboard },
-  { path: "/addroom", exact: "exact", name: "Rooms", element: AddRoom },
+  // { path: "/addroom", exact: "exact", name: "Rooms", element: AddRoom },
   { path: "/user", exact: "exact", name: "Users", element: Users },
   { path: "/login", exact: "exact", name: "Login Admin", element: Login },
   {

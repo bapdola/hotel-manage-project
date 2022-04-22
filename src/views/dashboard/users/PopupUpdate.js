@@ -154,7 +154,7 @@ const PopupUpdate = (props) => {
               <CFormInput
                 type="date"
                 id="validationTooltip04"
-                placeholder="Birthday"
+                placeholder="dd-mm-yyyy"
                 value={birtDate}
                 {...register("birtDate", { required: true })}
                 onChange={(e) => setBirthday(e.target.value)}

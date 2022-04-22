@@ -47,7 +47,7 @@ function Dashboard() {
         >
           <CCardBody>
             <CCardTitle>Bookings</CCardTitle>
-            <CButton color="light" href="/admin/Bookings">
+            <CButton color="light" href="/admin/bookings">
               Go Bookings
             </CButton>
           </CCardBody>
@@ -60,7 +60,7 @@ function Dashboard() {
         >
           <CCardBody>
             <CCardTitle>Services</CCardTitle>
-            <CButton color="light" href="/admin/room">
+            <CButton color="light" href="/admin/services">
               Go Services
             </CButton>
           </CCardBody>
