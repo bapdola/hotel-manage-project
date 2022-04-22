@@ -6,7 +6,7 @@ const Bookings = React.lazy(() =>
 
 const Users = React.lazy(() => import("./views/dashboard/users/ManagerUser"));
 const Rooms = React.lazy(() => import("./views/dashboard/rooms/rooms"));
-const AddRoom = React.lazy(() => import("./views/dashboard/rooms/addRoom"));
+// const AddRoom = React.lazy(() => import("./views/dashboard/rooms/addRoom"));
 const Login = React.lazy(() => import("./views/pages/login/Login"));
 const Services = React.lazy(() =>
   import("./views/dashboard/services/Services")

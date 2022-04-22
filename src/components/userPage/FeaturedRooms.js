@@ -3,14 +3,14 @@ import Title from "./Title";
 import img1 from "../../images/room-8.jpeg";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { FetchData } from "src/Utils/store/action/roomAction";
+import { FetchDataRoom } from "src/Utils/store/action/roomAction";
 
 const FeaturedRooms = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.room.rooms);
 
   useEffect(() => {
-    dispatch(FetchData());
+    dispatch(FetchDataRoom());
   }, [dispatch]);
 
   return (

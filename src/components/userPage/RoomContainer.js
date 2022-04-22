@@ -5,7 +5,6 @@ import RoomsList from "./RoomList";
 function RoomContainer() {
   return (
     <>
-      {/* <RoomsFilter /> */}
       <RoomsList />
     </>
   );

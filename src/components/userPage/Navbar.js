@@ -30,6 +30,7 @@ const Navbar = () => {
     dispatch(AdminLogut());
   };
 
+
   return (
     <nav className="navbar">
       <div className="nav-center">
@@ -61,7 +62,7 @@ const Navbar = () => {
               </Link>
             ) : (
               <Link to="/login">
-                <VscAccount size="25" />
+                <VscAccount size="27" />
               </Link>
             )}
           </li>

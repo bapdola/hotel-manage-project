@@ -13,17 +13,34 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
+  CFormSelect,
 } from "@coreui/react";
 import { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch, connect } from "react-redux";
-import { AddDataService } from "src/Utils/store/action/serviceAction";
+import { AddDataRoom } from "src/Utils/store/action/roomAction";
 import { useForm } from "react-hook-form";
-import { FetchDataService } from "src/Utils/store/action/serviceAction";
+import { FetchDataRoom } from "src/Utils/store/action/roomAction";
 import { useEffect } from "react";
+import { FetchDataTypeRoom } from "src/Utils/store/action/roomAction";
+import { useSelector } from "react-redux";
 
 const PopupAdd = () => {
   const [visibleLg, setVisibleLg] = useState(false);
+  const [name, setNameRoom] = useState("");
+  const [roomTypeId, setTypeRoom] = useState("");
+  // const [hotelId, setHotelId] = useState("");
+
+  const dispatch = useDispatch();
+
+  const dataType = useSelector((state) => state.room.typeRoom);
+
+  console.log(dataType);
+
+  useEffect(() => {
+    dispatch(FetchDataTypeRoom());
+  }, [dispatch]);
+
   const {
     register,
     handleSubmit,
@@ -34,34 +51,27 @@ const PopupAdd = () => {
     mode: "onBlur",
   });
 
-  const [name, setNameService] = useState("");
-  const [price, setPriceService] = useState("");
-
-  const dispatch = useDispatch();
-
   const handleOnSubmit = (data, e) => {
     e.preventDefault();
-    if (data) {
-      dispatch(AddDataService(data));
-    }
-    setVisibleLg(false);
-  };
+    dispatch(AddDataRoom(data));
 
-  const handleReset = () => {
-    reset({});
-    setNameService("");
-    setPriceService("");
     setVisibleLg(false);
   };
 
   return (
     <>
-      <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
-        <VscAdd size={15} /> Add
+      <CButton
+        color="success"
+        shape="rounded-pill"
+        variant="outline"
+        className="me-md-9"
+        onClick={() => setVisibleLg(!visibleLg)}
+      >
+        CREAT
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={handleReset}>
+      <CModal size="mg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Add Services</CModalTitle>
+          <CModalTitle>Add Rooms</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -80,39 +90,39 @@ const PopupAdd = () => {
                   required: true,
                   pattern: /^[A-Za-z0-9 ]+$/i,
                 })}
-                onChange={(e) => setNameService(e.target.value)}
+                onChange={(e) => setNameRoom(e.target.value)}
                 required
               />
               {errors.name?.type === "required" && (
-                <p className="text-danger mt-2">Name Service is required</p>
+                <p className="text-danger mt-2">Name Room is required</p>
               )}
               {errors.name?.type === "pattern" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Name Service does not contain special characters
+                  Name Room does not contain special characters
                 </p>
               )}
             </CCol>
             <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Price</CFormLabel>
-              <CFormInput
-                type="number"
-                id="validationTooltip02"
-                placeholder="Price"
-                value={price}
-                {...register("price", {
-                  required: true,
-                })}
-                onChange={(e) => setPriceService(e.target.value)}
-                required
-              />
-              {errors.price?.type === "required" && (
-                <p className="text-danger mt-2"> Price Service is required</p>
-              )}
+              <CFormLabel htmlFor="validationTooltip02">Type</CFormLabel>
+              <CFormSelect
+                aria-label="Default select example"
+                {...register("roomTypeId", { required: true })}
+                onChange={(e) => setTypeRoom(e.target.value)}
+              >
+                {dataType &&
+                  dataType.map((item) => {
+                    return (
+                      <option key={item.id} value={item.id}>
+                        {item.type}
+                      </option>
+                    );
+                  })}
+              </CFormSelect>
             </CCol>
 
             <CModalFooter>
-              <CButton color="secondary" onClick={handleReset}>
+              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
                 Close
               </CButton>
               <CButton color="success" type="submit">
@@ -126,11 +136,10 @@ const PopupAdd = () => {
   );
 };
 connect(
-  ({ name, price, hotelId }) => ({
+  ({ name, roomTypeId }) => ({
     name,
-    price,
-    hotelId,
+    roomTypeId,
   }),
-  AddDataService
+  AddDataRoom
 )(PopupAdd);
 export default PopupAdd;

@@ -1,11 +1,14 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
+
 import ProtectedRoutes from "./router/ProtectedRoutes";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import cookie from "react-cookies";
+
 
 const loading = (
   <div className="pt-3 text-center">
@@ -32,7 +35,7 @@ const SingleRoom = React.lazy(() =>
   import("./views/pages/singleRoom/SingleRoom")
 );
 
-const BtnBooking = React.lazy(() => import("./components/userPage/btnBooking"));
+// const BtnBooking = React.lazy(() => import("./components/userPage/btnBooking"));
 
 const App = () => {
   return (
@@ -44,8 +47,8 @@ const App = () => {
             name="Login Page"
             element={<AdminLogin />}
           />
-          <Route exact element={<ProtectedRoutes redirect="admin/login" />}>
-            <Route exact path="/admin/*" element={<DefaultLayout />} />
+          <Route element={<ProtectedRoutes redirectLink="admin/login" />}>
+            <Route path="/admin/*" element={<DefaultLayout />} />
           </Route>
 
           <Route exact element={<ProtectedRoutes redirect="/login" />}>
