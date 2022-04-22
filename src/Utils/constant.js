@@ -33,3 +33,6 @@ export const GET_DATA_HOTEL = "GET_DATA_HOTEL";
 export const ADD_DATA_HOTEL = "ADD_DATA_HOTEL";
 export const DELETE_DATA_HOTEL = "DELETE_DATA_HOTEL";
 export const UPDATE_DATA_HOTEL = "UPDATE_DATA_HOTEL";
+
+//data booking
+export const GET_DATA_BOOKING = "GET_DATA_BOOKING";

@@ -72,12 +72,10 @@ const Login = () => {
             {errors.password?.type === "required" && (
               <p className="text-danger">Password is required</p>
             )}
-            <button type="submit" className="btn-primary mb-2 mt-3">
-              Submit
+            <button type="submit" className="btn-primary">
+              Login
             </button>
           </form>
-
-          <Link to="/">Back home</Link>
         </div>
       </section>
     </div>

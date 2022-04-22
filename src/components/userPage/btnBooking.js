@@ -38,7 +38,8 @@ const BtnBookings = (props) => {
   const { name, typeRoom, id, status } = props;
 
   const dispatch = useDispatch();
-  const dataType = useSelector((state) => state.room.typeRoom);
+  const dataType = useSelector((state) => state.room.typeRoom) || [];
+  const dataService = useSelector((state) => state.service.services) || [];
 
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
@@ -48,8 +49,7 @@ const BtnBookings = (props) => {
   // lấy service
   useEffect(() => {
     dispatch(FetchDataService());
-  }, [dispatch]);
-  const dataService = useSelector((state) => state.service.services);
+  }, []);
 
   return (
     <>
@@ -81,7 +81,7 @@ const BtnBookings = (props) => {
                   <CCol xs>
                     <img
                       src={defaultImg}
-                      width="500"
+                      width="450"
                       height="300"
                       alt="double economy"
                     />
@@ -96,7 +96,7 @@ const BtnBookings = (props) => {
                           >
                             Room Type
                           </CTableDataCell>
-                          <CTableDataCell>1</CTableDataCell>
+                          <CTableDataCell>{datatypeRoom.type}</CTableDataCell>
                         </CTableRow>
                         <CTableRow>
                           <CTableDataCell
@@ -189,32 +189,31 @@ const BtnBookings = (props) => {
                       placeholder="0"
                     />
                   </CCol>
-                  
                 </CRow>
                 <CRow className="g-3 m-3">
                   <CCol xs>
-                  <label htmlFor="formGroupExampleInput3" className=" mb-2">
-                     Service orders
+                    <label htmlFor="formGroupExampleInput3" className=" mb-2">
+                      Service orders
                     </label>
-                  <CFormSelect
-                    color="success"
-                    size="mg"
-                    className="mb-3"
-                    md={6}
-                    aria-label="Large select example"
-                    // {...register("roomTypeId", { required: true })}
-                    // ontChange={(e) => setTypeRoom(e.target.value)}
-                  >
-                    <option>Please choose service</option>
-                    {dataService.map((item) => {
-                      return (
-                        <>
-                          {" "}
-                          <option key={item.id}>{item.name}</option>
-                        </>
-                      );
-                    })}
-                  </CFormSelect>
+                    <CFormSelect
+                      color="success"
+                      size="mg"
+                      className="mb-3"
+                      md={6}
+                      aria-label="Large select example"
+                      // {...register("roomTypeId", { required: true })}
+                      // ontChange={(e) => setTypeRoom(e.target.value)}
+                    >
+                      <option>Please choose service</option>
+                      {dataService.map((item) => {
+                        return (
+                          <>
+                            {" "}
+                            <option key={item.id}>{item.name}</option>
+                          </>
+                        );
+                      })}
+                    </CFormSelect>
                   </CCol>
                   <CCol xs>
                     <label htmlFor="formGroupExampleInput3" className=" mb-2">
@@ -227,7 +226,6 @@ const BtnBookings = (props) => {
                       placeholder="0"
                     />
                   </CCol>
-                  
                 </CRow>
 
                 <CRow className="g-3 m-3">
@@ -274,7 +272,7 @@ const BtnBookings = (props) => {
               <CCol xs>
                 <img
                   src={defaultImg}
-                  width="500"
+                  width="450"
                   height="300"
                   alt="double economy"
                 />

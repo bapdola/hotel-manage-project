@@ -5,3 +5,7 @@ export const formatDate = (date) => {
   dayjs.extend(localizedFormat);
   return dayjs(date).format("L");
 };
+
+export const formatBirthDate = (date) => {
+  return dayjs(date).format("DD/MM/YYYY");
+};

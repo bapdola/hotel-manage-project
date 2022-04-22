@@ -4,11 +4,10 @@ import RoomsList from "./RoomList";
 
 function RoomContainer() {
   return (
-          <>
-            <RoomsList />
-          </>
+    <>
+      <RoomsList />
+    </>
   );
 }
 
 export default RoomContainer;
-

@@ -18,7 +18,7 @@ export const AddDataUser = (data) => {
       const res = await ApiCaller("users/create", "POST", data);
       if (res.status === 200) {
         dispatch({ type: a.ADD_DATA_USERS, payload: res.data.result });
-        toast.success("Successfully added new!!");
+        toast.success("Successfully!!");
       }
     } catch (error) {
       toast.error("Username already exists!!");

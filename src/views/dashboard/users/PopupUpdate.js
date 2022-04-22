@@ -154,7 +154,7 @@ const PopupUpdate = (props) => {
               <CFormInput
                 type="date"
                 id="validationTooltip04"
-                placeholder="Birthday"
+                placeholder="dd-mm-yyyy"
                 value={birtDate}
                 {...register("birtDate", { required: true })}
                 onChange={(e) => setBirthday(e.target.value)}
@@ -164,7 +164,7 @@ const PopupUpdate = (props) => {
               )}
             </CCol>
             <CCol md={7} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip05">Adress</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip05">Address</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip05"
