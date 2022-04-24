@@ -8,26 +8,20 @@ import cookie from "react-cookies";
 import { Navigate } from "react-router-dom";
 
 const Rooms = () => {
-  let isAdminRoot = cookie.load("ADMIN_DATA") || {};
-
   return (
     <>
-      {isAdminRoot.role === "User" ? (
-        <>
-          {" "}
-          <Navbar />
-          <Hero hero="roomsHero">
-            <Banner title="our rooms">
-              <Link to="/" className="btn-primary">
-                return home
-              </Link>
-            </Banner>
-          </Hero>
-          <RoomContainer />
-        </>
-      ) : (
-        <Navigate to="/login" />
-      )}
+      <>
+        {" "}
+        <Navbar />
+        <Hero hero="roomsHero">
+          <Banner title="our rooms">
+            <Link to="/" className="btn-primary">
+              return home
+            </Link>
+          </Banner>
+        </Hero>
+        <RoomContainer />
+      </>
     </>
   );
 };

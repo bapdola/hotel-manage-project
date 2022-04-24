@@ -10,10 +10,7 @@ import { cilLockLocked, cilSettings, cilUser } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminLogut } from "src/Utils/store/action/adminLoginAction";
-
-import avatar8 from "./../../assets/images/avatars/8.jpg";
 import { RiAdminFill } from "react-icons/ri";
-import Profile from "src/views/dashboard/users/ProfileAdmin";
 import { Link } from "react-router-dom";
 import "../../views/pages/login/login.css";
 import { CurrentUserLogin } from "src/Utils/store/action/userAction";
@@ -43,11 +40,6 @@ const AppHeaderDropdown = () => {
         <RiAdminFill size={20} />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownItem href="admin/login" onClick={handleLogOutAd}>
-          <CIcon icon={cilLockLocked} className="me-2" />
-          Logout Account
-        </CDropdownItem>
-
         <Link
           className="dropdown-item"
           style={{
@@ -60,6 +52,10 @@ const AppHeaderDropdown = () => {
           <CIcon icon={cilUser} className="me-2" />
           Profile
         </Link>
+        <CDropdownItem href="admin/login" onClick={handleLogOutAd}>
+          <CIcon icon={cilLockLocked} className="me-2" />
+          Logout
+        </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
   );

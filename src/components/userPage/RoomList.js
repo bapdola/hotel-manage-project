@@ -16,15 +16,18 @@ export default function RoomList() {
 
   useEffect(() => {
     dispatch(FetchDataRoom());
-    dispatch(FetchDataTypeRoom());
   }, [dispatch]);
 
   const dataType = useSelector((state) => state.room.typeRoom);
 
+  useEffect(() => {
+    dispatch(FetchDataTypeRoom());
+  }, [dispatch]);
+
+
   const dataSort = data.sort(function (a, b) {
     return a.status - b.status;
   });
- 
 
   return (
     <>
@@ -34,7 +37,7 @@ export default function RoomList() {
             dataSort.map((item) => {
               return (
                 <div key={item.id}>
-                  <article className="room"  >
+                  <article className="room">
                     <div className="img-container">
                       <img src={defaultImg} alt="single room" />
                       <div className="price-top">

@@ -10,8 +10,11 @@ import { MdOutlineHomeRepairService } from "react-icons/md";
 const _nav = [
   {
     component: CNavItem,
+  },
+  {
+    component: CNavItem,
     name: "Rooms",
-    to: "/admin",
+    to: "/admin/room",
     icon: <CIcon icon={cilRoom} customClassName="nav-icon" />,
     badge: {
       color: "info",

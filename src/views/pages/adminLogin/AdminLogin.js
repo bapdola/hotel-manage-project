@@ -72,7 +72,11 @@ const AdminLogin = () => {
               {errors.password?.type === "required" && (
                 <p className="text-danger">Password is required</p>
               )}
-              <button type="submit" className="btn-success mb-2 mt-3">
+              <button
+                type="submit"
+                id="btn_admin"
+                className="btn-success  mb-2 mt-5"
+              >
                 Login
               </button>
             </form>

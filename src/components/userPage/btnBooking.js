@@ -46,7 +46,8 @@ const BtnBookings = (props) => {
 
 
   const dispatch = useDispatch();
-  const dataType = useSelector((state) => state.room.typeRoom);
+  const dataType = useSelector((state) => state.room.typeRoom) || [];
+  const dataService = useSelector((state) => state.service.services) || [];
 
   // useEffect(() => {
   //   dispatch(FetchDataTypeRoom());
@@ -56,8 +57,7 @@ const BtnBookings = (props) => {
   // lấy service
   useEffect(() => {
     dispatch(FetchDataService());
-  }, [dispatch]);
-  const dataService = useSelector((state) => state.service.services);
+  }, []);
 
   // add
   const {

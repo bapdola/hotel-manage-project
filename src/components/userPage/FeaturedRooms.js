@@ -9,11 +9,10 @@ const FeaturedRooms = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.room.rooms);
 
-  console.log(data.slice(0, 3));
-
   useEffect(() => {
     dispatch(FetchDataRoom());
   }, [dispatch]);
+
   return (
     <section className="featured-rooms">
       <Title title="Featured Rooms" />

@@ -67,9 +67,9 @@ const PopupAdd = () => {
         className="me-md-9"
         onClick={() => setVisibleLg(!visibleLg)}
       >
-        CREAT
+        CREATE
       </CButton>
-      <CModal size="mg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
           <CModalTitle>Add Rooms</CModalTitle>
         </CModalHeader>

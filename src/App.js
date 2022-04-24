@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import cookie from "react-cookies";
 
-
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -47,13 +46,14 @@ const App = () => {
             name="Login Page"
             element={<AdminLogin />}
           />
-          <Route element={<ProtectedRoutes redirectLink="admin/login" />}>
+          <Route element={<ProtectedRoutes redirect="admin/login" />}>
             <Route path="/admin/*" element={<DefaultLayout />} />
           </Route>
 
           <Route exact element={<ProtectedRoutes redirect="/login" />}>
             <Route exact path="/" name="Home Page" element={<Home />} />
             <Route exact path="/rooms" name="Page" element={<Rooms />} />
+
             <Route
               path="/rooms/single-room"
               name="Page"

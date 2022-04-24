@@ -66,9 +66,11 @@ h6 {
   display: inline-block;
   text-decoration: none;
   letter-spacing: var(--mainSpacing);
-  background: linear-gradient(90deg,
-      rgba(182, 70, 185, 0.555) 0%,
-      rgba(0, 212, 255, 0.3203326740852591) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(182, 70, 185, 0.555) 0%,
+    rgba(0, 212, 255, 0.3203326740852591) 100%
+  );
   color: var(--mainBlack);
   padding: 0.4rem 0.9rem;
   border: 3px solid var(--primaryColor);
