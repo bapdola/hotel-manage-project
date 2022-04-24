@@ -12,37 +12,29 @@ export default function RoomList() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.room.rooms);
+  console.log(data);
 
   useEffect(() => {
     dispatch(FetchDataRoom());
-  }, [dispatch]);
-  console.log("data", data);
-
-  const dataType = useSelector((state) => state.room.typeRoom);
-
-  useEffect(() => {
     dispatch(FetchDataTypeRoom());
   }, [dispatch]);
+
+  const dataType = useSelector((state) => state.room.typeRoom);
 
   const dataSort = data.sort(function (a, b) {
     return a.status - b.status;
   });
-  console.log("dataSort", dataSort);
+ 
 
   return (
     <>
       <section className="roomslist">
         <div className="roomslist-center">
-          {/* {item.status === 1 ? (
-                        hành động1
-                      ) : (
-                       hành động 2
-                      )} */}
           {dataSort &&
             dataSort.map((item) => {
               return (
-                <div className="roomslist-center" key={item.id}>
-                  <article className="room">
+                <div key={item.id}>
+                  <article className="room"  >
                     <div className="img-container">
                       <img src={defaultImg} alt="single room" />
                       <div className="price-top">

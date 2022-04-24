@@ -17,9 +17,9 @@ import {
   FetchDataRoom,
   FetchDataTypeRoom,
 } from "src/Utils/store/action/roomAction";
-import PopupAdd from "./PopupAdd";
-import PopupUpdate from "./PopupUpdate";
-import PopupDelete from "./PopupDelete";
+import PopupAdd from "./popupAdd";
+import PopupUpdate from "./popupUpdate";
+import PopupDelete from "./popupDelete";
 
 export default function Rooms() {
   const dispatch = useDispatch();
