@@ -12,6 +12,7 @@ export default function RoomList() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.room.rooms);
+  console.log(data);
 
   useEffect(() => {
     dispatch(FetchDataRoom());
@@ -22,6 +23,7 @@ export default function RoomList() {
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
   }, [dispatch]);
+
 
   const dataSort = data.sort(function (a, b) {
     return a.status - b.status;

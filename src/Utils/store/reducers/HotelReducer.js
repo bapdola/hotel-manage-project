@@ -11,7 +11,6 @@ const HotelReducer = (state = initialState, action) => {
     case a.ADD_DATA_HOTEL:
       const hotels = state.hotels.concat(action.payload);
       return { ...state, hotels };
-
     case a.UPDATE_DATA_HOTEL:
       return {
         ...state,
@@ -24,7 +23,6 @@ const HotelReducer = (state = initialState, action) => {
         ...state,
         hotels: action.payload,
       };
-
     default:
       return state;
   }

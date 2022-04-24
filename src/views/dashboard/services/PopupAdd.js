@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState ,useEffect} from "react";
 import {
   CForm,
   CFormLabel,
@@ -14,13 +14,11 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch, connect } from "react-redux";
 import { AddDataService } from "src/Utils/store/action/serviceAction";
 import { useForm } from "react-hook-form";
 import { FetchDataService } from "src/Utils/store/action/serviceAction";
-import { useEffect } from "react";
 
 const PopupAdd = () => {
   const [visibleLg, setVisibleLg] = useState(false);
