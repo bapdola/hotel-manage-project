@@ -76,7 +76,7 @@ const Login = () => {
             </button>
           </form>
 
-          <Link to="/">Back home</Link>
+          {/* <Link to="/">Back home</Link> */}
         </div>
       </section>
     </div>
