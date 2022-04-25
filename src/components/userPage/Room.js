@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import defaultImg from "../../assets/images/react.jpg";
-const Room = () => {
+import PropTypes from "prop-types";
+
+const Room = (props) => {
   // console.log(name);
+  const { name } = props;
   return (
     <article className="room">
       <div className="img-container">
@@ -15,9 +18,11 @@ const Room = () => {
           features
         </Link>
       </div>
-      <p className="room-info">Phong</p>
+      <p className="room-info">{name}</p>
     </article>
   );
 };
-
+Room.propTypes = {
+  name: PropTypes.node,
+};
 export default Room;

@@ -3,7 +3,8 @@ import "./login.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from
+ "react-router-dom";
 import { UserLoginAction } from "src/Utils/store/action/adminLoginAction";
 import { Navigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -71,12 +72,10 @@ const Login = () => {
             {errors.password?.type === "required" && (
               <p className="text-danger">Password is required</p>
             )}
-            <button type="submit" className="btn-primary mb-2 mt-3">
-              Submit
+            <button type="submit" className="btn-primary">
+              Login
             </button>
           </form>
-
-          {/* <Link to="/">Back home</Link> */}
         </div>
       </section>
     </div>

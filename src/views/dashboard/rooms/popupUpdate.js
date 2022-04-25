@@ -1,33 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CForm,
+  CModalFooter,
+  CFormSelect,
+  CButton,
+  CModal,
+  CModalTitle,
+  CModalHeader,
+  CModalBody,
+  CCol,
   CFormLabel,
   CFormInput,
-  CButton,
-  CCol,
-  CFormFeedback,
 } from "@coreui/react";
-import {
-  CModal,
-  CModalHeader,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
-} from "@coreui/react";
-import { useState } from "react";
 
-import { useDispatch, connect } from "react-redux";
-import { UpdateDataService } from "src/Utils/store/action/serviceAction";
+import { useDispatch, connect, useSelector } from "react-redux";
+import { UpdateDataRoom } from "src/Utils/store/action/roomAction";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
-import { VscAdd } from "react-icons/vsc";
 
 const PopupUpdate = (props) => {
-  const { nameSer, priceSer, HotelId, serviceId } = props;
+  const dataType = useSelector((state) => state.room.typeRoom);
+
+  const { nameRoom, typeRoom, roomId } = props;
   const [visibleLg, setVisibleLg] = useState(false);
 
-  const [name, setNameService] = useState(nameSer);
-  const [price, setPriceService] = useState(priceSer);
+  const [name, setNameRoom] = useState(nameRoom);
+  const [roomTypeId, setTypeRoom] = useState(typeRoom);
 
   const dispatch = useDispatch();
 
@@ -42,30 +40,37 @@ const PopupUpdate = (props) => {
   });
 
   const handleOnSubmit = (data) => {
-    if (serviceId && data) {
-      dispatch(UpdateDataService(serviceId, data));
-    }
+    dispatch(UpdateDataRoom(roomId, data));
+    reset({ ...data });
     setVisibleLg(false);
   };
 
   return (
     <>
-      <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
-        <VscAdd size={15} /> Edit
+      <CButton
+        shape="rounded-pill"
+        color="info"
+        variant="outline"
+        className="me-md-2 "
+        onClick={() => setVisibleLg(!visibleLg)}
+      >
+        Update
       </CButton>
+
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Add Services</CModalTitle>
+          <CModalTitle>Update Rooms</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
-            className="row g-3 needs-validation"
+            className="row g-6 needs-validation"
             noValidate
             onSubmit={handleSubmit(handleOnSubmit)}
           >
             <CCol md={6} className="position-relative">
               <CFormLabel htmlFor="validationTooltip01">Name</CFormLabel>
               <CFormInput
+                size="lg"
                 type="text"
                 id="validationTooltip01"
                 placeholder="Name"
@@ -74,37 +79,41 @@ const PopupUpdate = (props) => {
                   required: true,
                   pattern: /^[A-Za-z0-9 ]+$/i,
                 })}
-                onChange={(e) => setNameService(e.target.value)}
+                onChange={(e) => setNameRoom(e.target.value)}
                 required
               />
               {errors.name?.type === "required" && (
-                <p className="text-danger mt-2">Name Service is required</p>
+                <p className="text-danger mt-2">Name Room is required</p>
               )}
               {errors.name?.type === "pattern" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Name Service does not contain special characters
+                  Name Room does not contain special characters
                 </p>
               )}
             </CCol>
             <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Price</CFormLabel>
-              <CFormInput
-                type="number"
-                id="validationTooltip02"
-                placeholder="Price"
-                value={price}
-                {...register("price", {
-                  required: true,
+              <CFormLabel htmlFor="validationTooltip02">
+                Choose TypeRoom
+              </CFormLabel>
+              <CFormSelect
+                color="success"
+                size="lg"
+                className="mb-3"
+                aria-label="Large select example"
+                {...register("roomTypeId", { required: true })}
+                ontChange={(e) => setTypeRoom(e.target.value)}
+              >
+                {/* <option>Please choose type room</option> */}
+                {dataType.map((item) => {
+                  return (
+                    <option key={item.id} value={item.id}>
+                      {item.type}
+                    </option>
+                  );
                 })}
-                onChange={(e) => setPriceService(e.target.value)}
-                required
-              />
-              {errors.price?.type === "required" && (
-                <p className="text-danger mt-2"> Price Service is required</p>
-              )}
+              </CFormSelect>
             </CCol>
-
             <CModalFooter>
               <CButton color="secondary" onClick={() => setVisibleLg(false)}>
                 Close
@@ -120,17 +129,15 @@ const PopupUpdate = (props) => {
   );
 };
 PopupUpdate.propTypes = {
-  serviceId: PropTypes.node,
-  nameSer: PropTypes.node,
-  priceSer: PropTypes.node,
-  HotelId: PropTypes.node,
+  roomId: PropTypes.node,
+  nameRoom: PropTypes.node,
+  typeRoom: PropTypes.node,
 };
 connect(
-  ({ name, price, hotelId }) => ({
+  ({ name, roomTypeId }) => ({
     name,
-    price,
-    hotelId,
+    roomTypeId,
   }),
-  UpdateDataService
+  UpdateDataRoom
 )(PopupUpdate);
 export default PopupUpdate;

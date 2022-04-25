@@ -1,7 +1,6 @@
 import React from "react";
 import img1 from "../../../images/room-8.jpeg";
 import { Link } from "react-router-dom";
-import BtnBookings from "src/components/userPage/btnBooking";
 import { PropTypes } from "prop-types";
 import Banner from "src/components/userPage/Banner";
 import Navbar from "src/components/userPage/Navbar";
@@ -63,7 +62,6 @@ const SingleRoom = ({ isAuth }) => {
       </section>
       <section className="room-booking">
         {" "}
-        <BtnBookings />{" "}
       </section>
     </>
   );
