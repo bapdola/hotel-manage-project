@@ -30,7 +30,6 @@ const Navbar = () => {
     dispatch(AdminLogut());
   };
 
-
   return (
     <nav className="navbar">
       <div className="nav-center">

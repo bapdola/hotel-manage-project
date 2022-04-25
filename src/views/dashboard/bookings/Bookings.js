@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CTable,
   CTableBody,
@@ -7,7 +7,7 @@ import {
   CTableHead,
   CTableHeaderCell,
 } from "@coreui/react";
-import { BookingFetchData } from "src/Utils/store/action/bookingAction";
+import { FetchDataBookRoom } from "src/Utils/store/action/bookroomAction";
 import CIcon from "@coreui/icons-react";
 import {
   cilCloudUpload,
@@ -23,14 +23,42 @@ import PopupUpdate from "./PopupUpdate";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { formatDate } from "src/Utils/DateTme/dateTime";
+import ReactPaginate from "react-paginate";
 
 function Bookings() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.booking.bookings);
+  const data = useSelector((state) => state.bookroom.bookrooms);
 
   useEffect(() => {
-    dispatch(BookingFetchData());
+    dispatch(FetchDataBookRoom());
   }, [dispatch]);
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const usersPerPage = 4;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayBookings = data
+    .slice(pagesVisited, pagesVisited + usersPerPage)
+    .map((item, inx) => {
+      return (
+        <CTableRow key={item.id}>
+          <CTableHeaderCell scope="row">{inx + 1}</CTableHeaderCell>
+          <CTableDataCell>{item.customerName}</CTableDataCell>
+          <CTableDataCell>{item.customerIdCard}</CTableDataCell>
+          <CTableDataCell>{formatDate(item.fromDate)}</CTableDataCell>
+          <CTableDataCell>{formatDate(item.toDate)}</CTableDataCell>
+          <CTableDataCell>{item.roomName}</CTableDataCell>
+          <CTableDataCell>
+            {/* <PopupUpdate /> <PopupDelete /> */}
+          </CTableDataCell>
+        </CTableRow>
+      );
+    });
+
+  const pageCount = Math.ceil(data.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <>
@@ -46,25 +74,28 @@ function Bookings() {
             <CTableHeaderCell scope="col"></CTableHeaderCell>
           </CTableRow>
         </CTableHead>
-        <CTableBody>
-          {data &&
-            data.map((item, inx) => {
-              return (
-                <CTableRow key={item.id}>
-                  <CTableHeaderCell scope="row">{inx + 1}</CTableHeaderCell>
-                  <CTableDataCell>{item.customerName}</CTableDataCell>
-                  <CTableDataCell>{item.customerIdCard}</CTableDataCell>
-                  <CTableDataCell>{formatDate(item.fromDate)}</CTableDataCell>
-                  <CTableDataCell>{formatDate(item.toDate)}</CTableDataCell>
-                  <CTableDataCell>{item.roomName}</CTableDataCell>
-                  <CTableDataCell>
-                    {/* <PopupUpdate /> <PopupDelete /> */}
-                  </CTableDataCell>
-                </CTableRow>
-              );
-            })}
-        </CTableBody>
+        <CTableBody>{displayBookings}</CTableBody>
       </CTable>
+      <ReactPaginate
+        nextLabel="next >"
+        onPageChange={changePage}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+      />
     </>
   );
 }

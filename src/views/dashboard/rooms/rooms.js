@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./room.scss";
 import {
   CRow,
@@ -20,6 +20,7 @@ import {
 import PopupAdd from "./popupAdd";
 import PopupUpdate from "./popupUpdate";
 import PopupDelete from "./popupDelete";
+import ReactPaginate from "react-paginate";
 
 export default function Rooms() {
   const dispatch = useDispatch();
@@ -41,6 +42,63 @@ export default function Rooms() {
     dispatch(FetchDataRoom());
   }, [dispatch]);
 
+  const [pageNumber, setPageNumber] = useState(0);
+  const usersPerPage = 7;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayUsers = dataSort
+    .slice(pagesVisited, pagesVisited + usersPerPage)
+    .map((item) => {
+      return (
+        <CCol xs key={item.id}>
+          <CCard textColor="primary" className="h-100'">
+            <CCardImage orientation="top" src={img1} />
+            <CCardBody>
+              <CCardTitle>
+                <div className="Title">
+                  {item.name}
+                  {item.status === 1 ? (
+                    <CBadge shape="rounded-pill" color="success">
+                      Active
+                    </CBadge>
+                  ) : (
+                    <CBadge shape="rounded-pill" color="secondary">
+                      Empty
+                    </CBadge>
+                  )}
+                </div>
+              </CCardTitle>
+              <CCardText>{item.price}</CCardText>
+
+              {dataType.map((type) => {
+                return (
+                  <div className="type" key={type.id}>
+                    {type.id === item.roomTypeId ? type.type : []}{" "}
+                    <span className="Title">
+                      {type.id === item.roomTypeId ? `${type.price}đ` : []}{" "}
+                    </span>
+                  </div>
+                );
+              })}
+              <CCardBody>
+                <PopupUpdate
+                  roomId={item?.id}
+                  nameRoom={item?.name}
+                  typeRoom={item?.roomType}
+                />
+                <PopupDelete roomId={item?.id} nameRoom={item?.name} />
+              </CCardBody>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      );
+    });
+
+  const pageCount = Math.ceil(dataSort.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   return (
     <>
       <CRow xs={{ cols: 1 }} md={{ cols: 4 }} className="g-4">
@@ -55,56 +113,29 @@ export default function Rooms() {
             </CCardBody>
           </CCard>
         </CCol>
-        {dataSort &&
-          dataSort.map((item) => {
-            return (
-              <CCol xs key={item.id}>
-                <CCard textColor="primary" className="h-100'">
-                  <CCardImage orientation="top" src={img1} />
-                  <CCardBody>
-                    <CCardTitle>
-                      <div className="Title">
-                        {item.name}
-                        {item.status === 1 ? (
-                          <CBadge shape="rounded-pill" color="success">
-                            Active
-                          </CBadge>
-                        ) : (
-                          <CBadge shape="rounded-pill" color="secondary">
-                            Empty
-                          </CBadge>
-                        )}
-                      </div>
-                    </CCardTitle>
-                    <CCardText>{item.price}</CCardText>
-
-                    {dataType.map((type) => {
-                      return (
-                        <div className="type" key={type.id}>
-                          {type.id === item.roomTypeId ? type.type : []}{" "}
-                          <span className="Title">
-                            {type.id === item.roomTypeId
-                              ? `${type.price}đ`
-                              : []}{" "}
-                          </span>
-                        </div>
-                      );
-                    })}
-
-                    <CCardBody>
-                      <PopupUpdate
-                        roomId={item?.id}
-                        nameRoom={item?.name}
-                        typeRoom={item?.roomType}
-                      />
-                      <PopupDelete roomId={item?.id} nameRoom={item?.name} />
-                    </CCardBody>
-                  </CCardBody>
-                </CCard>
-              </CCol>
-            );
-          })}
+        {displayUsers}
       </CRow>
+      <ReactPaginate
+        nextLabel="next >"
+        onPageChange={changePage}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+      />
+      {/* <PaginatedItems items={dataSort} itemsPerPage={4} /> */}
     </>
   );
 }

@@ -5,8 +5,10 @@ import defaultImg from "../../images/room-1.jpeg";
 import { useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { useForm } from "react-hook-form";
-import { AddDataBookRoom ,UpdateDataBookRoom } from "src/Utils/store/action/bookroomAction";
-import { FetchDataTypeRoom } from "src/Utils/store/action/roomAction";
+import {
+  AddDataBookRoom,
+  UpdateDataBookRoom,
+} from "src/Utils/store/action/bookroomAction";
 import { FetchDataService } from "src/Utils/store/action/serviceAction";
 
 import {
@@ -29,21 +31,19 @@ import {
 
 import { PropTypes } from "prop-types";
 
+import { differenceInDays, format } from "date-fns";
+
 const BtnBookings = (props) => {
   const [visibleXL, setVisibleXL] = useState(false);
   const [visibleXLD, setVisibleXLD] = useState(false);
 
   const { name, typeRoom, id, status } = props;
-  
+
   const [customerName, setcustomerName] = useState("");
   const [customerIdCard, setcustomerIdCard] = useState("");
   const [roomId, setroomId] = useState(id);
   const [toDate, settoDate] = useState("");
   const [fromDate, setfromDate] = useState("");
-
-  const navigate = useNavigate();
-
-
 
   const dispatch = useDispatch();
   const dataType = useSelector((state) => state.room.typeRoom) || [];
@@ -52,9 +52,10 @@ const BtnBookings = (props) => {
   // useEffect(() => {
   //   dispatch(FetchDataTypeRoom());
   // }, []);
-  //lấy data type room
+
   const datatypeRoom = dataType.find((item) => item.id === typeRoom) || {};
-  // lấy service
+
+  // take data service
   useEffect(() => {
     dispatch(FetchDataService());
   }, []);
@@ -75,10 +76,9 @@ const BtnBookings = (props) => {
     if (data) {
       dispatch(AddDataBookRoom(data));
     }
-    console.log(data,"data");
     setVisibleXL(false);
   };
-//update
+  //update
   const handleOnUpdate = (data) => {
     if (id && data) {
       dispatch(UpdateDataBookRoom(data, id));
@@ -86,6 +86,7 @@ const BtnBookings = (props) => {
     setVisibleXLD(false);
   };
 
+  var result = differenceInDays(new Date(toDate), new Date(fromDate));
   return (
     <>
       {status === 1 ? (
@@ -102,167 +103,183 @@ const BtnBookings = (props) => {
           >
             Details
           </CButton>
-          <CModal visible={visibleXLD} onClose={() => setVisibleXLD(false)}>
+          <CModal
+            size="lg"
+            visible={visibleXLD}
+            onClose={() => setVisibleXLD(false)}
+          >
             <CModalHeader>
               <CModalTitle>Update Book</CModalTitle>
             </CModalHeader>
             <CModalBody>
-          <CForm onSubmit={handleSubmit(handleOnUpdate)} >
-            <CRow className="g-3 mb-3">
-              <CCol xs>
-                <img
-                  src={defaultImg}
-                  width="470"
-                  height="300"
-                  alt="double economy"
-                />
-              </CCol>
-              <CCol xs>
-                <h2
-                value={roomId}
-                onChange={(e) => setroomId(e.target.value)}
-                >{name}</h2>
-                <CTable>
-                  <CTableBody>
-                    <CTableRow>
-                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
-                        Room Type
-                      </CTableDataCell>
-                      <CTableDataCell>{datatypeRoom.type}</CTableDataCell>
-                    </CTableRow>
-                    <CTableRow>
-                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
-                        Price
-                      </CTableDataCell>
-                      <CTableDataCell>{datatypeRoom.price}</CTableDataCell>
-                    </CTableRow>
+              <CForm onSubmit={handleSubmit(handleOnUpdate)}>
+                <CRow className="g-3 mb-3">
+                  <CCol xs>
+                    <img
+                      src={defaultImg}
+                      width="470"
+                      height="300"
+                      alt="double economy"
+                    />
+                  </CCol>
+                  <CCol xs>
+                    <h2
+                      value={roomId}
+                      onChange={(e) => setroomId(e.target.value)}
+                    >
+                      {name}
+                    </h2>
+                    <CTable>
+                      <CTableBody>
+                        <CTableRow>
+                          <CTableDataCell
+                            style={{ backgroundColor: "#e6f2ff" }}
+                          >
+                            Room Type
+                          </CTableDataCell>
+                          <CTableDataCell>{datatypeRoom.type}</CTableDataCell>
+                        </CTableRow>
+                        <CTableRow>
+                          <CTableDataCell
+                            style={{ backgroundColor: "#e6f2ff" }}
+                          >
+                            Price
+                          </CTableDataCell>
+                          <CTableDataCell>{datatypeRoom.price}</CTableDataCell>
+                        </CTableRow>
 
-                    <CTableRow>
-                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
-                        Status
-                      </CTableDataCell>
-                      {status === 1 ? (
-                        <CTableDataCell color="secondary">
-                          {" "}
-                          Active
-                        </CTableDataCell>
-                      ) : (
-                        <CTableDataCell> Empty </CTableDataCell>
-                      )}
-                    </CTableRow>
-                  </CTableBody>
-                </CTable>
-              </CCol>
-            </CRow>
-            <CRow className="g-3 m-3">
-              
-              <CCol xs>
-                <label htmlFor="from-date" className=" mb-2">
-                  Check in
-                </label>
-                <CFormInput
-                  type="date"
-                  id="validationTooltip04"
-                  placeholder="fromDate"
-                  value={fromDate}
-                  {...register("fromDate", { required: true })}
-                  onChange={(e) => setfromDate(e.target.value)}
-                />
-                {errors.customerIdCard?.type === "required" && (
-                  <p className="text-danger mt-2">Check in is required</p>
-                )}
-              </CCol>
-              <CCol xs>
-                <label htmlFor="to-date" className=" mb-2">
-                  Check out
-                </label>
-                <CFormInput
-                  type="date"
-                  id="validationTooltip04"
-                  placeholder="toDate"
-                  value={toDate}
-                  {...register("toDate", { required: true })}
-                  onChange={(e) => settoDate(e.target.value)}
-                />
-                {errors.customerIdCard?.type === "required" && (
-                  <p className="text-danger mt-2">Check out is required</p>
-                )}
-              </CCol>
-            </CRow>
-            <CRow className="g-3 m-3">
-              <CCol xs>
-                <label htmlFor="formGroupExampleInput1" className=" mb-2">
-                  Full name
-                </label>
-                <CFormInput
-                  type="text"
-                  id="validationTooltip01"
-                  placeholder="Full name "
-                  value={customerName}
-                  {...register("customerName", {
-                    required: true,
-                    pattern: /^[A-Za-z0-9 ]+$/i,
-                  })}
-                  onChange={(e) => setcustomerName(e.target.value)}
-                  required
-                />
-                {errors.customerName?.type === "required" && (
-                  <p className="text-danger mt-2">customerName is required</p>
-                )}
-                {errors.customerName?.type === "maxLength" && (
-                  <p className="text-danger mt-2">
-                    FullName not than 24 number
-                  </p>
-                )}
-                {errors.customerName?.type === "pattern" && (
-                  <p className="text-danger mt-2">
-                    FullName does not contain special characters
-                  </p>
-                )}
-              </CCol>
-              <CCol xs>
-                <label htmlFor="formGroupExampleInput3" className=" mb-2">
-                  ID CARD
-                </label>
-                <CFormInput
-                  type="number"
-                  id="validationTooltip06"
-                  placeholder="ID Card"
-                  value={customerIdCard}
-                  {...register("customerIdCard", {
-                    required: true,
-                    minLength: 9,
-                    maxLength: 12,
-                  })}
-                  onChange={(e) => setcustomerIdCard(e.target.value)}
-                />
-                {errors.customerIdCard?.type === "required" && (
-                  <p className="text-danger mt-2">customerIdCard is required</p>
-                )}
-                {errors.customerIdCard?.type === "minLength" && (
-                  <p className="text-danger mt-2">
-                    {" "}
-                    Number customerIdCard must be 10 number
-                  </p>
-                )}
-                {errors.customerIdCard?.type === "maxLength" && (
-                  <p className="text-danger mt-2">
-                    {" "}
-                    Number customerIdCard not than 10 number
-                  </p>
-                )}
-              </CCol>
-              <CCol md={12}>
-                <CModalTitle
-                  type="text"
-                  value={roomId}
-                  {...register("roomId", {
-                    required: true,
-                  })}
-                 
-                >Customer confirms booking: {name}</CModalTitle>
-              </CCol>
-            </CRow>
+                        <CTableRow>
+                          <CTableDataCell
+                            style={{ backgroundColor: "#e6f2ff" }}
+                          >
+                            Status
+                          </CTableDataCell>
+                          {status === 1 ? (
+                            <CTableDataCell color="secondary">
+                              {" "}
+                              Active
+                            </CTableDataCell>
+                          ) : (
+                            <CTableDataCell> Empty </CTableDataCell>
+                          )}
+                        </CTableRow>
+                      </CTableBody>
+                    </CTable>
+                  </CCol>
+                </CRow>
+                <CRow className="g-3 m-3">
+                  <CCol xs>
+                    <label htmlFor="from-date" className=" mb-2">
+                      Check in
+                    </label>
+                    <CFormInput
+                      type="date"
+                      id="validationTooltip04"
+                      placeholder="fromDate"
+                      value={fromDate}
+                      {...register("fromDate", { required: true })}
+                      onChange={(e) => setfromDate(e.target.value)}
+                    />
+                    {errors.customerIdCard?.type === "required" && (
+                      <p className="text-danger mt-2">Check in is required</p>
+                    )}
+                  </CCol>
+                  <CCol xs>
+                    <label htmlFor="to-date" className=" mb-2">
+                      Check out
+                    </label>
+                    <CFormInput
+                      type="date"
+                      id="validationTooltip04"
+                      placeholder="toDate"
+                      value={toDate}
+                      {...register("toDate", { required: true })}
+                      onChange={(e) => settoDate(e.target.value)}
+                    />
+                    {errors.customerIdCard?.type === "required" && (
+                      <p className="text-danger mt-2">Check out is required</p>
+                    )}
+                  </CCol>
+                </CRow>
+                <CRow className="g-3 m-3">
+                  <CCol xs>
+                    <label htmlFor="formGroupExampleInput1" className=" mb-2">
+                      Full name
+                    </label>
+                    <CFormInput
+                      type="text"
+                      id="validationTooltip01"
+                      placeholder="Full name "
+                      value={customerName}
+                      {...register("customerName", {
+                        required: true,
+                        pattern: /^[A-Za-z0-9 ]+$/i,
+                      })}
+                      onChange={(e) => setcustomerName(e.target.value)}
+                      required
+                    />
+                    {errors.customerName?.type === "required" && (
+                      <p className="text-danger mt-2">
+                        customerName is required
+                      </p>
+                    )}
+                    {errors.customerName?.type === "maxLength" && (
+                      <p className="text-danger mt-2">
+                        FullName not than 24 number
+                      </p>
+                    )}
+                    {errors.customerName?.type === "pattern" && (
+                      <p className="text-danger mt-2">
+                        FullName does not contain special characters
+                      </p>
+                    )}
+                  </CCol>
+                  <CCol xs>
+                    <label htmlFor="formGroupExampleInput3" className=" mb-2">
+                      ID CARD
+                    </label>
+                    <CFormInput
+                      type="number"
+                      id="validationTooltip06"
+                      placeholder="ID Card"
+                      value={customerIdCard}
+                      {...register("customerIdCard", {
+                        required: true,
+                        minLength: 9,
+                        maxLength: 12,
+                      })}
+                      onChange={(e) => setcustomerIdCard(e.target.value)}
+                    />
+                    {errors.customerIdCard?.type === "required" && (
+                      <p className="text-danger mt-2">
+                        customerIdCard is required
+                      </p>
+                    )}
+                    {errors.customerIdCard?.type === "minLength" && (
+                      <p className="text-danger mt-2">
+                        {" "}
+                        Number customerIdCard must be 10 number
+                      </p>
+                    )}
+                    {errors.customerIdCard?.type === "maxLength" && (
+                      <p className="text-danger mt-2">
+                        {" "}
+                        Number customerIdCard not than 10 number
+                      </p>
+                    )}
+                  </CCol>
+                  <CCol md={12}>
+                    <CModalTitle
+                      type="text"
+                      value={roomId}
+                      {...register("roomId", {
+                        required: true,
+                      })}
+                    >
+                      Customer confirms booking: {name}
+                    </CModalTitle>
+                  </CCol>
+                </CRow>
                 <CRow className="g-3 m-3">
                   <CCol xs>
                     <label htmlFor="formGroupExampleInput3" className=" mb-2">
@@ -270,7 +287,7 @@ const BtnBookings = (props) => {
                     </label>
                     <CFormSelect
                       color="success"
-                      size="md"
+                      size="sm"
                       className="mb-3"
                       aria-label="Large select example"
                       // {...register("roomTypeId", { required: true })}
@@ -278,12 +295,7 @@ const BtnBookings = (props) => {
                     >
                       <option>Please choose service</option>
                       {dataService.map((item) => {
-                        return (
-                          <>
-                            {" "}
-                            <option key={item.id}>{item.name}</option>
-                          </>
-                        );
+                        return <option key={item.id}>{item.name}</option>;
                       })}
                     </CFormSelect>
                   </CCol>
@@ -333,12 +345,12 @@ const BtnBookings = (props) => {
           Booking
         </CButton>
       )}
-      <CModal visible={visibleXL} onClose={() => setVisibleXL(false)}>
+      <CModal size="lg" visible={visibleXL} onClose={() => setVisibleXL(false)}>
         <CModalHeader>
           <CModalTitle>Booking</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <CForm onSubmit={handleSubmit(handleOnSubmit)} >
+          <CForm onSubmit={handleSubmit(handleOnSubmit)}>
             <CRow className="g-3 mb-3">
               <CCol xs>
                 <img
@@ -349,10 +361,9 @@ const BtnBookings = (props) => {
                 />
               </CCol>
               <CCol xs>
-                <h2
-                value={roomId}
-                onChange={(e) => setroomId(e.target.value)}
-                >{name}</h2>
+                <h2 value={roomId} onChange={(e) => setroomId(e.target.value)}>
+                  {name}
+                </h2>
                 <CTable>
                   <CTableBody>
                     <CTableRow>
@@ -386,7 +397,6 @@ const BtnBookings = (props) => {
               </CCol>
             </CRow>
             <CRow className="g-3 m-3">
-              
               <CCol xs>
                 <label htmlFor="from-date" className=" mb-2">
                   Check in
@@ -440,11 +450,6 @@ const BtnBookings = (props) => {
                 {errors.customerName?.type === "required" && (
                   <p className="text-danger mt-2">customerName is required</p>
                 )}
-                {errors.customerName?.type === "maxLength" && (
-                  <p className="text-danger mt-2">
-                    FullName not than 24 number
-                  </p>
-                )}
                 {errors.customerName?.type === "pattern" && (
                   <p className="text-danger mt-2">
                     FullName does not contain special characters
@@ -490,53 +495,25 @@ const BtnBookings = (props) => {
                   {...register("roomId", {
                     required: true,
                   })}
-                 
-                >Customer confirms booking: {name}</CModalTitle>
+                >
+                  Customer confirms booking: {name}
+                </CModalTitle>
               </CCol>
             </CRow>
-            <CRow className="g-3 m-3">
-                  <CCol xs>
-                    <label htmlFor="formGroupExampleInput3" className=" mb-2">
-                      Service orders
-                    </label>
-                    <CFormSelect
-                      color="success"
-                      size="md"
-                      className="mb-3"
-                      aria-label="Large select example"
-                      // {...register("roomTypeId", { required: true })}
-                      // ontChange={(e) => setTypeRoom(e.target.value)}
-                    >
-                      <option>Please choose service</option>
-                      {dataService.map((item) => {
-                        return (
-                          <>
-                            {" "}
-                            <option key={item.id}>{item.name}</option>
-                          </>
-                        );
-                      })}
-                    </CFormSelect>
-                  </CCol>
-                  <CCol xs>
-                    <label htmlFor="formGroupExampleInput1" className=" mb-2">
-                      Number of service
-                    </label>
-                    <input
-                      type="number"
-                      id="formGroupExampleInput1"
-                      className="form-control"
-                      placeholder="Number of service"
-                    />
-                  </CCol>
-                </CRow>
+
             <CRow className="g-3 m-3">
               <CCol xs>
-                <p>Number of day: 0</p>
+                <p>Number of day: {result ? result : 0}</p>
               </CCol>
               <CCol xs>
                 <p>Price per day: {`${datatypeRoom.price} VNĐ `}</p>
-                <p>Total Price to be said: Rs0</p>
+                <p>
+                  Total Price to be said:{" "}
+                  {result * datatypeRoom.price
+                    ? result * datatypeRoom.price
+                    : 0}{" "}
+                  VNĐ
+                </p>
               </CCol>
             </CRow>
 

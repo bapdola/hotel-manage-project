@@ -10,7 +10,7 @@ export const AdminLoginAction = ({ username, password }) => {
       const res = await ApiCaller("login", "POST", { username, password });
       if (
         (res.status === 200 && res.data.role === "Admin") ||
-        res.data.role === "Root"
+        (res.status === 200 && res.data.role === "Root")
       ) {
         cookie.save("ADMIN_DATA", res.data);
         dispatch({ type: a.LOGIN_ADMIN, payload: res.data.Token });
