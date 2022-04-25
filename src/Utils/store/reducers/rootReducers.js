@@ -7,7 +7,7 @@ import HotelReducer from "./HotelReducer";
 import listServiceReducer from "./ServiceReducer";
 
 const rootReducer = combineReducers({
-  bookroom:listBookRoomReducer,
+  bookroom: listBookRoomReducer,
   room: listRoomReducer,
   adminLogin: LoginAdmin,
   service: listServiceReducer,

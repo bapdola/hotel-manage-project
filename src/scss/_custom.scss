@@ -218,10 +218,12 @@ h6 {
 .banner {
   border-radius: 3px;
   display: inline-block;
-  background: linear-gradient(90deg,
-      rgba(2, 0, 36, 0.534) 0%,
-      rgba(9, 9, 121, 0.534) 45%,
-      rgba(0, 213, 255, 0.568) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0.534) 0%,
+    rgba(9, 9, 121, 0.534) 45%,
+    rgba(0, 213, 255, 0.568) 100%
+  );
   color: var(--mainWhite);
   padding: 2rem 1rem;
   text-align: center;
@@ -437,7 +439,11 @@ h6 {
 
 .room-info {
   font-family: "Segoe UI Light";
-  background: linear-gradient(71deg, rgba(210, 108, 25, 0.741) 0%, rgba(184, 12, 23, 0.682) 100%);
+  background: linear-gradient(
+    71deg,
+    rgba(210, 108, 25, 0.741) 0%,
+    rgba(184, 12, 23, 0.682) 100%
+  );
   text-transform: capitalize;
   padding: 0rem 0;
   font-size: 20px;
@@ -449,7 +455,11 @@ h6 {
 
 .room-infox {
   font-family: "Segoe UI Light";
-  background: linear-gradient(48deg, rgba(25, 210, 198, 0.511) 0%, rgba(12, 8, 97, 0.755) 100%);
+  background: linear-gradient(
+    48deg,
+    rgba(25, 210, 198, 0.511) 0%,
+    rgba(12, 8, 97, 0.755) 100%
+  );
   text-transform: capitalize;
   padding: 0rem 0;
   font-size: 20px;
@@ -550,7 +560,6 @@ h6 {
 }
 
 @media screen and (min-width: 992px) {
-
   .single-room-images,
   .single-room-info,
   .room-extras {
@@ -699,4 +708,8 @@ h6 {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+.pagination {
+  margin-left: 25rem;
+  margin-top: 1.5rem;
 }

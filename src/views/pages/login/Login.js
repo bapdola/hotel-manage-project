@@ -3,8 +3,7 @@ import "./login.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { Link } from
- "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserLoginAction } from "src/Utils/store/action/adminLoginAction";
 import { Navigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
