@@ -24,22 +24,28 @@ import PopupDelete from "./popupDelete";
 export default function Rooms() {
   const dispatch = useDispatch();
 
-  const dataType = useSelector((state) => state.room.typeRoom);
+   useEffect(() => {
+    dispatch(FetchDataRoom());
+  }, [dispatch]);
+
+  const data = useSelector((state) => state.room.rooms);
+  console.log("dữ liệu nhận về",data);
+
+
+
+
 
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
   }, [dispatch]);
+  const dataType = useSelector((state) => state.room.typeRoom);
 
-  const data = useSelector((state) => state.room.rooms);
+
 
   const dataSort =
     data.sort(function (a, b) {
       return a.status - b.status;
     }) || {};
-
-  useEffect(() => {
-    dispatch(FetchDataRoom());
-  }, [dispatch]);
 
   return (
     <>
@@ -59,7 +65,7 @@ export default function Rooms() {
           dataSort.map((item) => {
             return (
               <CCol xs key={item.id}>
-                <CCard textColor="primary" className="h-100'">
+                <CCard textColor="primary" className="h-100">
                   <CCardImage orientation="top" src={img1} />
                   <CCardBody>
                     <CCardTitle>
@@ -76,7 +82,7 @@ export default function Rooms() {
                         )}
                       </div>
                     </CCardTitle>
-                    <CCardText>{item.price}</CCardText>
+                    <CCardText className="price">{item.price}</CCardText>
 
                     {dataType.map((type) => {
                       return (

@@ -3,6 +3,7 @@ import defaultImg from "../../assets/images/react.jpg";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import BtnBookings from "./btnBooking";
+import BtnUpdate from "./btnUpdateBooking";
 import {
   FetchDataRoom,
   FetchDataTypeRoom,
@@ -54,12 +55,18 @@ export default function RoomList() {
                       </div>
                       <div>
                         {" "}
-                        <BtnBookings
+                        
+                        {item.status===0 ? <BtnBookings
                           id={item.id}
                           name={item.name}
                           status={item.status}
                           typeRoom={item.roomTypeId}
-                        />
+                        />: <BtnUpdate
+                        id={item.id}
+                        name={item.name}
+                        status={item.status}
+                        typeRoom={item.roomTypeId}
+                      /> }
                       </div>
                     </div>
                     <div>
@@ -69,7 +76,6 @@ export default function RoomList() {
                         <h4 className="room-infox"> {item.name}</h4>
                       )}
                     </div>
-                    {/* <h6 >{item.name}</h6> */}
                   </article>
                 </div>
               );

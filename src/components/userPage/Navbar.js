@@ -42,7 +42,7 @@ const Navbar = () => {
             <FaAlignRight className="nav-icon" />
           </button>
         </div>
-        <ul className={isOpen ? "nav-links show-nav" : "nav-links"}>
+        <ul className={isOpen ? "nav-links show-nav" : "nav-links" }>
           <li>
             <Link to="/">Home</Link>
           </li>
