@@ -7,7 +7,7 @@ import {
   CTableHead,
   CTableHeaderCell,
 } from "@coreui/react";
-import { BookingFetchData } from "src/Utils/store/action/bookingAction";
+import { FetchDataBookRoom } from "src/Utils/store/action/bookroomAction";
 import CIcon from "@coreui/icons-react";
 import {
   cilCloudUpload,
@@ -29,7 +29,7 @@ function Bookings() {
   const data = useSelector((state) => state.booking.bookings);
 
   useEffect(() => {
-    dispatch(BookingFetchData());
+    dispatch(FetchDataBookRoom());
   }, [dispatch]);
 
   return (

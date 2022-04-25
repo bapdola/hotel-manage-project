@@ -51,7 +51,7 @@ const PopupUpdate = (props) => {
         shape="rounded-pill"
         color="info"
         variant="outline"
-        className="me-md-2 "
+        size="sm"
         onClick={() => setVisibleLg(!visibleLg)}
       >
         Update

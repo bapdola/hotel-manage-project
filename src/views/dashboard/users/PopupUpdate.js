@@ -15,7 +15,7 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { UpdateDataUser } from "src/Utils/store/action/userAction";
@@ -66,7 +66,7 @@ const PopupUpdate = (props) => {
 
   return (
     <>
-      <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
+      <CButton  color="warning" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Edit
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>

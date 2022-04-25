@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import PopupUpdate from "./PopupUpdate";
+import PopupUpdate from "./popupadd";
 
 import {
   CTable,
@@ -8,11 +8,9 @@ import {
   CTableRow,
   CTableDataCell,
   CTableHeaderCell,
-  CButton,
-  CButtonGroup,
 } from "@coreui/react";
 import PopupDelete from "./PopupDelete";
-import PopupAdd from "./PopupAdd";
+import PopupAdd from "./popupadd";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { FetchDataUser } from "src/Utils/store/action/userAction";
 import { LoadListRole } from "src/Utils/store/action/userAction";
@@ -65,7 +63,7 @@ function User() {
                     {dataRole.map((role) => {
                       return (
                         <p key={role.id}>
-                          {role.id == item.roleId ? role.name : []}
+                          {role.id === item.roleId ? role.name : []}
                         </p>
                       );
                     })}
