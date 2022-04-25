@@ -1,12 +1,11 @@
-import React from "react";
 import axios from "axios";
 import * as Config from "./Config";
 import cookie from "react-cookies";
 
-export default async function ApiCaller(endpoint, method = "GET", body) {
+export default async function ApiCaller(endpoint, method = "GET", body, ) {
   try {
-    const loginData = cookie.load("ADMIN_DATA") || {}; // if undefined -> {}
-    const token = loginData.Token; // undefined.Token nên nó lỗi
+    const loginData = cookie.load("ADMIN_DATA") || {}; 
+    const token = loginData.Token; 
     let res = await axios({
       method: method,
       url: `${Config.API_URL}/${endpoint}`,

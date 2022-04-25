@@ -1,15 +1,17 @@
 import { combineReducers } from "redux";
 import listRoomReducer from "./RoomReducer";
-import listServiceReducer from "./ServiceReducer";
+import listBookRoomReducer from "./BookRoomReducer";
 import LoginAdmin from "./loginAdminReducer";
-import UsersReducer from "./UserReducers";
+import listUserReducer from "./UserReducers";
 import HotelReducer from "./HotelReducer";
+import listServiceReducer from "./ServiceReducer";
 
 const rootReducer = combineReducers({
+  bookroom: listBookRoomReducer,
   room: listRoomReducer,
   adminLogin: LoginAdmin,
   service: listServiceReducer,
-  user: UsersReducer,
+  user: listUserReducer,
   hotel: HotelReducer,
 });
 

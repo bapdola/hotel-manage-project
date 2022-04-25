@@ -15,34 +15,25 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { UpdateDataUser } from "src/Utils/store/action/userAction";
+import { AddDataUser } from "src/Utils/store/action/userAction";
 import { useForm } from "react-hook-form";
-import PropTypes from "prop-types";
+import { formatDate } from "../../../Utils/DateTme/dateTime";
+import { cilReload } from "@coreui/icons";
 
-const PopupUpdate = (props) => {
+const PopupAdd = () => {
+  const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
 
-  const {
-    nameUser,
-    Password,
-    FullName,
-    BirtDate,
-    Adress,
-    Phone,
-    RoleId,
-    userId,
-  } = props;
-
-  const [username, setUserName] = useState(nameUser);
-  const [password, setPassword] = useState(Password);
-  const [fullName, setFullName] = useState(FullName);
-  const [birtDate, setBirthday] = useState(BirtDate);
-  const [adress, setAdress] = useState(Adress);
-  const [phone, setPhone] = useState(Phone);
-  const [roleId, setRoleId] = useState(RoleId);
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [birtDate, setBirthday] = useState("");
+  const [adress, setAdress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [roleId, setRoleId] = useState("");
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state.user.roles);
@@ -58,20 +49,31 @@ const PopupUpdate = (props) => {
   });
 
   const handleOnSubmit = (data) => {
-    if (userId && data) {
-      dispatch(UpdateDataUser(data, userId));
+    if (data) {
+      dispatch(AddDataUser(data));
     }
+    setVisibleLg(false);
+  };
+  const handleReset = () => {
+    reset({});
+    setUserName("");
+    setPassword("");
+    setFullName("");
+    setBirthday("");
+    setAdress("");
+    setPhone("");
+    setRoleId("");
     setVisibleLg(false);
   };
 
   return (
     <>
-      <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
-        <VscAdd size={15} /> Edit
+      <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
+        <VscAdd size={15} /> Add
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={handleReset}>
         <CModalHeader>
-          <CModalTitle>Update Users</CModalTitle>
+          <CModalTitle>Add Users</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -105,7 +107,7 @@ const PopupUpdate = (props) => {
             <CCol md={6} className="position-relative">
               <CFormLabel htmlFor="validationTooltip02">Password</CFormLabel>
               <CFormInput
-                type="upPassword"
+                type="password"
                 id="validationTooltip02"
                 placeholder="Passwords"
                 value={password}
@@ -154,17 +156,17 @@ const PopupUpdate = (props) => {
               <CFormInput
                 type="date"
                 id="validationTooltip04"
-                placeholder="dd-mm-yyyy"
+                placeholder="Birthday"
                 value={birtDate}
                 {...register("birtDate", { required: true })}
                 onChange={(e) => setBirthday(e.target.value)}
               />
-              {errors.birtDate?.type === "required" && (
+              {errors.username?.type === "required" && (
                 <p className="text-danger mt-2">birtDate is required</p>
               )}
             </CCol>
             <CCol md={7} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip05">Address</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip05">Adress</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip05"
@@ -186,8 +188,8 @@ const PopupUpdate = (props) => {
                 value={phone}
                 {...register("phone", {
                   required: true,
-                  minLength: 11,
-                  maxLength: 11,
+                  minLength: 10,
+                  maxLength: 10,
                 })}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -197,13 +199,13 @@ const PopupUpdate = (props) => {
               {errors.phone?.type === "minLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone must be 11 characters long
+                  Number phone must be 10 characters long
                 </p>
               )}
               {errors.phone?.type === "maxLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone not than 11 characters long
+                  Number phone not than 10 characters long
                 </p>
               )}
             </CCol>
@@ -229,11 +231,11 @@ const PopupUpdate = (props) => {
             </CCol>
 
             <CModalFooter>
-              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton color="secondary" onClick={handleReset}>
                 Close
               </CButton>
               <CButton color="success" type="submit">
-                Update
+                Add
               </CButton>
             </CModalFooter>
           </CForm>
@@ -253,17 +255,7 @@ connect(
     roleId,
     adress,
   }),
-  UpdateDataUser
-)(PopupUpdate);
-PopupUpdate.propTypes = {
-  userId: PropTypes.node,
-  nameUser: PropTypes.node,
-  Password: PropTypes.node,
-  FullName: PropTypes.node,
-  BirtDate: PropTypes.node,
-  Adress: PropTypes.node,
-  Phone: PropTypes.node,
-  RoleId: PropTypes.node,
-  HotelId: PropTypes.node,
-};
-export default PopupUpdate;
+  AddDataUser
+)(PopupAdd);
+
+export default PopupAdd;

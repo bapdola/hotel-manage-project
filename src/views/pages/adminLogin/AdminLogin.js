@@ -75,13 +75,11 @@ const AdminLogin = () => {
               <button
                 type="submit"
                 id="btn_admin"
-                className="btn-success mb-2 mt-3"
+                className="btn-success  mb-2 mt-5"
               >
                 Login
               </button>
             </form>
-
-            {/* <Link to="/">Back home</Link> */}
           </div>
         </section>
       </div>

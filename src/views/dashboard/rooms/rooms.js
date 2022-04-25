@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import "./room.scss";
 import {
   CRow,
   CCol,
@@ -8,51 +8,103 @@ import {
   CCardBody,
   CCardTitle,
   CCardText,
-  CButton,
+  CBadge,
 } from "@coreui/react";
 import img1 from "../../../assets/images/react.jpg";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FetchData } from "src/Utils/store/action/roomAction";
-import { toast } from "react-toastify";
+import {
+  FetchDataRoom,
+  FetchDataTypeRoom,
+} from "src/Utils/store/action/roomAction";
+import PopupAdd from "./popupAdd";
+import PopupUpdate from "./popupUpdate";
+import PopupDelete from "./popupDelete";
 
 export default function Rooms() {
-  const navigate = useNavigate();
-  const AddRoom = () => {
-    navigate("/admin/addroom");
-  };
-
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.room.rooms);
-  const isLoggIn = useSelector((state) => state.adminLogin.currentUser);
+
+  const dataType = useSelector((state) => state.room.typeRoom);
 
   useEffect(() => {
-    dispatch(FetchData());
+    dispatch(FetchDataTypeRoom());
+  }, [dispatch]);
+
+  const data = useSelector((state) => state.room.rooms);
+
+  const dataSort =
+    data.sort(function (a, b) {
+      return a.status - b.status;
+    }) || {};
+
+  useEffect(() => {
+    dispatch(FetchDataRoom());
   }, [dispatch]);
 
   return (
     <>
-      <CRow xs={{ cols: 1 }} md={{ cols: 3 }} className="g-4">
-        {data.map((item, inx) => {
-          return (
-            <CCol xs key={inx}>
-              <CCard className="h-100">
-                <CCardImage orientation="top" src={img1} />
-                <CCardBody>
-                  <CCardTitle>{item.name}</CCardTitle>
-                  <CCardText>${item.price}</CCardText>
-                  <CCardText>Type: {item.type}</CCardText>
-                </CCardBody>
-              </CCard>
-            </CCol>
-          );
-        })}
+      <CRow xs={{ cols: 1 }} md={{ cols: 4 }} className="g-4">
+        <CCol xs>
+          <CCard className="h-100">
+            <CCardImage orientation="top" src={img1} />
+            <CCardBody>
+              <h1 className="Title">CREATE NEW ROOM</h1>
+            </CCardBody>
+            <CCardBody>
+              <PopupAdd />
+            </CCardBody>
+          </CCard>
+        </CCol>
+        {dataSort &&
+          dataSort.map((item) => {
+            return (
+              <CCol xs key={item.id}>
+                <CCard textColor="primary" className="h-100'">
+                  <CCardImage orientation="top" src={img1} />
+                  <CCardBody>
+                    <CCardTitle>
+                      <div className="Title">
+                        {item.name}
+                        {item.status === 1 ? (
+                          <CBadge shape="rounded-pill" color="success">
+                            Active
+                          </CBadge>
+                        ) : (
+                          <CBadge shape="rounded-pill" color="secondary">
+                            Empty
+                          </CBadge>
+                        )}
+                      </div>
+                    </CCardTitle>
+                    <CCardText>{item.price}</CCardText>
+
+                    {dataType.map((type) => {
+                      return (
+                        <div className="type" key={type.id}>
+                          {type.id === item.roomTypeId ? type.type : []}{" "}
+                          <span className="Title">
+                            {type.id === item.roomTypeId
+                              ? `${type.price}đ`
+                              : []}{" "}
+                          </span>
+                        </div>
+                      );
+                    })}
+
+                    <CCardBody>
+                      <PopupUpdate
+                        roomId={item?.id}
+                        nameRoom={item?.name}
+                        typeRoom={item?.roomType}
+                      />
+                      <PopupDelete roomId={item?.id} nameRoom={item?.name} />
+                    </CCardBody>
+                  </CCardBody>
+                </CCard>
+              </CCol>
+            );
+          })}
       </CRow>
-      <CCol xs={12} className="m-4 text-center">
-        <CButton type="submit" onClick={() => AddRoom()}>
-          AddRoom
-        </CButton>
-      </CCol>
     </>
   );
 }
