@@ -5,7 +5,6 @@ import {
   CFormInput,
   CButton,
   CCol,
-  CFormFeedback,
   CFormSelect,
 } from "@coreui/react";
 import {
@@ -24,7 +23,6 @@ import { formatDate } from "../../../Utils/DateTme/dateTime";
 import { cilReload } from "@coreui/icons";
 
 const PopupAdd = () => {
-  const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
 
   const [username, setUserName] = useState("");

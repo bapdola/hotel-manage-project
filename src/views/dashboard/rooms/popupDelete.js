@@ -31,9 +31,10 @@ const PopupDelete = (props) => {
         shape="rounded-pill"
         color="danger"
         variant="outline"
-        className="me-md-4"
+        size="sm"
         onClick={() => setVisible(!visible)}
-      >
+      > 
+
         Delete
       </CButton>
       <CModal size="lg" visible={visible} onClose={() => setVisible(false)}>

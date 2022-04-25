@@ -64,7 +64,6 @@ const PopupAdd = () => {
         color="success"
         shape="rounded-pill"
         variant="outline"
-        className="me-md-9"
         onClick={() => setVisibleLg(!visibleLg)}
       >
         CREATE

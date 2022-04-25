@@ -3,6 +3,7 @@ import defaultImg from "../../assets/images/react.jpg";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import BtnBookings from "./btnBooking";
+import BtnUpdate from "./btnUpdateBooking";
 import {
   FetchDataRoom,
   FetchDataTypeRoom,

@@ -15,7 +15,7 @@ const listBookRoomReducer = (state = initialState, action) => {
       return {
         ...state,
         bookrooms: state.bookrooms.map((item) =>
-          item.id == action.payload.id ? action.payload : item
+          item.id === action.payload.id ? action.payload : item
         ),
       };
     case a.DELETE_DATA_BOOKROOM:

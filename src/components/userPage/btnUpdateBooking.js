@@ -5,12 +5,9 @@ import defaultImg from "../../images/room-1.jpeg";
 import { useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { useForm } from "react-hook-form";
-import {
-  AddDataBookRoom,
-  UpdateDataBookRoom,
-} from "src/Utils/store/action/bookroomAction";
+import { AddDataBookRoom ,UpdateDataBookRoom } from "src/Utils/store/action/bookroomAction";
+import { FetchDataTypeRoom } from "src/Utils/store/action/roomAction";
 import { FetchDataService } from "src/Utils/store/action/serviceAction";
-import { differenceInDays, format } from "date-fns";
 
 import {
   CButton,
@@ -32,17 +29,21 @@ import {
 
 import { PropTypes } from "prop-types";
 
-const BtnBookings = (props) => {
+const BtnUpdate = (props) => {
   const [visibleXL, setVisibleXL] = useState(false);
   const [visibleXLD, setVisibleXLD] = useState(false);
 
   const { name, typeRoom, id, status } = props;
-
+  
   const [customerName, setcustomerName] = useState("");
   const [customerIdCard, setcustomerIdCard] = useState("");
   const [roomId, setroomId] = useState(id);
   const [toDate, settoDate] = useState("");
   const [fromDate, setfromDate] = useState("");
+
+  const navigate = useNavigate();
+
+
 
   const dispatch = useDispatch();
   const dataType = useSelector((state) => state.room.typeRoom) || [];
@@ -51,10 +52,9 @@ const BtnBookings = (props) => {
   // useEffect(() => {
   //   dispatch(FetchDataTypeRoom());
   // }, []);
-
+  //lấy data type room
   const datatypeRoom = dataType.find((item) => item.id === typeRoom) || {};
-
-  // take data service
+  // lấy service
   useEffect(() => {
     dispatch(FetchDataService());
   }, []);
@@ -75,31 +75,33 @@ const BtnBookings = (props) => {
     if (data) {
       dispatch(AddDataBookRoom(data));
     }
-    console.log("data", data);
+    console.log(data,"data");
     setVisibleXL(false);
   };
 
-  var result = differenceInDays(new Date(toDate), new Date(fromDate));
+
   return (
-    <>
-      <CButton
-        shape="rounded-pill"
-        color="danger"
-        size="lg"
-        variant="outline"
-        className="room-link"
-        onClick={() => {
-          setVisibleXL(!visibleXL);
-        }}
-      >
-        Booking
-      </CButton>
-      <CModal visible={visibleXL} onClose={() => setVisibleXL(false)}>
-        <CModalHeader>
-          <CModalTitle>Booking</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CForm onSubmit={handleSubmit(handleOnSubmit)}>
+   
+   
+        <>
+          <CButton
+            className="room-link"
+            shape="rounded-pill"
+            size="lg"
+            color="info"
+            variant="outline"
+            onClick={() => {
+              setVisibleXLD(!visibleXLD);
+            }}
+          >
+            Details
+          </CButton>
+          <CModal visible={visibleXLD} onClose={() => setVisibleXLD(false)}>
+            <CModalHeader>
+              <CModalTitle>Update Book</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+          <CForm  >
             <CRow className="g-3 mb-3">
               <CCol xs>
                 <img
@@ -110,6 +112,10 @@ const BtnBookings = (props) => {
                 />
               </CCol>
               <CCol xs>
+                <h2
+                // value={roomId}
+                onChange={(e) => setroomId(e.target.value)}
+                >{name}</h2>
                 <CTable>
                   <CTableBody>
                     <CTableRow>
@@ -143,6 +149,7 @@ const BtnBookings = (props) => {
               </CCol>
             </CRow>
             <CRow className="g-3 m-3">
+              
               <CCol xs>
                 <label htmlFor="from-date" className=" mb-2">
                   Check in
@@ -151,7 +158,7 @@ const BtnBookings = (props) => {
                   type="date"
                   id="validationTooltip04"
                   placeholder="fromDate"
-                  value={fromDate}
+                  // value={fromDate}
                   {...register("fromDate", { required: true })}
                   onChange={(e) => setfromDate(e.target.value)}
                 />
@@ -167,7 +174,7 @@ const BtnBookings = (props) => {
                   type="date"
                   id="validationTooltip04"
                   placeholder="toDate"
-                  value={toDate}
+                  // value={toDate}
                   {...register("toDate", { required: true })}
                   onChange={(e) => settoDate(e.target.value)}
                 />
@@ -191,9 +198,15 @@ const BtnBookings = (props) => {
                     pattern: /^[A-Za-z0-9 ]+$/i,
                   })}
                   onChange={(e) => setcustomerName(e.target.value)}
+                  required
                 />
                 {errors.customerName?.type === "required" && (
                   <p className="text-danger mt-2">customerName is required</p>
+                )}
+                {errors.customerName?.type === "maxLength" && (
+                  <p className="text-danger mt-2">
+                    FullName not than 24 number
+                  </p>
                 )}
                 {errors.customerName?.type === "pattern" && (
                   <p className="text-danger mt-2">
@@ -209,7 +222,7 @@ const BtnBookings = (props) => {
                   type="number"
                   id="validationTooltip06"
                   placeholder="ID Card"
-                  value={customerIdCard}
+                  // value={customerIdCard}
                   {...register("customerIdCard", {
                     required: true,
                     minLength: 9,
@@ -234,44 +247,75 @@ const BtnBookings = (props) => {
                 )}
               </CCol>
               <CCol md={12}>
-                <CFormInput
-                  type="hidden"
+                <CModalTitle
+                  type="text"
                   value={roomId}
                   {...register("roomId", {
                     required: true,
                   })}
-                />
+                 
+                >Customer confirms booking: {name}</CModalTitle>
               </CCol>
             </CRow>
+                <CRow className="g-3 m-3">
+                  <CCol xs>
+                    <label htmlFor="formGroupExampleInput3" className=" mb-2">
+                      Service orders
+                    </label>
+                    <CFormSelect
+                      color="success"
+                      size="md"
+                      className="mb-3"
+                      aria-label="Large select example"
+                    >
+                      <option>Please choose service</option>
+                      {dataService.map((item) => {
+                        return (
+                          <>
+                            {" "}
+                            <option key={item.id}>{item.name}</option>
+                          </>
+                        );
+                      })}
+                    </CFormSelect>
+                  </CCol>
+                  <CCol xs>
+                    <label htmlFor="formGroupExampleInput1" className=" mb-2">
+                      Number of service
+                    </label>
+                    <input
+                      type="number"
+                      id="formGroupExampleInput1"
+                      className="form-control"
+                      placeholder="Number of service"
+                    />
+                  </CCol>
+                </CRow>
 
-            <CRow className="g-3 m-3">
-              <CCol xs>
-                <p>Number of day: {result ? result : 0}</p>
-              </CCol>
-              <CCol xs>
-                <p>Price per day: {`${datatypeRoom.price} VNĐ `}</p>
-                <p>
-                  Total Price to be said:{" "}
-                  {result * datatypeRoom.price
-                    ? result * datatypeRoom.price
-                    : 0}{" "}
-                  VNĐ
-                </p>
-              </CCol>
-            </CRow>
+                <CRow className="g-3 m-3">
+                  <CCol xs>
+                    <p>Number of day: 0</p>
+                  </CCol>
+                  <CCol xs>
+                    <p>Price per day: {`${datatypeRoom.price} VNĐ `}</p>
+                    <p>Total Price to be said: Rs0</p>
+                  </CCol>
+                </CRow>
 
-            <CModalFooter>
-              <CButton color="success" type="submit">
-                Bookroom
-              </CButton>
-            </CModalFooter>
-          </CForm>
-        </CModalBody>
-      </CModal>
-    </>
+                <CModalFooter>
+                  <button type="submit" className="btn btn-success mb-2">
+                    Update Booking
+                  </button>
+                </CModalFooter>
+              </CForm>
+            </CModalBody>
+          </CModal>
+        </>
+      
+  
   );
 };
-BtnBookings.propTypes = {
+BtnUpdate.propTypes = {
   id: PropTypes.node,
   name: PropTypes.node,
   typeRoom: PropTypes.node,
@@ -286,6 +330,6 @@ connect(
     toDate,
   }),
   AddDataBookRoom
-)(BtnBookings);
+)(BtnUpdate);
 
-export default BtnBookings;
+export default BtnUpdate;

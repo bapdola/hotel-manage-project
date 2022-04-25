@@ -25,13 +25,17 @@ import ReactPaginate from "react-paginate";
 export default function Rooms() {
   const dispatch = useDispatch();
 
-  const dataType = useSelector((state) => state.room.typeRoom);
+  useEffect(() => {
+    dispatch(FetchDataRoom());
+  }, [dispatch]);
+
+  const data = useSelector((state) => state.room.rooms);
+  console.log("dữ liệu nhận về", data);
 
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
   }, [dispatch]);
-
-  const data = useSelector((state) => state.room.rooms);
+  const dataType = useSelector((state) => state.room.typeRoom);
 
   const dataSort =
     data.sort(function (a, b) {
