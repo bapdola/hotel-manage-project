@@ -13,15 +13,28 @@ import {
   CModalFooter,
   CRow,
 } from "@coreui/react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { CreateBill } from "src/Utils/store/action/billAction";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { VscCreditCard } from "react-icons/vsc";
+import { formatDate } from "../../../Utils/DateTme/dateTime";
+import {FetchDataTypeRoom,FetchDataRoom } from "../../../Utils/store/action/roomAction"
+import { differenceInDays, format } from "date-fns";
+
+
 
 const PopupPayment = (props) => {
-  const { idBookRoom } = props;
+  const {
+    roomId,
+    idBookRoom,
+    customerName,
+    customerIdCard,
+    roomName,
+    fromDate,
+    toDate,
+  } = props;
   const [visibleLg, setVisibleLg] = useState(false);
   // const data = useSelector((state) => state.id);
   const [bookRoomId, setbookRoomId] = useState("");
@@ -35,6 +48,28 @@ const PopupPayment = (props) => {
   };
 
   const dispatch = useDispatch();
+  const dataType =useSelector(state => state.room.typeRoom)||[] //fetch data type room
+  const dataRoom =useSelector(state => state.room.rooms)||[] // fetch data room
+
+
+  
+
+  const dataRoomcurrent =  dataRoom.find((item) => item.id === roomId); //đúng
+  
+  const roomType = dataType.find((item) => item.id === dataRoomcurrent.roomTypeId );
+
+
+  console.log("data type",roomType.price);
+  // console.log("data room",dataType.roomTypeId);
+
+
+  useEffect(() => {
+    dispatch(FetchDataTypeRoom())
+  },[])
+
+  useEffect(() => {
+    dispatch(FetchDataRoom())
+  },[])
 
   const {
     handleSubmit,
@@ -44,6 +79,8 @@ const PopupPayment = (props) => {
     mode: "onBlur",
     mode: "onChange",
   });
+
+  var result = differenceInDays(new Date(toDate), new Date(fromDate));
 
   return (
     <>
@@ -58,7 +95,7 @@ const PopupPayment = (props) => {
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Payment</CModalTitle>
+          <CModalTitle>Payment : {roomName}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -67,8 +104,6 @@ const PopupPayment = (props) => {
             onSubmit={handleSubmit(handleOnSubmit)}
           >
             <CCol md={12} color="success" className="position-relative">
-              <CModalTitle>Do you want to complete the payment ?</CModalTitle>
-
               <CFormInput
                 type="hidden"
                 value={idBookRoom}
@@ -81,7 +116,62 @@ const PopupPayment = (props) => {
                 required
               />
             </CCol>
-
+           
+            <CCol md={6} className="position-relative">
+              <CFormLabel htmlFor="validationTooltip02">Name</CFormLabel>
+              <CModalTitle
+                value=""
+                type="number"
+                id="validationTooltip02"
+                placeholder="Price"
+              >
+                {customerName}
+              </CModalTitle>
+            </CCol>
+            <CCol md={6} className="position-relative">
+              <CFormLabel htmlFor="validationTooltip02">ID Card</CFormLabel>
+              <CModalTitle
+                value=""
+                type="number"
+                id="validationTooltip02"
+                placeholder="Price"
+              >
+                {customerIdCard}
+              </CModalTitle>
+            </CCol>
+            <CCol md={6} className="position-relative">
+              <CFormLabel htmlFor="validationTooltip02">Checkin</CFormLabel>
+              <CModalTitle
+                value=""
+                type="date"
+                id="validationTooltip02"
+                placeholder="Price"
+              >
+                {formatDate(fromDate)}
+              </CModalTitle>
+            </CCol>
+            <CCol md={6} className="position-relative">
+              <CFormLabel htmlFor="validationTooltip02">Checkout</CFormLabel>
+              <CModalTitle
+                value=""
+                type="date"
+                id="validationTooltip02"
+                placeholder="Price"
+              >
+                {formatDate(toDate)}
+              </CModalTitle>
+            </CCol>
+            <CRow className="g-3 m-3">
+              <CCol xs={6}>
+                <p>Number of day: {result} </p>
+              </CCol>
+              <CCol xs={6}>
+                <p>Price per day: {roomType.price} </p>
+              </CCol>
+              <CCol xs={6}>
+                <h3>Total:{result*roomType.price} </h3>
+              </CCol>
+            </CRow>
             <CModalFooter>
               <CButton color="secondary" onClick={() => setVisibleLg(false)}>
                 Cancel
@@ -91,65 +181,6 @@ const PopupPayment = (props) => {
               </CButton>
             </CModalFooter>
           </CForm>
-          {/* <CCol md={6} className="position-relative">
-            <CFormLabel htmlFor="validationTooltip02">Name</CFormLabel>
-            <CModalTitle
-              value=""
-              type="number"
-              id="validationTooltip02"
-              placeholder="Price"
-            >
-              {" "}
-              Teen khach hang{" "}
-            </CModalTitle>
-          </CCol>
-          <CCol md={6} className="position-relative">
-            <CFormLabel htmlFor="validationTooltip02">ID Card</CFormLabel>
-            <CModalTitle
-              value=""
-              type="number"
-              id="validationTooltip02"
-              placeholder="Price"
-            >
-              {" "}
-              CMND{" "}
-            </CModalTitle>
-          </CCol>
-          <CCol md={6} className="position-relative">
-            <CFormLabel htmlFor="validationTooltip02">Checkin</CFormLabel>
-            <CModalTitle
-              value=""
-              type="date"
-              id="validationTooltip02"
-              placeholder="Price"
-            >
-              {" "}
-              Ngay den{" "}
-            </CModalTitle>
-          </CCol>
-          <CCol md={6} className="position-relative">
-            <CFormLabel htmlFor="validationTooltip02">Checkout</CFormLabel>
-            <CModalTitle
-              value=""
-              type="date"
-              id="validationTooltip02"
-              placeholder="Price"
-            >
-              {" "}
-              Ngay di{" "}
-            </CModalTitle>
-          </CCol>
-          <CRow className="g-3 m-3">
-            <CCol xs={3}>
-              <p>Number of day: </p>
-            </CCol>
-            <CCol xs={4}>
-              <p>Price per day: </p>
-            </CCol>
-            <CCol xs={5}>
-              <p>Total: </p>
-            </CCol>
-          </CRow> */}
         </CModalBody>
       </CModal>
     </>
@@ -164,5 +195,12 @@ connect(
 )(PopupPayment);
 PopupPayment.propTypes = {
   idBookRoom: PropTypes.node,
+  customerName: PropTypes.node,
+  customerIdCard: PropTypes.node,
+  fromDate: PropTypes.node,
+  toDate: PropTypes.node,
+  roomName: PropTypes.node,
+  roomId: PropTypes.node,
+
 };
 export default PopupPayment;

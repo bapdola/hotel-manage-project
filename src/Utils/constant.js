@@ -42,3 +42,5 @@ export const GET_DATA_BOOKROOM = "GET_DATA_BOOKROOM";
 
 //bill
 export const CREATE_DATA_BILL = "CREATE_DATA_BILL";
+export const GET_DATA_BILL = "GET_DATA_BILL";
+
