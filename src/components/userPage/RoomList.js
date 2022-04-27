@@ -26,14 +26,14 @@ export default function RoomList() {
     dispatch(FetchDataTypeRoom());
   }, [dispatch]);
 
-  const dataSort = data.sort(function (a, b) {
-    return a.status - b.status;
-  });
+  // const dataSort = data.sort(function (a, b) {
+  //   return a.status - b.status;
+  // });
 
   const [pageNumber, setPageNumber] = useState(0);
-  const usersPerPage = 7;
+  const usersPerPage = 8;
   const pagesVisited = pageNumber * usersPerPage;
-  const displayRooms = dataSort
+  const displayRooms = data
     .slice(pagesVisited, pagesVisited + usersPerPage)
     .map((item) => {
       return (
@@ -62,11 +62,7 @@ export default function RoomList() {
               </div>
             </div>
             <div>
-              {item.status === 1 ? (
-                <h4 className="room-info">{item.name}</h4>
-              ) : (
-                <h4 className="room-infox"> {item.name}</h4>
-              )}
+              <h4 className="room-infox">{item.name}</h4>
             </div>
             {/* <h6 >{item.name}</h6> */}
           </article>
@@ -74,7 +70,7 @@ export default function RoomList() {
       );
     });
 
-  const pageCount = Math.ceil(dataSort.length / usersPerPage);
+  const pageCount = Math.ceil(data.length / usersPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);

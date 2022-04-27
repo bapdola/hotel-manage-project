@@ -274,8 +274,11 @@ h6 {
 /* End of Banner */
 /* Title */
 .section-title {
+  font-size: 40px;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  
 }
 
 .section-title h4 {
@@ -287,9 +290,14 @@ h6 {
 
 .section-title div {
   width: 5rem;
-  height: 5px;
-  margin: 0 auto;
-  background: var(--primaryColor);
+  height: 17px;
+  margin-top: 20px;
+
+  background: linear-gradient(
+    48deg,
+    rgba(25, 210, 198, 0.511) 0%,
+    rgba(12, 8, 97, 0.755) 100%
+  );
 }
 
 /* end of Title */
