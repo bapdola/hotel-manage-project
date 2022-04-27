@@ -21,6 +21,7 @@ import { useDispatch, useSelector, connect } from "react-redux";
 import { UpdateDataUser } from "src/Utils/store/action/userAction";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
+import { formatDateInput } from "../../../Utils/DateTme/dateTime";
 
 const PopupUpdate = (props) => {
   const [visibleLg, setVisibleLg] = useState(false);
@@ -39,13 +40,13 @@ const PopupUpdate = (props) => {
   const [username, setUserName] = useState(nameUser);
   const [password, setPassword] = useState(Password);
   const [fullName, setFullName] = useState(FullName);
-  const [birtDate, setBirthday] = useState(BirtDate);
+  const [birtDate, setBirthday] = useState(formatDateInput(BirtDate));
   const [adress, setAdress] = useState(Adress);
   const [phone, setPhone] = useState(Phone);
   const [roleId, setRoleId] = useState(RoleId);
 
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.user.roles);
+  const data = useSelector((state) => state.user.roles) || [];
 
   const {
     register,
@@ -66,7 +67,7 @@ const PopupUpdate = (props) => {
 
   return (
     <>
-      <CButton  color="warning" onClick={() => setVisibleLg(!visibleLg)}>
+      <CButton color="warning" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Edit
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
@@ -186,8 +187,8 @@ const PopupUpdate = (props) => {
                 value={phone}
                 {...register("phone", {
                   required: true,
-                  minLength: 11,
-                  maxLength: 11,
+                  minLength: 10,
+                  maxLength: 10,
                 })}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -197,13 +198,13 @@ const PopupUpdate = (props) => {
               {errors.phone?.type === "minLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone must be 11 characters long
+                  Number phone must be 10 characters long
                 </p>
               )}
               {errors.phone?.type === "maxLength" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Number phone not than 11 characters long
+                  Number phone not than 10 characters long
                 </p>
               )}
             </CCol>

@@ -34,7 +34,7 @@ function Bookings() {
   }, [dispatch]);
 
   const [pageNumber, setPageNumber] = useState(0);
-  const usersPerPage = 4;
+  const usersPerPage = 8;
   const pagesVisited = pageNumber * usersPerPage;
   const displayBookings = data
     .slice(pagesVisited, pagesVisited + usersPerPage)

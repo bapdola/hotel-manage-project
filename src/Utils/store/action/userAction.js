@@ -75,3 +75,19 @@ export const CurrentUserLogin = () => {
     }
   };
 };
+export const UpdateCurrentUserLogin = (data) => {
+  return async (dispatch) => {
+    try {
+      const res = await ApiCaller("users/userCurentLogin/update", "PUT", data);
+      if (res.status === 200) {
+        dispatch({
+          type: a.UPDATE_DATA_CURRENT_USERS,
+          payload: res.data.result,
+        });
+        toast.success("Update Successfully!!");
+      }
+    } catch (error) {
+      toast.error("Update failed!!");
+    }
+  };
+};
