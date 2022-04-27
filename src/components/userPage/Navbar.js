@@ -48,6 +48,9 @@ const Navbar = () => {
           <li>
             <Link to="/rooms">Rooms</Link>
           </li>
+          <li>
+            <a href="/bookings">Bookings</a>
+          </li>
           <li className="pl-3">
             <Link to="/">
               Hi!!:{" "}

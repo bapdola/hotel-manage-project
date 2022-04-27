@@ -5,7 +5,11 @@ import defaultImg from "../../images/room-1.jpeg";
 import { useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { useForm } from "react-hook-form";
-import { AddDataBookRoom ,UpdateDataBookRoom } from "src/Utils/store/action/bookroomAction";
+import {
+  AddDataBookRoom,
+  UpdateDataBookRoom,
+  FetchDataBookRoom,
+} from "src/Utils/store/action/bookroomAction";
 import { FetchDataTypeRoom } from "src/Utils/store/action/roomAction";
 import { FetchDataService } from "src/Utils/store/action/serviceAction";
 
@@ -30,11 +34,17 @@ import {
 import { PropTypes } from "prop-types";
 
 const BtnUpdate = (props) => {
+  const databookroom = useSelector((state) => state.bookroom.bookrooms) || [];
+  useEffect(() => {
+    dispatch(FetchDataBookRoom());
+  }, []);
+
+  console.log(databookroom);
   const [visibleXL, setVisibleXL] = useState(false);
   const [visibleXLD, setVisibleXLD] = useState(false);
 
   const { name, typeRoom, id, status } = props;
-  
+
   const [customerName, setcustomerName] = useState("");
   const [customerIdCard, setcustomerIdCard] = useState("");
   const [roomId, setroomId] = useState(id);
@@ -42,8 +52,6 @@ const BtnUpdate = (props) => {
   const [fromDate, setfromDate] = useState("");
 
   const navigate = useNavigate();
-
-
 
   const dispatch = useDispatch();
   const dataType = useSelector((state) => state.room.typeRoom) || [];
@@ -75,33 +83,30 @@ const BtnUpdate = (props) => {
     if (data) {
       dispatch(AddDataBookRoom(data));
     }
-    console.log(data,"data");
+    console.log(data, "data");
     setVisibleXL(false);
   };
 
-
   return (
-   
-   
-        <>
-          <CButton
-            className="room-link"
-            shape="rounded-pill"
-            size="lg"
-            color="info"
-            variant="outline"
-            onClick={() => {
-              setVisibleXLD(!visibleXLD);
-            }}
-          >
-            Details
-          </CButton>
-          <CModal visible={visibleXLD} onClose={() => setVisibleXLD(false)}>
-            <CModalHeader>
-              <CModalTitle>Update Book</CModalTitle>
-            </CModalHeader>
-            <CModalBody>
-          <CForm  >
+    <>
+      <CButton
+        className="room-link"
+        shape="rounded-pill"
+        size="lg"
+        color="info"
+        variant="outline"
+        onClick={() => {
+          setVisibleXLD(!visibleXLD);
+        }}
+      >
+        Details
+      </CButton>
+      <CModal visible={visibleXLD} onClose={() => setVisibleXLD(false)}>
+        <CModalHeader>
+          <CModalTitle>Update Book</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <CForm>
             <CRow className="g-3 mb-3">
               <CCol xs>
                 <img
@@ -113,9 +118,11 @@ const BtnUpdate = (props) => {
               </CCol>
               <CCol xs>
                 <h2
-                // value={roomId}
-                onChange={(e) => setroomId(e.target.value)}
-                >{name}</h2>
+                  // value={roomId}
+                  onChange={(e) => setroomId(e.target.value)}
+                >
+                  {name}
+                </h2>
                 <CTable>
                   <CTableBody>
                     <CTableRow>
@@ -149,7 +156,6 @@ const BtnUpdate = (props) => {
               </CCol>
             </CRow>
             <CRow className="g-3 m-3">
-              
               <CCol xs>
                 <label htmlFor="from-date" className=" mb-2">
                   Check in
@@ -247,72 +253,38 @@ const BtnUpdate = (props) => {
                 )}
               </CCol>
               <CCol md={12}>
-                <CModalTitle
-                  type="text"
-                  value={roomId}
-                  {...register("roomId", {
-                    required: true,
-                  })}
-                 
-                >Customer confirms booking: {name}</CModalTitle>
+                <CCol md={12}>
+                  <CFormInput
+                    type="hidden"
+                    value={roomId}
+                    {...register("roomId", {
+                      required: true,
+                    })}
+                  />
+                </CCol>
               </CCol>
             </CRow>
-                <CRow className="g-3 m-3">
-                  <CCol xs>
-                    <label htmlFor="formGroupExampleInput3" className=" mb-2">
-                      Service orders
-                    </label>
-                    <CFormSelect
-                      color="success"
-                      size="md"
-                      className="mb-3"
-                      aria-label="Large select example"
-                    >
-                      <option>Please choose service</option>
-                      {dataService.map((item) => {
-                        return (
-                          <>
-                            {" "}
-                            <option key={item.id}>{item.name}</option>
-                          </>
-                        );
-                      })}
-                    </CFormSelect>
-                  </CCol>
-                  <CCol xs>
-                    <label htmlFor="formGroupExampleInput1" className=" mb-2">
-                      Number of service
-                    </label>
-                    <input
-                      type="number"
-                      id="formGroupExampleInput1"
-                      className="form-control"
-                      placeholder="Number of service"
-                    />
-                  </CCol>
-                </CRow>
+            
 
-                <CRow className="g-3 m-3">
-                  <CCol xs>
-                    <p>Number of day: 0</p>
-                  </CCol>
-                  <CCol xs>
-                    <p>Price per day: {`${datatypeRoom.price} VNĐ `}</p>
-                    <p>Total Price to be said: Rs0</p>
-                  </CCol>
-                </CRow>
+            <CRow className="g-3 m-3">
+              <CCol xs>
+                <p>Number of day: 0</p>
+              </CCol>
+              <CCol xs>
+                <p>Price per day: {`${datatypeRoom.price} VNĐ `}</p>
+                <p>Total Price to be said: Rs0</p>
+              </CCol>
+            </CRow>
 
-                <CModalFooter>
-                  <button type="submit" className="btn btn-success mb-2">
-                    Update Booking
-                  </button>
-                </CModalFooter>
-              </CForm>
-            </CModalBody>
-          </CModal>
-        </>
-      
-  
+            <CModalFooter>
+              <button type="submit" className="btn btn-success mb-2">
+                Update Booking
+              </button>
+            </CModalFooter>
+          </CForm>
+        </CModalBody>
+      </CModal>
+    </>
   );
 };
 BtnUpdate.propTypes = {

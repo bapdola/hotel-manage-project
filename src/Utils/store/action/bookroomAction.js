@@ -19,7 +19,7 @@ export const AddDataBookRoom = (data) => {
       const res = await ApiCaller("bookroom/create", "POST", data);
       dispatch({ type: a.ADD_DATA_BOOKROOM, payload: res.data.result });
       toast.success("Successfully added new!!");
-      window.location.reload()
+      // window.location.reload();
     } catch (error) {
       toast.error("Add new failed!!");
     }
