@@ -12,13 +12,14 @@ import {
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { UpdateDataUser } from "src/Utils/store/action/userAction";
+import { UpdateCurrentUserLogin } from "src/Utils/store/action/userAction";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { CurrentUserLogin } from "src/Utils/store/action/userAction";
 import { LoadListRole } from "src/Utils/store/action/userAction";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { formatDateInput } from "../../../Utils/DateTme/dateTime";
 
 const Profile = () => {
   const [visibleLg, setVisibleLg] = useState(false);
@@ -26,8 +27,8 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const dataRole = useSelector((state) => state.user.roles);
-  const dataUserLogin = useSelector((state) => state.user.currentUserlogin);
+  const dataUserLogin =
+    useSelector((state) => state.user.currentUserlogin) || {};
 
   useEffect(() => {
     dispatch(CurrentUserLogin());
@@ -36,12 +37,11 @@ const Profile = () => {
   const [username, setUserName] = useState(dataUserLogin.username);
   const [password, setPassword] = useState(dataUserLogin.password);
   const [fullName, setFullName] = useState(dataUserLogin.fullName);
-  const [birtDate, setBirthday] = useState(dataUserLogin.birtDate);
+  const [birtDate, setBirthday] = useState(
+    formatDateInput(dataUserLogin.birtDate)
+  );
   const [adress, setAdress] = useState(dataUserLogin.adress);
   const [phone, setPhone] = useState(dataUserLogin.phone);
-  const [roleId, setRoleId] = useState(dataUserLogin.roleId);
-
-  console.log(dataRole);
 
   const {
     register,
@@ -53,16 +53,10 @@ const Profile = () => {
     mode: "onChange",
   });
 
-  useEffect(() => {
-    dispatch(LoadListRole());
-  }, [dispatch]);
-
   const handleOnSubmit = (data) => {
-    const id = dataUserLogin.id;
     if (data) {
-      dispatch(UpdateDataUser(data, id));
+      dispatch(UpdateCurrentUserLogin(data));
     }
-    navigate("/admin");
   };
 
   return (
@@ -179,8 +173,8 @@ const Profile = () => {
             value={phone}
             {...register("phone", {
               required: true,
-              minLength: 11,
-              maxLength: 11,
+              minLength: 10,
+              maxLength: 10,
             })}
             onChange={(e) => setPhone(e.target.value)}
           />
@@ -190,34 +184,14 @@ const Profile = () => {
           {errors.phone?.type === "minLength" && (
             <p className="text-danger mt-2">
               {" "}
-              Number phone must be 11 characters long
+              Number phone must be 10 characters long
             </p>
           )}
           {errors.phone?.type === "maxLength" && (
             <p className="text-danger mt-2">
               {" "}
-              Number phone not than 11 characters long
+              Number phone not than 10 characters long
             </p>
-          )}
-        </CCol>
-        <CCol md={4} className="position-relative">
-          <CFormLabel htmlFor="validationTooltip07">Roles</CFormLabel>
-          <CFormSelect
-            aria-label="Default select example"
-            {...register("roleId", { required: true })}
-            onChange={(e) => setRoleId(e.target.value)}
-          >
-            {dataRole &&
-              dataRole.map((item) => {
-                return (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                );
-              })}
-          </CFormSelect>
-          {errors.roleId?.type === "required" && (
-            <p className="text-danger mt-2">roleId is required</p>
           )}
         </CCol>
 
@@ -243,16 +217,15 @@ const Profile = () => {
 };
 
 connect(
-  ({ username, password, fullName, phone, birtDate, roleId, adress }) => ({
+  ({ username, password, fullName, phone, birtDate, adress }) => ({
     username,
     password,
     fullName,
     phone,
     birtDate,
-    roleId,
     adress,
   }),
-  UpdateDataUser
+  UpdateCurrentUserLogin
 )(Profile);
 
 export default Profile;

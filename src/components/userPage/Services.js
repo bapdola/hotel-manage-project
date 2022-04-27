@@ -12,7 +12,7 @@ const Services = () => {
 
   useEffect(() => {
     dispatch(FetchDataService());
-  }, [dispatch]);
+  }, []);
 
   return (
     <section className="services">
