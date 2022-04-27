@@ -3,7 +3,6 @@ export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
 export const LOGIN_USER = "LOGIN_USER";
 
-//Data Admin-----------
 //data room
 export const ADD_DATA_ROOM = "ADD_DATA_ROOM";
 export const UPDATE_DATA_ROOM = "UPDATE_DATA_ROOM";
@@ -34,7 +33,12 @@ export const ADD_DATA_HOTEL = "ADD_DATA_HOTEL";
 export const DELETE_DATA_HOTEL = "DELETE_DATA_HOTEL";
 export const UPDATE_DATA_HOTEL = "UPDATE_DATA_HOTEL";
 
+//data bookroom
 export const ADD_DATA_BOOKROOM = "ADD_DATA_BOOKROOM";
 export const UPDATE_DATA_BOOKROOM = "UPDATE_DATA_BOOKROOM";
 export const DELETE_DATA_BOOKROOM = "DELETE_DATA_BOOKROOM";
 export const GET_DATA_BOOKROOM = "GET_DATA_BOOKROOM";
+ 
+
+//bill
+export const CREATE_DATA_BILL = "CREATE_DATA_BILL";

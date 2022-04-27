@@ -30,6 +30,8 @@ const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
 const Home = React.lazy(() => import("./views/pages/home/Home"));
 const Rooms = React.lazy(() => import("./views/pages/rooms/Rooms"));
+const Bookings = React.lazy(() => import("./views/pages/booking/Booking"));
+
 const SingleRoom = React.lazy(() =>
   import("./views/pages/singleRoom/SingleRoom")
 );
@@ -53,6 +55,8 @@ const App = () => {
           <Route exact element={<ProtectedRoutes redirect="/login" />}>
             <Route exact path="/" name="Home Page" element={<Home />} />
             <Route exact path="/rooms" name="Page" element={<Rooms />} />
+            <Route exact path="/bookings" name="Page" element={<Bookings />} />
+
 
             <Route
               path="/rooms/single-room"
@@ -68,7 +72,7 @@ const App = () => {
         </Routes>
       </Suspense>{" "}
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}

@@ -52,7 +52,7 @@ const AppHeaderDropdown = () => {
           <CIcon icon={cilUser} className="me-2" />
           Profile
         </Link>
-        <CDropdownItem href="admin/login" onClick={handleLogOutAd}>
+        <CDropdownItem href="/admin/login" onClick={handleLogOutAd}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Logout
         </CDropdownItem>

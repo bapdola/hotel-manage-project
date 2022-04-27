@@ -15,10 +15,7 @@ function Dashboard() {
   return (
     <CRow xs={{ cols: 1 }} md={{ cols: 4 }} className="g-4 ">
       <CCol xs>
-        <CCard
-          className="h-100"
-          style={{ width: "18rem", backgroundColor: "#3399ff" }}
-        >
+        <CCard className="h-100" style={{ backgroundColor: "#3399ff" }}>
           <CCardBody>
             <CCardTitle>Room</CCardTitle>
             <CButton href="/admin/room" color="light">
@@ -28,10 +25,7 @@ function Dashboard() {
         </CCard>
       </CCol>
       <CCol xs>
-        <CCard
-          className="h-100"
-          style={{ width: "18rem", backgroundColor: "#f9b115" }}
-        >
+        <CCard className="h-100" style={{ backgroundColor: "#f9b115" }}>
           <CCardBody>
             <CCardTitle>User</CCardTitle>
             <CButton color="light" href="/admin/user">
@@ -41,10 +35,7 @@ function Dashboard() {
         </CCard>
       </CCol>
       <CCol xs>
-        <CCard
-          className="h-100"
-          style={{ width: "18rem", backgroundColor: "#2eb85c" }}
-        >
+        <CCard className="h-100" style={{ backgroundColor: "#2eb85c" }}>
           <CCardBody>
             <CCardTitle>Bookings</CCardTitle>
             <CButton color="light" href="/admin/bookings">
@@ -54,10 +45,7 @@ function Dashboard() {
         </CCard>
       </CCol>
       <CCol xs>
-        <CCard
-          className="h-100"
-          style={{ width: "18rem", backgroundColor: "#e55353" }}
-        >
+        <CCard className="h-100" style={{ backgroundColor: "#e55353" }}>
           <CCardBody>
             <CCardTitle>Services</CCardTitle>
             <CButton color="light" href="/admin/services">

@@ -30,7 +30,6 @@ const Navbar = () => {
     dispatch(AdminLogut());
   };
 
-
   return (
     <nav className="navbar">
       <div className="nav-center">
@@ -48,6 +47,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/rooms">Rooms</Link>
+          </li>
+          <li>
+            <a href="/bookings">Bookings</a>
           </li>
           <li className="pl-3">
             <Link to="/">
