@@ -2,6 +2,7 @@
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
 export const LOGIN_USER = "LOGIN_USER";
+export const UPDATE_DATA_CURRENT_USERS = "UPDATE_DATA_CURRENT_USERS";
 
 //data room
 export const ADD_DATA_ROOM = "ADD_DATA_ROOM";

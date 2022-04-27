@@ -1,4 +1,4 @@
-import React,{ useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   CForm,
   CFormLabel,
@@ -33,7 +33,7 @@ const PopupAdd = () => {
   });
 
   const [name, setNameService] = useState("");
-  const [price, setPriceService] = useState("");
+  const [price, setPriceService] = useState(0);
 
   const dispatch = useDispatch();
 
