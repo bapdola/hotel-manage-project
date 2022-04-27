@@ -80,8 +80,6 @@ const AdminLogin = () => {
                 Login
               </button>
             </form>
-
-            {/* <Link to="/">Back home</Link> */}
           </div>
         </section>
       </div>

@@ -21,6 +21,7 @@
   border-radius: 5px;
   border-top: 5px solid #112f42;
   border-bottom: 8px solid #112f42;
+  font-size: 16px;
 
   margin: 0 auto;
   position: relative;
@@ -46,7 +47,7 @@
   margin-bottom: 2px;
   margin-top: 5px;
 
-  font-size: 14px;
+  font-size: 16px;
   font-family: Montserrat;
   padding: 0 20px 0 20px;
   outline: none;

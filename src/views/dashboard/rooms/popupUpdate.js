@@ -102,7 +102,7 @@ const PopupUpdate = (props) => {
                 className="mb-3"
                 aria-label="Large select example"
                 {...register("roomTypeId", { required: true })}
-                ontChange={(e) => setTypeRoom(e.target.value)}
+                onChange={(e) => setTypeRoom(e.target.value)}
               >
                 {/* <option>Please choose type room</option> */}
                 {dataType.map((item) => {
