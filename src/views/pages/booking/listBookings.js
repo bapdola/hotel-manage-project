@@ -40,6 +40,8 @@ function Bookings() {
           <CTableDataCell>
             <PopupPayment
               idBookRoom={item.id}
+              roomId={item.roomId}
+
               toDate={item.toDate}
               fromDate={item.fromDate}
               roomName={item.roomName}

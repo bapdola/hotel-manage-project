@@ -3,7 +3,6 @@ import defaultImg from "../../assets/images/react.jpg";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import BtnBookings from "./btnBooking";
-import BtnUpdate from "./btnUpdateBooking";
 import {
   FetchDataRoom,
   FetchDataTypeRoom,
@@ -15,6 +14,7 @@ export default function RoomList() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.room.rooms);
+
 
   useEffect(() => {
     dispatch(FetchDataRoom());
@@ -52,17 +52,21 @@ export default function RoomList() {
                 })}
               </div>
               <div>
-                {" "}
-                <BtnBookings
+
+                {" "} <BtnBookings
+
                   id={item.id}
                   name={item.name}
                   status={item.status}
                   typeRoom={item.roomTypeId}
                 />
+
+                
               </div>
             </div>
             <div>
-              <h4 className="room-infox">{item.name}</h4>
+            <h4 className="room-infox">{item.name}</h4>
+
             </div>
             {/* <h6 >{item.name}</h6> */}
           </article>

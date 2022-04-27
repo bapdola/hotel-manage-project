@@ -4,6 +4,18 @@ import { toast } from "react-toastify";
 
 import * as a from "../../constant";
 
+
+export const FetchDataBill = () => {
+  return async (dispatch) => {
+    try {
+      const res = await ApiCaller("bill/findAll", "GET", null);
+      dispatch({ type: a.GET_DATA_BILL, payload: res.data.result });;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const CreateBill = (data) => {
   return async (dispatch) => {
     try {
