@@ -13,17 +13,18 @@ import {
   CModalFooter,
   CRow,
 } from "@coreui/react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { CreateBill } from "src/Utils/store/action/billAction";
+import { CreateBill, FetchDataBill } from "src/Utils/store/action/billAction";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { VscCreditCard } from "react-icons/vsc";
 import { formatDate } from "../../../Utils/DateTme/dateTime";
-import {FetchDataTypeRoom,FetchDataRoom } from "../../../Utils/store/action/roomAction"
+import {
+  FetchDataTypeRoom,
+  FetchDataRoom,
+} from "../../../Utils/store/action/roomAction";
 import { differenceInDays, format } from "date-fns";
-
-
 
 const PopupPayment = (props) => {
   const {
@@ -48,28 +49,28 @@ const PopupPayment = (props) => {
   };
 
   const dispatch = useDispatch();
-  const dataType =useSelector(state => state.room.typeRoom)||[] //fetch data type room
-  const dataRoom =useSelector(state => state.room.rooms)||[] // fetch data room
+  const dataType = useSelector((state) => state.room.typeRoom) || []; //fetch data type room
+  const dataRoom = useSelector((state) => state.room.rooms) || []; // fetch data room
 
+  const dataRoomcurrent = dataRoom.find((item) => item.id === roomId) || {}; //đúng
 
+  const roomType = dataType.find((item) => item.id === dataRoomcurrent.roomTypeId) || {};
+
+  const dataInfobill = useSelector((state) => state.bill.infobill)||[];
   
-
-  const dataRoomcurrent =  dataRoom.find((item) => item.id === roomId); //đúng
-  
-  const roomType = dataType.find((item) => item.id === dataRoomcurrent.roomTypeId );
-
-
-  console.log("data type",roomType.price);
-  // console.log("data room",dataType.roomTypeId);
-
+  console.log("data room",dataInfobill);
 
   useEffect(() => {
-    dispatch(FetchDataTypeRoom())
-  },[])
+    dispatch(FetchDataTypeRoom());
+  }, []);
 
   useEffect(() => {
-    dispatch(FetchDataRoom())
-  },[])
+    dispatch(FetchDataRoom());
+  }, []);
+
+  useEffect(() => {
+    dispatch(FetchDataBill());
+  }, []);
 
   const {
     handleSubmit,
@@ -93,9 +94,9 @@ const PopupPayment = (props) => {
       >
         Payment <VscCreditCard size={15} />
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Payment : {roomName}</CModalTitle>
+          <CModalTitle>Payment : {customerName}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -116,7 +117,7 @@ const PopupPayment = (props) => {
                 required
               />
             </CCol>
-           
+
             <CCol md={6} className="position-relative">
               <CFormLabel htmlFor="validationTooltip02">Name</CFormLabel>
               <CModalTitle
@@ -125,7 +126,7 @@ const PopupPayment = (props) => {
                 id="validationTooltip02"
                 placeholder="Price"
               >
-                {customerName}
+               {roomName}
               </CModalTitle>
             </CCol>
             <CCol md={6} className="position-relative">
@@ -169,15 +170,15 @@ const PopupPayment = (props) => {
                 <p>Price per day: {roomType.price} </p>
               </CCol>
               <CCol xs={6}>
-                <h3>Total:{result*roomType.price} </h3>
+                <h3>Total:{result * roomType.price} </h3>
               </CCol>
             </CRow>
             <CModalFooter>
-              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton size="sm" shape="rounded-pill" variant="ghost" color="secondary" onClick={() => setVisibleLg(false)}>
                 Cancel
               </CButton>
-              <CButton size="lg" color="success" type="submit">
-                Pay
+              <CButton size="lg" color="success" type="submit" shape="rounded-pill" variant="outline">
+                Payment
               </CButton>
             </CModalFooter>
           </CForm>
@@ -201,6 +202,5 @@ PopupPayment.propTypes = {
   toDate: PropTypes.node,
   roomName: PropTypes.node,
   roomId: PropTypes.node,
-
 };
 export default PopupPayment;

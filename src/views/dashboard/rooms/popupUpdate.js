@@ -48,7 +48,7 @@ const PopupUpdate = (props) => {
   return (
     <>
       <CButton
-        shape="rounded-pill"
+        shape="rounded"
         color="info"
         variant="outline"
         size="sm"
