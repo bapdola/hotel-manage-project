@@ -35,8 +35,6 @@ const PopupAdd = () => {
 
   const dataType = useSelector((state) => state.room.typeRoom);
 
-  console.log(dataType);
-
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
   }, [dispatch]);

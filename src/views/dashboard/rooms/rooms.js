@@ -30,7 +30,6 @@ export default function Rooms() {
   }, [dispatch]);
 
   const data = useSelector((state) => state.room.rooms);
-  console.log("dữ liệu nhận về", data);
 
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
