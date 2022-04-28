@@ -28,7 +28,7 @@ const PopupDelete = (props) => {
   return (
     <>
       <CButton
-        shape="rounded-pill"
+        shape="rounded"
         color="danger"
         variant="outline"
         size="sm"

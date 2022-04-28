@@ -52,7 +52,7 @@ function User() {
               );
             })}
           </CTableDataCell>
-          <CTableDataCell className="text-center">
+          <CTableDataCell className="text-center" >
             <PopupUpdate
               userId={item?.id}
               nameUser={item?.username}
@@ -97,6 +97,9 @@ function User() {
         <CTableBody>{displayUsers}</CTableBody>
       </CTable>
       <ReactPaginate
+      color="success"
+      size="sm"
+      aria-label="Page navigation example"
         nextLabel="next >"
         onPageChange={changePage}
         pageRangeDisplayed={3}
