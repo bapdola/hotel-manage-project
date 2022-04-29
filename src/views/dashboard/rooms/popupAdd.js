@@ -60,8 +60,9 @@ const PopupAdd = () => {
     <>
       <CButton
         color="success"
-        shape="rounded-pill"
+        shape="rounded-bottom"
         variant="outline"
+        size="sm"
         onClick={() => setVisibleLg(!visibleLg)}
       >
         CREATE

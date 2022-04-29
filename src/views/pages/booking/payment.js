@@ -15,7 +15,7 @@ import {
 } from "@coreui/react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { CreateBill } from "src/Utils/store/action/billAction";
+import { CreateBill, FetchDataBill } from "src/Utils/store/action/billAction";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { VscCreditCard } from "react-icons/vsc";
@@ -54,11 +54,19 @@ const PopupPayment = (props) => {
 
   const dataRoomcurrent = dataRoom.find((item) => item.id === roomId) || {}; //đúng
 
+<<<<<<< HEAD
   const roomType =
     dataType.find((item) => item.id === dataRoomcurrent.roomTypeId) || {};
 
   // console.log("data type",roomType.price);
   console.log("data room", roomType.price);
+=======
+  const roomType = dataType.find((item) => item.id === dataRoomcurrent.roomTypeId) || {};
+
+  const dataInfobill = useSelector((state) => state.bill.infobill)||[];
+  
+  console.log("data room",dataInfobill);
+>>>>>>> b19128d2bc6c337e10aa4560ce53e1bc0a4c4bdb
 
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
@@ -66,6 +74,10 @@ const PopupPayment = (props) => {
 
   useEffect(() => {
     dispatch(FetchDataRoom());
+  }, []);
+
+  useEffect(() => {
+    dispatch(FetchDataBill());
   }, []);
 
   const {
@@ -90,9 +102,9 @@ const PopupPayment = (props) => {
       >
         Payment <VscCreditCard size={15} />
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Payment : {roomName}</CModalTitle>
+          <CModalTitle>Payment : {customerName}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -122,7 +134,7 @@ const PopupPayment = (props) => {
                 id="validationTooltip02"
                 placeholder="Price"
               >
-                {customerName}
+               {roomName}
               </CModalTitle>
             </CCol>
             <CCol md={6} className="position-relative">
@@ -170,11 +182,11 @@ const PopupPayment = (props) => {
               </CCol>
             </CRow>
             <CModalFooter>
-              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton size="sm" shape="rounded-pill" variant="ghost" color="secondary" onClick={() => setVisibleLg(false)}>
                 Cancel
               </CButton>
-              <CButton size="lg" color="success" type="submit">
-                Pay
+              <CButton size="lg" color="success" type="submit" shape="rounded-pill" variant="outline">
+                Payment
               </CButton>
             </CModalFooter>
           </CForm>

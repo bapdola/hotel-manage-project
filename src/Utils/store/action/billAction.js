@@ -5,16 +5,17 @@ import { toast } from "react-toastify";
 import * as a from "../../constant";
 
 
-export const FetchDataBill = () => {
+export const FetchDataBill = (id) => {
   return async (dispatch) => {
     try {
-      const res = await ApiCaller("bill/findAll", "GET", null);
-      dispatch({ type: a.GET_DATA_BILL, payload: res.data.result });;
+      const res = await ApiCaller(`bill/getTotalBill/${id}`, "GET", null);
+      dispatch({ type: a.GET_DATA_BILL, payload: res.data.inforBookroom });;
     } catch (error) {
       console.log(error);
     }
   };
-};
+};// lấy info bill khi chưa tính tiền
+
 
 export const CreateBill = (data) => {
   return async (dispatch) => {

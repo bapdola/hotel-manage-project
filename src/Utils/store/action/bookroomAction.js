@@ -12,7 +12,7 @@ export const FetchDataBookRoom = () => {
       console.log(error);
     }
   };
-};
+}; //lấy data bookroom  hiển thị table 
 export const AddDataBookRoom = (data) => {
   return async (dispatch) => {
     try {
