@@ -66,7 +66,7 @@ const Profile = () => {
         noValidate
         onSubmit={handleSubmit(handleOnSubmit)}
       >
-        <CCol md={6} className="position-relative">
+        <CCol md={7} className="position-relative">
           <CFormLabel htmlFor="validationTooltip01">User Name</CFormLabel>
           <CFormInput
             type="text"
@@ -89,7 +89,7 @@ const Profile = () => {
             </p>
           )}
         </CCol>
-        <CCol md={6} className="position-relative">
+        <CCol md={5} className="position-relative">
           <CFormLabel htmlFor="validationTooltip02">Password</CFormLabel>
           <CFormInput
             type="upPassword"
@@ -151,7 +151,7 @@ const Profile = () => {
           )}
         </CCol>
         <CCol md={7} className="position-relative">
-          <CFormLabel htmlFor="validationTooltip05">Adress</CFormLabel>
+          <CFormLabel htmlFor="validationTooltip05">Address</CFormLabel>
           <CFormInput
             type="text"
             id="validationTooltip05"

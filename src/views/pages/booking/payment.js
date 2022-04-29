@@ -54,11 +54,12 @@ const PopupPayment = (props) => {
 
   const dataRoomcurrent = dataRoom.find((item) => item.id === roomId) || {}; //đúng
 
-  const roomType = dataType.find((item) => item.id === dataRoomcurrent.roomTypeId) || {};
+  const roomType =
+    dataType.find((item) => item.id === dataRoomcurrent.roomTypeId) || {};
 
-  const dataInfobill = useSelector((state) => state.bill.infobill)||[];
-  
-  console.log("data room",dataInfobill);
+  const dataInfobill = useSelector((state) => state.bill.infobill) || [];
+
+  console.log("data room", dataInfobill);
 
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
@@ -126,7 +127,7 @@ const PopupPayment = (props) => {
                 id="validationTooltip02"
                 placeholder="Price"
               >
-               {roomName}
+                {roomName}
               </CModalTitle>
             </CCol>
             <CCol md={6} className="position-relative">
@@ -174,10 +175,22 @@ const PopupPayment = (props) => {
               </CCol>
             </CRow>
             <CModalFooter>
-              <CButton size="sm" shape="rounded-pill" variant="ghost" color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton
+                size="sm"
+                shape="rounded-pill"
+                variant="ghost"
+                color="secondary"
+                onClick={() => setVisibleLg(false)}
+              >
                 Cancel
               </CButton>
-              <CButton size="lg" color="success" type="submit" shape="rounded-pill" variant="outline">
+              <CButton
+                size="lg"
+                color="success"
+                type="submit"
+                shape="rounded-pill"
+                variant="outline"
+              >
                 Payment
               </CButton>
             </CModalFooter>
