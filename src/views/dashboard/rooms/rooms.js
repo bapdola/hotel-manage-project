@@ -45,6 +45,10 @@ export default function Rooms() {
     dispatch(FetchDataRoom());
   }, [dispatch]);
 
+  // const marginleft = {
+  // margin-left: '2px'
+  // }
+
   const [pageNumber, setPageNumber] = useState(0);
   const usersPerPage = 7;
   const pagesVisited = pageNumber * usersPerPage;
@@ -60,7 +64,7 @@ export default function Rooms() {
                 <div className="Title">
                   {item.name}
                   {item.status === 1 ? (
-                    <CBadge size="sm" shape="rounded-pill" color="success">
+                    <CBadge  size="sm" shape="rounded-pill" color="success">
                       Active
                     </CBadge>
                   ) : (
