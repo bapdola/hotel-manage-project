@@ -13,17 +13,18 @@ import {
   CModalFooter,
   CRow,
 } from "@coreui/react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { CreateBill } from "src/Utils/store/action/billAction";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { VscCreditCard } from "react-icons/vsc";
 import { formatDate } from "../../../Utils/DateTme/dateTime";
-import {FetchDataTypeRoom,FetchDataRoom } from "../../../Utils/store/action/roomAction"
+import {
+  FetchDataTypeRoom,
+  FetchDataRoom,
+} from "../../../Utils/store/action/roomAction";
 import { differenceInDays, format } from "date-fns";
-
-
 
 const PopupPayment = (props) => {
   const {
@@ -48,28 +49,24 @@ const PopupPayment = (props) => {
   };
 
   const dispatch = useDispatch();
-  const dataType =useSelector(state => state.room.typeRoom)||[] //fetch data type room
-  const dataRoom =useSelector(state => state.room.rooms)||[] // fetch data room
+  const dataType = useSelector((state) => state.room.typeRoom) || []; //fetch data type room
+  const dataRoom = useSelector((state) => state.room.rooms) || []; // fetch data room
 
+  const dataRoomcurrent = dataRoom.find((item) => item.id === roomId) || {}; //đúng
 
-  
+  const roomType =
+    dataType.find((item) => item.id === dataRoomcurrent.roomTypeId) || {};
 
-  const dataRoomcurrent =  dataRoom.find((item) => item.id === roomId); //đúng
-  
-  const roomType = dataType.find((item) => item.id === dataRoomcurrent.roomTypeId );
-
-
-  console.log("data type",roomType.price);
-  // console.log("data room",dataType.roomTypeId);
-
+  // console.log("data type",roomType.price);
+  console.log("data room", roomType.price);
 
   useEffect(() => {
-    dispatch(FetchDataTypeRoom())
-  },[])
+    dispatch(FetchDataTypeRoom());
+  }, []);
 
   useEffect(() => {
-    dispatch(FetchDataRoom())
-  },[])
+    dispatch(FetchDataRoom());
+  }, []);
 
   const {
     handleSubmit,
@@ -116,7 +113,7 @@ const PopupPayment = (props) => {
                 required
               />
             </CCol>
-           
+
             <CCol md={6} className="position-relative">
               <CFormLabel htmlFor="validationTooltip02">Name</CFormLabel>
               <CModalTitle
@@ -169,7 +166,7 @@ const PopupPayment = (props) => {
                 <p>Price per day: {roomType.price} </p>
               </CCol>
               <CCol xs={6}>
-                <h3>Total:{result*roomType.price} </h3>
+                <h3>Total:{result * roomType.price} </h3>
               </CCol>
             </CRow>
             <CModalFooter>
@@ -201,6 +198,5 @@ PopupPayment.propTypes = {
   toDate: PropTypes.node,
   roomName: PropTypes.node,
   roomId: PropTypes.node,
-
 };
 export default PopupPayment;

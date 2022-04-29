@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   CSidebar,
@@ -17,17 +17,30 @@ import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";
 
 import cookie from "react-cookies";
-
+import { useSelector, useDispatch } from "react-redux";
 // sidebar nav config
 import { _navRoot, _nav } from "../_nav";
 
 const AppSidebar = () => {
   let isAdminRoot = cookie.load("ADMIN_DATA") || {};
+  const dispatch = useDispatch();
+  const unfoldable = useSelector((state) => state.change.sidebarUnfoldable);
+  const sidebarShow = useSelector((state) => state.change.sidebarShow);
 
   return (
-    <CSidebar position="fixed">
+    <CSidebar
+      position="fixed"
+      unfoldable={unfoldable}
+      visible={sidebarShow}
+      onVisibleChange={(visible) => {
+        dispatch({ type: "set", sidebarShow: visible });
+      }}
+    >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <h3 className="pt-3">Admin Manage</h3>
+        <h3 className="pt-3 sidebar-brand-full">Admin Manage</h3>
+
+        {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} /> */}
+        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
@@ -40,7 +53,12 @@ const AppSidebar = () => {
           )}
         </SimpleBar>
       </CSidebarNav>
-      <CSidebarToggler className="d-none d-lg-flex" />
+      <CSidebarToggler
+        className="d-none d-lg-flex"
+        onClick={() =>
+          dispatch({ type: "set", sidebarUnfoldable: !unfoldable })
+        }
+      />
     </CSidebar>
   );
 };
