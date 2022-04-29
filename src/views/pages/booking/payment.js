@@ -12,6 +12,7 @@ import {
   CModalBody,
   CModalFooter,
   CRow,
+
   CTableDataCell,
   CTableRow,
   CTableBody,
@@ -20,10 +21,12 @@ import {
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { CreateBill, FetchDataBill } from "src/Utils/store/action/billAction";
+
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { VscCreditCard } from "react-icons/vsc";
 import { formatDate } from "../../../Utils/DateTme/dateTime";
+
 import {
   FetchDataTypeRoom,
   FetchDataRoom,
@@ -53,6 +56,7 @@ const PopupPayment = (props) => {
   };
 
   const dispatch = useDispatch();
+
   const dataBill = useSelector((state) => state.bill.bills) || {}; // fetch data room
 
   console.log("databill", dataBill);
@@ -74,7 +78,6 @@ const PopupPayment = (props) => {
     }
     setVisibleLg(!visibleLg);
   };
-
   return (
     <>
       <CButton
@@ -82,6 +85,7 @@ const PopupPayment = (props) => {
         color="success"
         variant="outline"
         shape="rounded-pill"
+
         onClick={handleClickShowInfor}
       >
         Payment <VscCreditCard size={15} />
@@ -232,5 +236,6 @@ PopupPayment.propTypes = {
   toDate: PropTypes.node,
   roomName: PropTypes.node,
   roomId: PropTypes.node,
+
 };
 export default PopupPayment;

@@ -19,6 +19,7 @@ const Rooms = () => {
             </Link>
           </Banner>
         </Hero>
+        <Title title="THE LIST OF ROOM"/>
         <RoomContainer />
       </>
     </>
