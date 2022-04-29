@@ -166,7 +166,7 @@ const PopupAdd = () => {
               )}
             </CCol>
             <CCol md={7} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip05">Address</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip05">Adress</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip05"
