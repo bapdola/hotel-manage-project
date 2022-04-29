@@ -49,29 +49,9 @@ const PopupPayment = (props) => {
   };
 
   const dispatch = useDispatch();
-  const dataType = useSelector((state) => state.room.typeRoom) || []; //fetch data type room
-  const dataRoom = useSelector((state) => state.room.rooms) || []; // fetch data room
+  const dataBill = useSelector((state) => state.bill.bills) || {}; // fetch data room
 
-  const dataRoomcurrent = dataRoom.find((item) => item.id === roomId) || {}; //đúng
-
-  const roomType =
-    dataType.find((item) => item.id === dataRoomcurrent.roomTypeId) || {};
-
-  const dataInfobill = useSelector((state) => state.bill.infobill) || [];
-
-  console.log("data room", dataInfobill);
-
-  useEffect(() => {
-    dispatch(FetchDataTypeRoom());
-  }, []);
-
-  useEffect(() => {
-    dispatch(FetchDataRoom());
-  }, []);
-
-  useEffect(() => {
-    dispatch(FetchDataBill());
-  }, []);
+  console.log("databill", dataBill);
 
   const {
     handleSubmit,
@@ -84,6 +64,13 @@ const PopupPayment = (props) => {
 
   var result = differenceInDays(new Date(toDate), new Date(fromDate));
 
+  const handleClickShowInfor = () => {
+    if (idBookRoom) {
+      dispatch(FetchDataBill(idBookRoom));
+    }
+    setVisibleLg(!visibleLg);
+  };
+
   return (
     <>
       <CButton
@@ -91,13 +78,18 @@ const PopupPayment = (props) => {
         color="success"
         variant="outline"
         shape="rounded-pill"
-        onClick={() => setVisibleLg(!visibleLg)}
+        onClick={handleClickShowInfor}
       >
         Payment <VscCreditCard size={15} />
       </CButton>
-      <CModal visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Payment : {customerName}</CModalTitle>
+          <CModalTitle>
+            Payment :{" "}
+            {dataBill &&
+              dataBill.inforBookroom &&
+              dataBill.inforBookroom.customerName}
+          </CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -119,61 +111,37 @@ const PopupPayment = (props) => {
               />
             </CCol>
 
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Name</CFormLabel>
-              <CModalTitle
-                value=""
-                type="number"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {roomName}
-              </CModalTitle>
-            </CCol>
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">ID Card</CFormLabel>
-              <CModalTitle
-                value=""
-                type="number"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {customerIdCard}
-              </CModalTitle>
-            </CCol>
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Checkin</CFormLabel>
-              <CModalTitle
-                value=""
-                type="date"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {formatDate(fromDate)}
-              </CModalTitle>
-            </CCol>
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Checkout</CFormLabel>
-              <CModalTitle
-                value=""
-                type="date"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {formatDate(toDate)}
-              </CModalTitle>
-            </CCol>
-            <CRow className="g-3 m-3">
-              <CCol xs={6}>
-                <p>Number of day: {result} </p>
-              </CCol>
-              <CCol xs={6}>
-                <p>Price per day: {roomType.price} </p>
-              </CCol>
-              <CCol xs={6}>
-                <h3>Total:{result * roomType.price} </h3>
-              </CCol>
-            </CRow>
+            {dataBill && dataBill.inforBookroom && (
+              <CRow className="g-3 m-3">
+                <CCol xs={6}>
+                  <h3>Id Card: {dataBill.inforBookroom.customerIdCard} </h3>
+                </CCol>
+                <CCol xs={6}>
+                  <h3>Name Room: {dataBill.inforBookroom.name} </h3>
+                </CCol>
+                <CCol xs={6}>
+                  <h5>
+                    From Date: {formatDate(dataBill.inforBookroom.fromDate)}{" "}
+                  </h5>
+                </CCol>
+                <CCol xs={6}>
+                  <h5>To Date: {formatDate(dataBill.inforBookroom.toDate)} </h5>
+                </CCol>
+                <CCol xs={6}>
+                  <h4>Type: {dataBill.inforBookroom.type} </h4>
+                </CCol>
+                <CCol xs={6}>
+                  <p>Price per day: {dataBill.inforBookroom.price} </p>
+                </CCol>
+                <CCol xs={5}>
+                  <h3>User book: {dataBill.inforUser} </h3>
+                </CCol>
+                <CCol xs={7}>
+                  <h3>Total: {dataBill.totalBill} </h3>
+                </CCol>
+              </CRow>
+            )}
+
             <CModalFooter>
               <CButton
                 size="sm"

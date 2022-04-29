@@ -14,10 +14,12 @@ import { RiAdminFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import "../../views/pages/login/login.css";
 import { CurrentUserLogin } from "src/Utils/store/action/userAction";
+import cookie from "react-cookies";
 
 const AppHeaderDropdown = () => {
   const dispatch = useDispatch();
   const dataUserLogin = useSelector((state) => state.user.currentUserlogin);
+  let isAdminRoot = cookie.load("ADMIN_DATA") || {};
 
   useEffect(() => {
     dispatch(CurrentUserLogin());
@@ -30,13 +32,25 @@ const AppHeaderDropdown = () => {
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         Hi!!{" "}
-        <span
-          style={{
-            color: "#2eb85c",
-          }}
-        >
-          {dataUserLogin.fullName}
-        </span>{" "}
+        {isAdminRoot.role === "Root" ? (
+          <span
+            style={{
+              color: "#2eb85c",
+            }}
+          >
+            Root Admin
+          </span>
+        ) : isAdminRoot.role === "Admin" ? (
+          <span
+            style={{
+              color: "#2eb85c",
+            }}
+          >
+            {dataUserLogin.fullName}
+          </span>
+        ) : (
+          []
+        )}{" "}
         <RiAdminFill size={20} />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
