@@ -12,14 +12,21 @@ import {
   CModalBody,
   CModalFooter,
   CRow,
+
+  CTableDataCell,
+  CTableRow,
+  CTableBody,
+  CTable,
 } from "@coreui/react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { CreateBill, FetchDataBill } from "src/Utils/store/action/billAction";
+
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { VscCreditCard } from "react-icons/vsc";
 import { formatDate } from "../../../Utils/DateTme/dateTime";
+
 import {
   FetchDataTypeRoom,
   FetchDataRoom,
@@ -49,6 +56,7 @@ const PopupPayment = (props) => {
   };
 
   const dispatch = useDispatch();
+
   const dataBill = useSelector((state) => state.bill.bills) || {}; // fetch data room
 
   console.log("databill", dataBill);
@@ -70,7 +78,6 @@ const PopupPayment = (props) => {
     }
     setVisibleLg(!visibleLg);
   };
-
   return (
     <>
       <CButton
@@ -78,14 +85,15 @@ const PopupPayment = (props) => {
         color="success"
         variant="outline"
         shape="rounded-pill"
+
         onClick={handleClickShowInfor}
       >
         Payment <VscCreditCard size={15} />
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
           <CModalTitle>
-            Payment :{" "}
+            Payment for{" "}
             {dataBill &&
               dataBill.inforBookroom &&
               dataBill.inforBookroom.customerName}
@@ -113,32 +121,77 @@ const PopupPayment = (props) => {
 
             {dataBill && dataBill.inforBookroom && (
               <CRow className="g-3 m-3">
-                <CCol xs={6}>
-                  <h3>Id Card: {dataBill.inforBookroom.customerIdCard} </h3>
-                </CCol>
-                <CCol xs={6}>
-                  <h3>Name Room: {dataBill.inforBookroom.name} </h3>
-                </CCol>
-                <CCol xs={6}>
-                  <h5>
-                    From Date: {formatDate(dataBill.inforBookroom.fromDate)}{" "}
-                  </h5>
-                </CCol>
-                <CCol xs={6}>
-                  <h5>To Date: {formatDate(dataBill.inforBookroom.toDate)} </h5>
-                </CCol>
-                <CCol xs={6}>
-                  <h4>Type: {dataBill.inforBookroom.type} </h4>
-                </CCol>
-                <CCol xs={6}>
-                  <p>Price per day: {dataBill.inforBookroom.price} </p>
-                </CCol>
-                <CCol xs={5}>
-                  <h3>User book: {dataBill.inforUser} </h3>
-                </CCol>
-                <CCol xs={7}>
-                  <h3>Total: {dataBill.totalBill} </h3>
-                </CCol>
+                <div>
+                <CTable bordered>
+                  <CTableBody>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        ID CARD
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {dataBill.inforBookroom.customerIdCard}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Room Name
+                      </CTableDataCell>
+                      <CTableDataCell>1231</CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Checkin
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {formatDate(dataBill.inforBookroom.fromDate)}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Checkout
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {formatDate(dataBill.inforBookroom.toDate)}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Type
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {dataBill.inforBookroom.type}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Price per day
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {dataBill.inforBookroom.price}  VNĐ
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Staff
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {dataBill.inforBookroom.name}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Total
+                      </CTableDataCell>
+                      <CTableDataCell style={{ backgroundColor: "#819FF7" }} >{dataBill.totalBill} VNĐ</CTableDataCell>
+                    </CTableRow>
+                  </CTableBody>
+                </CTable>
+                </div>
               </CRow>
             )}
 
@@ -183,5 +236,6 @@ PopupPayment.propTypes = {
   toDate: PropTypes.node,
   roomName: PropTypes.node,
   roomId: PropTypes.node,
+
 };
 export default PopupPayment;

@@ -112,36 +112,36 @@ const BtnBookings = (props) => {
                 />
               </CCol>
               <CCol xs>
-                <CTable>
-                  <CTableBody>
-                    <CTableRow>
-                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
-                        Room Type
-                      </CTableDataCell>
-                      <CTableDataCell>{datatypeRoom.type}</CTableDataCell>
-                    </CTableRow>
-                    <CTableRow>
-                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
-                        Price
-                      </CTableDataCell>
-                      <CTableDataCell>{datatypeRoom.price}</CTableDataCell>
-                    </CTableRow>
-
-                    <CTableRow>
-                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
-                        Status
-                      </CTableDataCell>
-                      {status === 1 ? (
-                        <CTableDataCell color="secondary">
-                          {" "}
-                          Active
+                  <CTable>
+                    <CTableBody>
+                      <CTableRow>
+                        <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                          Room Type
                         </CTableDataCell>
-                      ) : (
-                        <CTableDataCell> Empty </CTableDataCell>
-                      )}
-                    </CTableRow>
-                  </CTableBody>
-                </CTable>
+                        <CTableDataCell>{datatypeRoom.type}</CTableDataCell>
+                      </CTableRow>
+                      <CTableRow>
+                        <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                          Price
+                        </CTableDataCell>
+                        <CTableDataCell>{datatypeRoom.price}</CTableDataCell>
+                      </CTableRow>
+
+                      <CTableRow>
+                        <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                          Status
+                        </CTableDataCell>
+                        {status === 1 ? (
+                          <CTableDataCell color="secondary">
+                            {" "}
+                            Active
+                          </CTableDataCell>
+                        ) : (
+                          <CTableDataCell> Empty </CTableDataCell>
+                        )}
+                      </CTableRow>
+                    </CTableBody>
+                  </CTable>
               </CCol>
             </CRow>
             <CRow className="g-3 m-3">

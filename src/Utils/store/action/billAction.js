@@ -13,7 +13,7 @@ export const FetchDataBill = (id) => {
       console.log(error);
     }
   };
-}; // lấy info bill khi chưa tính tiền
+};
 
 export const CreateBill = (data) => {
   return async (dispatch) => {

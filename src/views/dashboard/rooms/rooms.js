@@ -31,6 +31,7 @@ export default function Rooms() {
 
   const data = useSelector((state) => state.room.rooms);
 
+
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
   }, [dispatch]);
@@ -45,6 +46,7 @@ export default function Rooms() {
     dispatch(FetchDataRoom());
   }, [dispatch]);
 
+
   const [pageNumber, setPageNumber] = useState(0);
   const usersPerPage = 7;
   const pagesVisited = pageNumber * usersPerPage;
@@ -53,6 +55,7 @@ export default function Rooms() {
     .map((item) => {
       return (
         <CCol xs key={item.id}>
+
           <CCard textColor="primary" className="h-100">
             <CCardImage orientation="top" src={img1} />
             <CCardBody>
@@ -60,7 +63,7 @@ export default function Rooms() {
                 <div className="Title">
                   {item.name}
                   {item.status === 1 ? (
-                    <CBadge size="sm" shape="rounded-pill" color="success">
+                    <CBadge  size="sm" shape="rounded-pill" color="success">
                       Active
                     </CBadge>
                   ) : (
@@ -82,14 +85,18 @@ export default function Rooms() {
                   </div>
                 );
               })}
+
               <div className="d-grid gap-2  mx-auto">
+
                 <PopupUpdate
                   roomId={item?.id}
                   nameRoom={item?.name}
                   typeRoom={item?.roomType}
+
                 />{" "}
                 <PopupDelete roomId={item?.id} nameRoom={item?.name} />
               </div>
+
             </CCardBody>
           </CCard>
         </CCol>

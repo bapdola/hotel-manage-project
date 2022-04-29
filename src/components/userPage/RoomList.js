@@ -15,7 +15,6 @@ export default function RoomList() {
 
   const data = useSelector((state) => state.room.rooms);
 
-
   useEffect(() => {
     dispatch(FetchDataRoom());
   }, [dispatch]);
@@ -52,7 +51,6 @@ export default function RoomList() {
                 })}
               </div>
               <div>
-
                 {" "} <BtnBookings
 
                   id={item.id}

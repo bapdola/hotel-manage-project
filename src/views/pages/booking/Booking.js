@@ -4,7 +4,9 @@ import Hero from "src/components/userPage/Hero";
 import Banner from "src/components/userPage/Banner";
 import { Link } from "react-router-dom";
 import Bookings from "./listBookings";
-import Title from "../../../components/userPage/Title";
+
+import Title from "../../../components/userPage/Title"
+
 const ListBookings = () => {
   return (
     <>
@@ -12,12 +14,15 @@ const ListBookings = () => {
         {" "}
         <Navbar />
         <Hero hero="roomsHero">
-          <Banner title="List of booking">
-            <Link to="/rooms" className="btn-primary">
-              return room
+
+          <Banner title="our room">
+            <Link to="/" className="btn-primary">
+              return home
             </Link>
           </Banner>
         </Hero>
+        <Title title="THE LIST OF BOOKING "/>
+
         <Bookings />
       </>
     </>
