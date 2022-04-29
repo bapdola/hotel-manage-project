@@ -12,18 +12,26 @@ import {
   CModalBody,
   CModalFooter,
   CRow,
+
+  CTableDataCell,
+  CTableRow,
+  CTableBody,
+  CTable,
 } from "@coreui/react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { CreateBill } from "src/Utils/store/action/billAction";
+import { CreateBill, FetchDataBill } from "src/Utils/store/action/billAction";
+
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { VscCreditCard } from "react-icons/vsc";
 import { formatDate } from "../../../Utils/DateTme/dateTime";
-import {FetchDataTypeRoom,FetchDataRoom } from "../../../Utils/store/action/roomAction"
+
+import {
+  FetchDataTypeRoom,
+  FetchDataRoom,
+} from "../../../Utils/store/action/roomAction";
 import { differenceInDays, format } from "date-fns";
-
-
 
 const PopupPayment = (props) => {
   const {
@@ -48,28 +56,10 @@ const PopupPayment = (props) => {
   };
 
   const dispatch = useDispatch();
-  const dataType =useSelector(state => state.room.typeRoom)||[] //fetch data type room
-  const dataRoom =useSelector(state => state.room.rooms)||[] // fetch data room
 
+  const dataBill = useSelector((state) => state.bill.bills) || {}; // fetch data room
 
-  
-
-  const dataRoomcurrent =  dataRoom.find((item) => item.id === roomId); //đúng
-  
-  const roomType = dataType.find((item) => item.id === dataRoomcurrent.roomTypeId );
-
-
-  console.log("data type",roomType.price);
-  // console.log("data room",dataType.roomTypeId);
-
-
-  useEffect(() => {
-    dispatch(FetchDataTypeRoom())
-  },[])
-
-  useEffect(() => {
-    dispatch(FetchDataRoom())
-  },[])
+  console.log("databill", dataBill);
 
   const {
     handleSubmit,
@@ -82,6 +72,12 @@ const PopupPayment = (props) => {
 
   var result = differenceInDays(new Date(toDate), new Date(fromDate));
 
+  const handleClickShowInfor = () => {
+    if (idBookRoom) {
+      dispatch(FetchDataBill(idBookRoom));
+    }
+    setVisibleLg(!visibleLg);
+  };
   return (
     <>
       <CButton
@@ -89,13 +85,19 @@ const PopupPayment = (props) => {
         color="success"
         variant="outline"
         shape="rounded-pill"
-        onClick={() => setVisibleLg(!visibleLg)}
+
+        onClick={handleClickShowInfor}
       >
         Payment <VscCreditCard size={15} />
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
+      <CModal visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Payment : {roomName}</CModalTitle>
+          <CModalTitle>
+            Payment for{" "}
+            {dataBill &&
+              dataBill.inforBookroom &&
+              dataBill.inforBookroom.customerName}
+          </CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -116,68 +118,101 @@ const PopupPayment = (props) => {
                 required
               />
             </CCol>
-           
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Name</CFormLabel>
-              <CModalTitle
-                value=""
-                type="number"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {customerName}
-              </CModalTitle>
-            </CCol>
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">ID Card</CFormLabel>
-              <CModalTitle
-                value=""
-                type="number"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {customerIdCard}
-              </CModalTitle>
-            </CCol>
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Checkin</CFormLabel>
-              <CModalTitle
-                value=""
-                type="date"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {formatDate(fromDate)}
-              </CModalTitle>
-            </CCol>
-            <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Checkout</CFormLabel>
-              <CModalTitle
-                value=""
-                type="date"
-                id="validationTooltip02"
-                placeholder="Price"
-              >
-                {formatDate(toDate)}
-              </CModalTitle>
-            </CCol>
-            <CRow className="g-3 m-3">
-              <CCol xs={6}>
-                <p>Number of day: {result} </p>
-              </CCol>
-              <CCol xs={6}>
-                <p>Price per day: {roomType.price} </p>
-              </CCol>
-              <CCol xs={6}>
-                <h3>Total:{result*roomType.price} </h3>
-              </CCol>
-            </CRow>
+
+            {dataBill && dataBill.inforBookroom && (
+              <CRow className="g-3 m-3">
+                <div>
+                <CTable bordered>
+                  <CTableBody>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        ID CARD
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {dataBill.inforBookroom.customerIdCard}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Room Name
+                      </CTableDataCell>
+                      <CTableDataCell>1231</CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Checkin
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {formatDate(dataBill.inforBookroom.fromDate)}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Checkout
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {formatDate(dataBill.inforBookroom.toDate)}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Type
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {dataBill.inforBookroom.type}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Price per day
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {dataBill.inforBookroom.price}  VNĐ
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Staff
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        {" "}
+                        {dataBill.inforBookroom.name}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell style={{ backgroundColor: "#e6f2ff" }}>
+                        Total
+                      </CTableDataCell>
+                      <CTableDataCell style={{ backgroundColor: "#819FF7" }} >{dataBill.totalBill} VNĐ</CTableDataCell>
+                    </CTableRow>
+                  </CTableBody>
+                </CTable>
+                </div>
+              </CRow>
+            )}
+
             <CModalFooter>
-              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
+              <CButton
+                size="sm"
+                shape="rounded-pill"
+                variant="ghost"
+                color="secondary"
+                onClick={() => setVisibleLg(false)}
+              >
                 Cancel
               </CButton>
-              <CButton size="lg" color="success" type="submit">
-                Pay
+              <CButton
+                size="lg"
+                color="success"
+                type="submit"
+                shape="rounded-pill"
+                variant="outline"
+              >
+                Payment
               </CButton>
             </CModalFooter>
           </CForm>

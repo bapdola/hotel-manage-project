@@ -3,7 +3,7 @@ import * as a from "../../constant";
 const initialState = {
   users: [],
   roles: [],
-  currentUserlogin: [],
+  currentUserlogin: {},
 };
 
 const UsersReducer = (state = initialState, action) => {
@@ -33,6 +33,11 @@ const UsersReducer = (state = initialState, action) => {
 
     case a.GET_DATA_USERS_LOGIN:
       return { ...state, currentUserlogin: action.payload };
+    case a.UPDATE_DATA_CURRENT_USERS:
+      return {
+        ...state,
+        currentUserlogin: action.payload,
+      };
 
     // case a.UPDATE_DATA_SERVICE:
     //   return { ...state, services: action.payload };

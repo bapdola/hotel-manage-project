@@ -30,7 +30,7 @@ export default function Rooms() {
   }, [dispatch]);
 
   const data = useSelector((state) => state.room.rooms);
-  console.log("dữ liệu nhận về", data);
+
 
   useEffect(() => {
     dispatch(FetchDataTypeRoom());
@@ -46,6 +46,7 @@ export default function Rooms() {
     dispatch(FetchDataRoom());
   }, [dispatch]);
 
+
   const [pageNumber, setPageNumber] = useState(0);
   const usersPerPage = 7;
   const pagesVisited = pageNumber * usersPerPage;
@@ -54,18 +55,19 @@ export default function Rooms() {
     .map((item) => {
       return (
         <CCol xs key={item.id}>
-          <CCard textColor="primary" className="h-100'">
+
+          <CCard textColor="primary" className="h-100">
             <CCardImage orientation="top" src={img1} />
             <CCardBody>
               <CCardTitle>
                 <div className="Title">
                   {item.name}
                   {item.status === 1 ? (
-                    <CBadge shape="rounded-pill" color="success">
+                    <CBadge  size="sm" shape="rounded-pill" color="success">
                       Active
                     </CBadge>
                   ) : (
-                    <CBadge shape="rounded-pill" color="secondary">
+                    <CBadge size="sm" shape="rounded-pill" color="secondary">
                       Empty
                     </CBadge>
                   )}
@@ -83,14 +85,18 @@ export default function Rooms() {
                   </div>
                 );
               })}
-              <CCardBody>
+
+              <div className="d-grid gap-2  mx-auto">
+
                 <PopupUpdate
                   roomId={item?.id}
                   nameRoom={item?.name}
                   typeRoom={item?.roomType}
-                />
+
+                />{" "}
                 <PopupDelete roomId={item?.id} nameRoom={item?.name} />
-              </CCardBody>
+              </div>
+
             </CCardBody>
           </CCard>
         </CCol>
@@ -112,7 +118,7 @@ export default function Rooms() {
             <CCardBody>
               <h1 className="Title">CREATE NEW ROOM</h1>
             </CCardBody>
-            <CCardBody>
+            <CCardBody className="d-grid gap-2">
               <PopupAdd />
             </CCardBody>
           </CCard>

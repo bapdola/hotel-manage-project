@@ -1,4 +1,4 @@
-import React,{ useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   CForm,
   CFormLabel,
@@ -33,7 +33,7 @@ const PopupAdd = () => {
   });
 
   const [name, setNameService] = useState("");
-  const [price, setPriceService] = useState("");
+  const [price, setPriceService] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -54,7 +54,7 @@ const PopupAdd = () => {
 
   return (
     <>
-      <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
+      <CButton variant="outline" color="success" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Add
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={handleReset}>

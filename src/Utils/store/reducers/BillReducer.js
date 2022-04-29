@@ -1,8 +1,9 @@
 import * as a from "../../constant";
 
 const initialState = {
+
   bills: [],
-};
+
 
 const BillReducer = (state = initialState, action) => {
   switch (action.type) {

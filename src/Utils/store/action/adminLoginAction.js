@@ -51,7 +51,6 @@ export const AdminLogut = () => {
     try {
       cookie.remove("ADMIN_DATA");
       dispatch({ type: a.LOGOUT_ADMIN });
-      // window.location.reload();
       toast.success("Logout Success");
     } catch (error) {
       toast.error("Logout Failed!");

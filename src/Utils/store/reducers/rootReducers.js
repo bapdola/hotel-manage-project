@@ -7,6 +7,7 @@ import HotelReducer from "./HotelReducer";
 import listServiceReducer from "./ServiceReducer";
 import BillReducer from "./BillReducer";
 
+import chageState from "./showSideBar";
 
 const rootReducer = combineReducers({
   bookroom: listBookRoomReducer,
@@ -15,7 +16,9 @@ const rootReducer = combineReducers({
   service: listServiceReducer,
   user: listUserReducer,
   hotel: HotelReducer,
-  bill:BillReducer,
+
+  bill: BillReducer,
+  change: chageState,
 });
 
 export default rootReducer;
