@@ -52,7 +52,7 @@ function User() {
               );
             })}
           </CTableDataCell>
-          <CTableDataCell className="text-center" >
+          <CTableDataCell className="text-center">
             <PopupUpdate
               userId={item?.id}
               nameUser={item?.username}
@@ -96,29 +96,32 @@ function User() {
         </CTableHead>
         <CTableBody>{displayUsers}</CTableBody>
       </CTable>
-      <ReactPaginate
-      color="success"
-      size="sm"
-      aria-label="Page navigation example"
-        nextLabel="next >"
-        onPageChange={changePage}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-        renderOnZeroPageCount={null}
-      />
+      <CTable responsive>
+        <CTableHead>
+          <CTableRow>
+            <ReactPaginate
+              nextLabel="next >"
+              onPageChange={changePage}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              pageCount={pageCount}
+              previousLabel="< previous"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakLabel="..."
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
+              renderOnZeroPageCount={null}
+            />
+          </CTableRow>
+        </CTableHead>
+      </CTable>
     </>
   );
 }

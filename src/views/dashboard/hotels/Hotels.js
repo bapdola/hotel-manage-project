@@ -28,7 +28,7 @@ const Hotels = () => {
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Adress</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Address</CTableHeaderCell>
             <CTableHeaderCell scope="col">Phone</CTableHeaderCell>
             <CTableHeaderCell scope="col">Email</CTableHeaderCell>
             <CTableHeaderCell scope="col" className="text-center">

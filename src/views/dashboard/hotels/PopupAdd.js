@@ -94,7 +94,7 @@ const PopupAdd = () => {
               )}
             </CCol>
             <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Adress</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip02">Address</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip02"
@@ -107,7 +107,7 @@ const PopupAdd = () => {
                 required
               />
               {errors.adress?.type === "required" && (
-                <p className="text-danger mt-2">Adress Hotel is required</p>
+                <p className="text-danger mt-2">Address Hotel is required</p>
               )}
             </CCol>
             <CCol md={5} className="position-relative">

@@ -2,6 +2,7 @@ import * as a from "../../constant";
 
 const initialState = {
   bills: {},
+  paymentBills: [],
 };
 
 const BillReducer = (state = initialState, action) => {
@@ -9,8 +10,8 @@ const BillReducer = (state = initialState, action) => {
     case a.GET_DATA_BILL:
       return { ...state, bills: action.payload };
     case a.CREATE_DATA_BILL:
-      const bills = state.bills.concat(action.payload);
-      return { ...state, bills };
+      const paymentBills = state.paymentBills.concat(action.payload);
+      return { ...state, paymentBills };
 
     default:
       return state;

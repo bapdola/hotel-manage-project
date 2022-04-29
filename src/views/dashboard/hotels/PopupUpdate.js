@@ -91,11 +91,11 @@ const PopupUpdate = (props) => {
               )}
             </CCol>
             <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip02">Adress</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip02">Address</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip02"
-                placeholder="Adress"
+                placeholder="Address"
                 {...register("adress", {
                   required: true,
                 })}

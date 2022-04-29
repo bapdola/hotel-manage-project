@@ -19,9 +19,11 @@ export const CreateBill = (data) => {
   return async (dispatch) => {
     try {
       const res = await ApiCaller("bill/create", "POST", data);
-      dispatch({ type: a.CREATE_DATA_BILL, payload: res.data.inforBookroom });
-      window.location.reload();
-      toast.success("Payment Successfully!!");
+      if (res.status === 200) {
+        dispatch({ type: a.CREATE_DATA_BILL, payload: res.data.inforBookroom });
+        window.location.reload();
+        toast.success("Payment Successfully!!");
+      }
     } catch (error) {
       toast.error("create new failed!!");
     }
