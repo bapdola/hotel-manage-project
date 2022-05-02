@@ -41,7 +41,6 @@ function Bookings() {
     .map((item, inx) => {
       return (
         <CTableRow key={item.id}>
-          <CTableHeaderCell scope="row">{inx + 1}</CTableHeaderCell>
           <CTableDataCell>{item.customerName}</CTableDataCell>
           <CTableDataCell>{item.customerIdCard}</CTableDataCell>
           <CTableDataCell>{formatDate(item.fromDate)}</CTableDataCell>
@@ -65,7 +64,6 @@ function Bookings() {
       <CTable responsive striped>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">Customer Name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Customer Id Card</CTableHeaderCell>
             <CTableHeaderCell scope="col">Start Date</CTableHeaderCell>

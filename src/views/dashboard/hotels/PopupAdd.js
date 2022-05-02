@@ -13,15 +13,19 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
+  CSpinner,
 } from "@coreui/react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch, connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { AddDataHotel } from "src/Utils/store/action/hotelAction";
+import { useSelector } from "react-redux";
 
 const PopupAdd = () => {
   const [validated, setValidated] = useState(false);
   const [visibleLg, setVisibleLg] = useState(false);
+
+  const pending = useSelector((state) => state.hotel.pending);
 
   const {
     register,
@@ -57,7 +61,12 @@ const PopupAdd = () => {
 
   return (
     <>
-      <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
+      {/* {pending ? <CSpinner color="dark" /> : []} */}
+      <CButton
+        variant="outline"
+        color="success"
+        onClick={() => setVisibleLg(!visibleLg)}
+      >
         <VscAdd size={15} /> Add
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={handleReset}>

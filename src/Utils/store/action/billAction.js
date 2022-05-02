@@ -25,7 +25,7 @@ export const CreateBill = (data) => {
         toast.success("Payment Successfully!!");
       }
     } catch (error) {
-      toast.error("create new failed!!");
+      toast.error("Payment failed!!");
     }
   };
 };

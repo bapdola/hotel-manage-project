@@ -19,7 +19,7 @@ import { CurrentUserLogin } from "src/Utils/store/action/userAction";
 import { LoadListRole } from "src/Utils/store/action/userAction";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { formatDate } from "../../../Utils/DateTme/dateTime";
+import { formatDateInput } from "../../../Utils/DateTme/dateTime";
 
 const Profile = () => {
   const [visibleLg, setVisibleLg] = useState(false);
@@ -37,7 +37,9 @@ const Profile = () => {
   const [username, setUserName] = useState(dataUserLogin.username);
   const [password, setPassword] = useState(dataUserLogin.password);
   const [fullName, setFullName] = useState(dataUserLogin.fullName);
-  const [birtDate, setBirthday] = useState(formatDate(dataUserLogin.birtDate));
+  const [birtDate, setBirthday] = useState(
+    formatDateInput(dataUserLogin.birtDate)
+  );
   const [adress, setAdress] = useState(dataUserLogin.adress);
   const [phone, setPhone] = useState(dataUserLogin.phone);
 

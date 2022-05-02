@@ -20,7 +20,7 @@ export const AddDataBookRoom = (data) => {
       const res = await ApiCaller("bookroom/create", "POST", data);
       if (res.status === 200) {
         dispatch({ type: a.ADD_DATA_BOOKROOM, payload: res.data.result });
-        toast.success(res.data.message);
+        toast.success("Successfully!!");
       }
     } catch (e) {
       toast.error("Please enter the correct information!!");

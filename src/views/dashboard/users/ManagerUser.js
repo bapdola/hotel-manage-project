@@ -38,7 +38,6 @@ function User() {
     .map((item, inx) => {
       return (
         <CTableRow key={item.id}>
-          <CTableHeaderCell scope="row">{inx + 1}</CTableHeaderCell>
           <CTableDataCell>{item.username}</CTableDataCell>
           <CTableDataCell>{item.password}</CTableDataCell>
           <CTableDataCell>{item.fullName}</CTableDataCell>
@@ -81,7 +80,6 @@ function User() {
       <CTable responsive striped>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">User name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Password</CTableHeaderCell>
             <CTableHeaderCell scope="col">Full name</CTableHeaderCell>

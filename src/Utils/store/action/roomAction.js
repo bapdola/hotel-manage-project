@@ -18,9 +18,9 @@ export const AddDataRoom = (data) => {
     try {
       const res = await ApiCaller("room/create", "POST", data);
       dispatch({ type: a.ADD_DATA_ROOM, payload: res.data.result });
-      toast.success("Successfully added new!!");
+      toast.success("Added Successfully!!");
     } catch (error) {
-      toast.error("Add new failed!!");
+      toast.error("Added failed!!");
     }
   };
 };
@@ -45,10 +45,10 @@ export const UpdateDataRoom = (id, data) => {
           type: a.UPDATE_DATA_ROOM,
           payload: res.data.result,
         });
-        toast.success("Update Successfully!!");
+        toast.success("Updated Successfully!!");
       }
     } catch (error) {
-      toast.error("Update failed!!");
+      toast.error("Updated failed!!");
     }
   };
 };
