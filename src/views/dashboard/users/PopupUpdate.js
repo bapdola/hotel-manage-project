@@ -67,10 +67,13 @@ const PopupUpdate = (props) => {
 
   return (
     <>
-
-      <CButton shape="rounded" variant="outline"   color="info" onClick={() => setVisibleLg(!visibleLg)}>
+      <CButton
+        shape="rounded"
+        variant="outline"
+        color="info"
+        onClick={() => setVisibleLg(!visibleLg)}
+      >
         <VscEdit size={15} /> Edit
-
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
