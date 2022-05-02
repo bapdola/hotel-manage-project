@@ -68,11 +68,7 @@ const PopupAdd = () => {
 
   return (
     <>
-      <CButton
-        variant="outline"
-        color="success"
-        onClick={() => setVisibleLg(!visibleLg)}
-      >
+      <CButton color="success" onClick={() => setVisibleLg(!visibleLg)}>
         <VscAdd size={15} /> Add
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={handleReset}>
