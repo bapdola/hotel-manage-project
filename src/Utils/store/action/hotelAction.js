@@ -35,7 +35,7 @@ export const DeleteDataHotel = (id) => {
   return async (dispatch) => {
     try {
       const res = await ApiCaller(`hotel/delete/${id}`, "DELETE", null);
-      dispatch({ type: a.DELETE_DATA_HOTEL, payload: res.data.inforHotel });
+      dispatch({ type: a.DELETE_DATA_HOTEL, payload: res.data.inforHotel.result});
       toast.success("Deleted Successfully!!");
     } catch (error) {
       toast.error("Deleted failed!!");

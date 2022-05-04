@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   CForm,
   CFormLabel,
@@ -14,52 +14,49 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import { VscAdd } from "react-icons/vsc";
-import { useDispatch, connect } from "react-redux";
-import { AddDataService } from "src/Utils/store/action/serviceAction";
-import { useForm } from "react-hook-form";
-import { FetchDataService } from "src/Utils/store/action/serviceAction";
+import { useState } from "react";
 
-const PopupAdd = () => {
+import { useDispatch, connect } from "react-redux";
+import { UpdateDataService } from "src/Utils/store/action/serviceAction";
+import { useForm } from "react-hook-form";
+import PropTypes from "prop-types";
+import { VscEdit } from "react-icons/vsc";
+import { UpdateDataRoomType } from "src/Utils/store/action/roomAction";
+
+const PopupUpdate = (props) => {
+  const { nameSer, priceSer, roomTypeId } = props;
   const [visibleLg, setVisibleLg] = useState(false);
+
+  const [type, setNameService] = useState(nameSer);
+  const [price, setPriceService] = useState(priceSer);
+
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    mode: "onChange",
     mode: "onBlur",
+    mode: "onChange",
   });
 
-  const [name, setNameService] = useState("");
-  const [price, setPriceService] = useState("");
-
-  const dispatch = useDispatch();
-
-  const handleOnSubmit = (data, e) => {
-    e.preventDefault();
-    if (data) {
-      dispatch(AddDataService(data));
+  const handleOnSubmit = (data) => {
+    if (roomTypeId && data) {
+      dispatch(UpdateDataRoomType(roomTypeId, data));
     }
-    setVisibleLg(false);
-  };
-
-  const handleReset = () => {
-    reset({});
-    setNameService("");
-    setPriceService("");
     setVisibleLg(false);
   };
 
   return (
     <>
-      <CButton variant="outline" color="success" onClick={() => setVisibleLg(!visibleLg)}>
-        <VscAdd size={15} /> Add
+      <CButton shape="rounded" variant="outline"   color="info" onClick={() => setVisibleLg(!visibleLg)}>
+        <VscEdit size={15} /> Edit
       </CButton>
-      <CModal size="lg" visible={visibleLg} onClose={handleReset}>
+      <CModal size="lg" visible={visibleLg} onClose={() => setVisibleLg(false)}>
         <CModalHeader>
-          <CModalTitle>Add Services</CModalTitle>
+          <CModalTitle>Update</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm
@@ -68,26 +65,26 @@ const PopupAdd = () => {
             onSubmit={handleSubmit(handleOnSubmit)}
           >
             <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip01">Name</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip01">Type</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip01"
-                placeholder="Name"
-                value={name}
-                {...register("name", {
+                placeholder="Type"
+                value={type}
+                {...register("type", {
                   required: true,
                   pattern: /^[A-Za-z0-9 ]+$/i,
                 })}
                 onChange={(e) => setNameService(e.target.value)}
                 required
               />
-              {errors.name?.type === "required" && (
-                <p className="text-danger mt-2">Name Service is required</p>
+              {errors.type?.type === "required" && (
+                <p className="text-danger mt-2">Type is required</p>
               )}
-              {errors.name?.type === "pattern" && (
+              {errors.type?.type === "pattern" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Name Service does not contain special characters
+                  Type does not contain special characters
                 </p>
               )}
             </CCol>
@@ -110,11 +107,11 @@ const PopupAdd = () => {
             </CCol>
 
             <CModalFooter>
-              <CButton color="secondary" onClick={handleReset}>
+              <CButton color="secondary" onClick={() => setVisibleLg(false)}>
                 Close
               </CButton>
               <CButton color="success" type="submit">
-                Add
+                Update
               </CButton>
             </CModalFooter>
           </CForm>
@@ -123,12 +120,16 @@ const PopupAdd = () => {
     </>
   );
 };
+PopupUpdate.propTypes = {
+  roomTypeId: PropTypes.node,
+  nameSer: PropTypes.node,
+  priceSer: PropTypes.node,
+};
 connect(
-  ({ name, price, hotelId }) => ({
-    name,
+  ({ type, price }) => ({
+    type,
     price,
-    hotelId,
   }),
-  AddDataService
-)(PopupAdd);
-export default PopupAdd;
+  UpdateDataRoomType
+)(PopupUpdate);
+export default PopupUpdate;

@@ -45,7 +45,7 @@ const Hotels = () => {
               phoneHotel={item?.phone}
               emailHotel={item?.email}
             />{" "}
-            {/* <PopupDelete hotelId={item.id} /> */}
+             <PopupDelete hotelId={item.id} /> 
           </CTableDataCell>
         </CTableRow>
       );
@@ -59,7 +59,6 @@ const Hotels = () => {
 
   return (
     <>
-      {pending ? <CSpinner color="info" /> : []}
       <CTable responsive striped>
         <CTableHead>
           <CTableRow>

@@ -13,36 +13,40 @@ import PopupAdd from "./PopupAdd";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchDataService } from "src/Utils/store/action/serviceAction";
 import ReactPaginate from "react-paginate";
+import {
+    FetchDataTypeRoom,
+  } from "src/Utils/store/action/roomAction";
 
 const Services = () => {
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(FetchDataService());
+    dispatch(FetchDataTypeRoom());
   }, [dispatch]);
 
-  const data = useSelector((state) => state.service.services);
-  
+  const data = useSelector((state) => state.room.typeRoom);
+
   console.log(data);
 
   const [pageNumber, setPageNumber] = useState(0);
   const usersPerPage = 4;
   const pagesVisited = pageNumber * usersPerPage;
-  const displayService = data
+  const display = data
     .slice(pagesVisited, pagesVisited + usersPerPage)
     .map((item) => {
       return (
         <CTableRow key={item.id}>
-          <CTableHeaderCell scope="row">{item.name}</CTableHeaderCell>
+          <CTableHeaderCell scope="row">{item.type}</CTableHeaderCell>
           <CTableDataCell>{item.price} VND</CTableDataCell>
           <CTableDataCell className="text-center">
-            <PopupUpdate
-              serviceId={item?.id}
-              nameSer={item?.name}
+             <PopupUpdate
+              roomTypeId={item?.id}
+              nameSer={item?.type}
               priceSer={item?.price}
-              HotelId={item?.hotelId}
-            />{" "}
-            <PopupDelete serviceId={item?.id} />
+            />{" "} 
+            <PopupDelete roomTypeId={item?.id} /> 
           </CTableDataCell>
         </CTableRow>
       );
@@ -59,15 +63,15 @@ const Services = () => {
       <CTable responsive striped>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Type</CTableHeaderCell>
             <CTableHeaderCell scope="col">Price</CTableHeaderCell>
             <CTableHeaderCell scope="col" className="text-center">
               {" "}
-              <PopupAdd />{" "}
+               <PopupAdd />{" "}
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
-        <CTableBody>{displayService}</CTableBody>
+        <CTableBody>{display}</CTableBody>
       </CTable>
       <CTable responsive>
         <CTableHead>

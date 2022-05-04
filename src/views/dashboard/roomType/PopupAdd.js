@@ -18,7 +18,7 @@ import { VscAdd } from "react-icons/vsc";
 import { useDispatch, connect } from "react-redux";
 import { AddDataService } from "src/Utils/store/action/serviceAction";
 import { useForm } from "react-hook-form";
-import { FetchDataService } from "src/Utils/store/action/serviceAction";
+import { AddDataRoomType } from "src/Utils/store/action/roomAction";
 
 const PopupAdd = () => {
   const [visibleLg, setVisibleLg] = useState(false);
@@ -32,7 +32,7 @@ const PopupAdd = () => {
     mode: "onBlur",
   });
 
-  const [name, setNameService] = useState("");
+  const [type, settypeService] = useState("");
   const [price, setPriceService] = useState("");
 
   const dispatch = useDispatch();
@@ -40,14 +40,14 @@ const PopupAdd = () => {
   const handleOnSubmit = (data, e) => {
     e.preventDefault();
     if (data) {
-      dispatch(AddDataService(data));
+      dispatch(AddDataRoomType(data));
     }
     setVisibleLg(false);
   };
 
   const handleReset = () => {
     reset({});
-    setNameService("");
+    settypeService("");
     setPriceService("");
     setVisibleLg(false);
   };
@@ -68,26 +68,26 @@ const PopupAdd = () => {
             onSubmit={handleSubmit(handleOnSubmit)}
           >
             <CCol md={6} className="position-relative">
-              <CFormLabel htmlFor="validationTooltip01">Name</CFormLabel>
+              <CFormLabel htmlFor="validationTooltip01">Type</CFormLabel>
               <CFormInput
                 type="text"
                 id="validationTooltip01"
-                placeholder="Name"
-                value={name}
-                {...register("name", {
+                placeholder="type"
+                value={type}
+                {...register("type", {
                   required: true,
                   pattern: /^[A-Za-z0-9 ]+$/i,
                 })}
-                onChange={(e) => setNameService(e.target.value)}
+                onChange={(e) => settypeService(e.target.value)}
                 required
               />
-              {errors.name?.type === "required" && (
-                <p className="text-danger mt-2">Name Service is required</p>
+              {errors.type?.type === "required" && (
+                <p className="text-danger mt-2">type  is required</p>
               )}
-              {errors.name?.type === "pattern" && (
+              {errors.type?.type === "pattern" && (
                 <p className="text-danger mt-2">
                   {" "}
-                  Name Service does not contain special characters
+                  type  does not contain special characters
                 </p>
               )}
             </CCol>
@@ -105,7 +105,7 @@ const PopupAdd = () => {
                 required
               />
               {errors.price?.type === "required" && (
-                <p className="text-danger mt-2"> Price Service is required</p>
+                <p className="text-danger mt-2"> Price  is required</p>
               )}
             </CCol>
 
@@ -124,10 +124,9 @@ const PopupAdd = () => {
   );
 };
 connect(
-  ({ name, price, hotelId }) => ({
-    name,
+  ({ type, price }) => ({
+    type,
     price,
-    hotelId,
   }),
   AddDataService
 )(PopupAdd);

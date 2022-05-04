@@ -7,7 +7,6 @@ import ProtectedRoutes from "./router/ProtectedRoutes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import cookie from "react-cookies";
 
 const loading = (
   <div className="pt-3 text-center">

@@ -61,13 +61,17 @@ const PopupAdd = () => {
 
   return (
     <>
-      {/* {pending ? <CSpinner color="dark" /> : []} */}
+     
       <CButton
         variant="outline"
         color="success"
         onClick={() => setVisibleLg(!visibleLg)}
       >
-        <VscAdd size={15} /> Add
+          {pending ? 
+          <><CSpinner component="span" size="sm" aria-hidden="true"/>
+          Loading...</> : 
+          <><VscAdd size={15} /> Add</>
+          } 
       </CButton>
       <CModal size="lg" visible={visibleLg} onClose={handleReset}>
         <CModalHeader>
